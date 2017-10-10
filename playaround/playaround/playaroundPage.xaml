@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:playaround" x:Class="playaround.playaroundPage">
+	<!--<Label Text="Hello world" VerticalOptions="Start" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" TextColor="Aqua" />-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="One" />
+        <ToolbarItem Text="Two"  />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Slider VerticalOptions="CenterAndExpand"
+                    ValueChanged="OnSliderValueChanged"/>
+
+            <Label x:Name="valueLabel" 
+                Text="A simple label"
+                Font="Large"
+                HorizontalOptions = "Center"
+                VerticalOptions = "CenterAndExpand" />
+            
+            <Button Text="Click me!" HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand" 
+                Clicked="OnButtonClicked"/>
+
+            <Button Text="Another Button!" TextColor="Lime" HorizontalOptions="Center"
+                VerticalOptions="Center" 
+                Clicked="OnButtonClicked"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
