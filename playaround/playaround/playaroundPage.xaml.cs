@@ -29,5 +29,19 @@ namespace playaround
 			Button button = (Button)sender;
 			await DisplayAlert("Clicked!", "The button labeled '" + button.Text + "' has been clicked", "OK");
 		}
+
+        async void DropDownMenuToggle(object sender, EventArgs args)
+        {
+            if (Dropdown.IsVisible)
+            {
+                Dropdown.IsVisible = false;
+                contentArea.IsVisible = true;
+            } else
+            {
+                Dropdown.IsVisible = true;
+                contentArea.IsVisible = false;
+            }
+        }
+
     }
 }

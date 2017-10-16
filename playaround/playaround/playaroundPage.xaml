@@ -1,29 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:playaround" x:Class="playaround.playaroundPage">
-	<!--<Label Text="Hello world" VerticalOptions="Start" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" TextColor="Aqua" />-->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="One" />
-        <ToolbarItem Text="Two"  />
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <StackLayout>
-            <Slider VerticalOptions="CenterAndExpand"
-                    ValueChanged="OnSliderValueChanged"/>
+    <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <!--Top Nav Bar-->
+        <Grid BackgroundColor="Navy" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="|||" TextColor="ForestGreen" HorizontalOptions="Center"
+                VerticalOptions="Center" 
+                Clicked="DropDownMenuToggle"/>
+
+            <Label Grid.Column="1" Text="Landing Screen" TextColor="Red" Font="Large" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
+        
+        
+        <!--DropDown Menu-->
+        <StackLayout x:Name="Dropdown" Grid.Row="1" Grid.RowSpan="2" BackgroundColor="DarkGray" IsVisible="False"
+                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="User" Font="Large" HorizontalOptions="Center"/>
+            <Label Text="Contact" Font="Large" HorizontalOptions="Center"/>
+            <Label Text="Logout" Font="Large" HorizontalOptions="Center"/>
+        </StackLayout>
+
+        
+        <!--Content Section-->
+        <StackLayout x:Name="contentArea" Grid.Row="1" BackgroundColor="Gray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Slider ValueChanged="OnSliderValueChanged"/>
 
             <Label x:Name="valueLabel" 
                 Text="A simple label"
                 Font="Large"
-                HorizontalOptions = "Center"
-                VerticalOptions = "CenterAndExpand" />
-            
+                HorizontalOptions = "Center" />
+
             <Button Text="Click me!" HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand" 
                 Clicked="OnButtonClicked"/>
 
-            <Button Text="Another Button!" TextColor="Lime" HorizontalOptions="Center"
+            <Button Text="Another Button!" TextColor="Green" HorizontalOptions="Center"
                 VerticalOptions="Center" 
                 Clicked="OnButtonClicked"/>
-            
+
         </StackLayout>
-    </ContentPage.Content>
+        
+        
+        <!--Bottom Bar-->
+        <Grid Grid.Row="2" BackgroundColor="Navy" VerticalOptions="FillAndExpand" ColumnSpacing="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"   />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <Button Grid.Column="0"  Text="Products" TextColor="Green" HorizontalOptions="FillAndExpand" BorderColor="Transparent"
+                VerticalOptions="FillAndExpand" Margin="0"
+                Clicked="OnButtonClicked"/>
+            <Button Grid.Column="1" Text="My shop" TextColor="Green" HorizontalOptions="FillAndExpand" BorderColor="Transparent"
+                VerticalOptions="FillAndExpand"  Margin="0"
+                Clicked="OnButtonClicked"/>
+            <Button Grid.Column="2" Text="Statements" TextColor="Green" HorizontalOptions="FillAndExpand" BorderColor="Transparent"
+                VerticalOptions="FillAndExpand"  Margin="0"
+                Clicked="OnButtonClicked"/>
+            <Button Grid.Column="3" Text="Events" TextColor="Green" HorizontalOptions="FillAndExpand" BorderColor="Transparent"
+                VerticalOptions="FillAndExpand"  Margin="0"
+                Clicked="OnButtonClicked"/>
+        </Grid>
+    </Grid>
 </ContentPage>
