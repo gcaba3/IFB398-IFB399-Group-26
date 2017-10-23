@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.MyPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
+        <ToolbarItem Text="Message" Order="Secondary" />
+        <ToolbarItem Text="Call" Order="Secondary" />
+        <ToolbarItem Text="Notification" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Label Text="My page content"/>
+
+    </ContentPage.Content>
+</ContentPage>

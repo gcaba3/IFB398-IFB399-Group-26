@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.LoginPage">
+	<ContentPage.Content>
+        <StackLayout x:Name="layout" Spacing="0">
+            <BoxView Color="#132c69"
+                        HorizontalOptions="FillAndExpand" />
+            
+            <StackLayout VerticalOptions="CenterAndExpand">
+
+                <Image Source="sp_login.png" />
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="50,0,50,0">
+                    <StackLayout BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" Spacing="0" Padding="5">
+                        <StackLayout BackgroundColor="White" Margin="0,0,0,30">
+                            <Entry x:Name="username" HorizontalTextAlignment="Center" Placeholder="Username"></Entry>
+                            <Entry x:Name="password" IsPassword="true" BackgroundColor="White" HorizontalTextAlignment="Center" Placeholder="Password"></Entry>
+                        </StackLayout>
+
+                        <Button BackgroundColor="#d83127" Text="Login" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                TextColor="White" Margin="0,0,0,50" Clicked="Handle_ClickedAsync"></Button>
+                        <Label Text="Forgot Password?" HorizontalTextAlignment="Center" TextColor="Blue"></Label>
+                        <Label Text="Register" HorizontalTextAlignment="Center" TextColor="Blue"></Label>             
+                    </StackLayout>     
+                </StackLayout>
+            </StackLayout>
+            <BoxView Color="#132c69" VerticalOptions="End"
+                        HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>
