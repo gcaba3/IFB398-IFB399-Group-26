@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProductsMyOrders.TopBar"
+      BackgroundColor="{StaticResource SPBlue}" 
+      HorizontalOptions="FillAndExpand"
+      x:Name="this">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="3*"/>
+        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="3*"/>
+        <ColumnDefinition Width="48*"/>
+        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="3*"/>
+        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="3*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="20*"/>
+        <RowDefinition Height="60*"/>
+        <RowDefinition Height="20*"/>
+    </Grid.RowDefinitions>
+
+    <Image
+        Grid.Row="1"
+            Grid.Column="1"
+            Source="menu.png"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+            />
+    <Label
+        Grid.Row="0"
+        Grid.RowSpan="3"
+            Grid.Column="3"
+            HorizontalOptions="FillAndExpand"
+            HorizontalTextAlignment="Start"
+            VerticalTextAlignment="Center"
+            FontSize="Large"
+            Text="{Binding TitleBarText, Source={x:Reference this}}"
+        TextColor="White"
+        LineBreakMode="NoWrap"
+            />
+    <Image
+        Grid.Row="1"
+            Grid.Column="5"
+            Source="search.png"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+            />
+    <Image
+        Grid.Row="1"
+            Grid.Column="7"
+            Source="overflow.png"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+            />
+</Grid>

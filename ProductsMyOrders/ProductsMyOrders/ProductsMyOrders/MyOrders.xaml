@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:ProductsMyOrders;"
+             x:Class="ProductsMyOrders.MyOrders">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TabLabelStyle"
+                   TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="White"/>
+                <Setter Property="BackgroundColor"
+                        Value="Transparent"/>
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center"/>
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center"/>
+                <Setter Property="HorizontalOptions"
+                Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions"
+                Value="FillAndExpand"/>
+                <Setter Property="FontSize"
+                Value="16"/>
+                <Setter Property="InputTransparent"
+                        Value="true"/>
+            </Style>
+            <Style x:Key="TabButtonStyle"
+               TargetType="Button">
+                <Setter Property="HorizontalOptions"
+                Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions"
+                Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource SPBlue}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <!--Top Bar-->
+        <control:TopBar Grid.Row="0" VerticalOptions="FillAndExpand"
+                        TitleBarText="My Orders"></control:TopBar>
+
+        <!--Tab bar-->
+        <Grid 
+        Grid.Row="1"
+      BackgroundColor="{StaticResource SPBlue}" 
+      HorizontalOptions="FillAndExpand">
+
+            <Button
+        Grid.Column="0"
+        Clicked = "Quotes_Clicked"
+                x:Name="btnQuotesTab"
+            Style="{StaticResource TabButtonStyle}"
+        />
+            <Label
+        x:Name="labelQuotes"
+            Grid.Column="0"         
+            Text="Quotes"
+            Style="{StaticResource TabLabelStyle}"
+        />
+            <Button
+        Grid.Column="1"
+        Clicked = "Orders_Clicked"
+                x:Name="btnOrdersTab"
+            Style="{StaticResource TabButtonStyle}"
+        />
+            <Label
+            Grid.Column="1"            
+            Text="Orders"
+            x:Name="labelOrders"
+            Style="{StaticResource TabLabelStyle}"
+            />
+
+            <Button
+        Grid.Column="2"
+                Clicked="Invoices_Clicked"
+                x:Name="btnInvoicesTab"
+            Style="{StaticResource TabButtonStyle}"
+        />
+            <Label        
+                Grid.Column="2"
+            Text="Invoices"
+        x:Name="labelInvoices"
+            Style="{StaticResource TabLabelStyle}"
+            />
+        </Grid>
+
+        <!--Start page content-->
+
+        <StackLayout Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" Margin="10,10,10,10" x:Name="stackLayoutMain"/>
+                <!--Main content gets added to this stack dynamically-->
+            </ScrollView>
+        </StackLayout>
+
+        <!--End page content-->
+
+        <!--Navigation Bar-->
+        <control:NavigationBar Grid.Row="3" VerticalOptions="FillAndExpand"></control:NavigationBar>
+    </Grid>
+</ContentPage>
