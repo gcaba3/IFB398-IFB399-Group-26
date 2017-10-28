@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.ContactUsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                    <Label Text="COMPANY ADDRESS" HorizontalTextAlignment="Center" TextColor="Black"/>
+                </StackLayout>
+                <Image Grid.Row="1" Source="map1.png" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                <StackLayout Grid.Row="2" Spacing="0" HorizontalOptions="Center" WidthRequest="150">
+                    <Label TextColor="Gray">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Brisbane Head Office / Warehouse" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="+61 7 3122 7584"/>
+                    <Label Text="184 Bluestone Circuit" />
+                    <Label Text="Seventeen Mile Rocks" />
+                    <Label Text="QLD 4073" />
+                </StackLayout>
+                <Image Grid.Row="3" Source="map1.png" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                <StackLayout Grid.Row="4" Spacing="0" HorizontalOptions="Center" WidthRequest="150">
+                    <Label TextColor="Gray">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Melbourne Office" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="2-6 New St" />
+                    <Label Text="Richmond" />
+                    <Label Text="VIC 3121" />
+                </StackLayout>
+                <StackLayout Grid.Row="5" Spacing="0" HorizontalOptions="Center" WidthRequest="150">
+                    <Label TextColor="Gray">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Mailbox:" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="Po Box 293" />
+                    <Label Text="Paddington" />
+                    <Label Text="QLD 4064" />
+                </StackLayout>
+                <StackLayout Grid.Row="6" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                    <Label Text="CONTACT INFORMATIONS" HorizontalTextAlignment="Center" TextColor="Black"/>
+                </StackLayout>
+                <StackLayout Grid.Row="7" Spacing="0" Margin="0,0,0,0" Padding="0"
+                    HorizontalOptions="CenterAndExpand">
+                    <Label TextColor="Gray" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Sales Enquiries:"  FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="sales@supplypartners.com.au  " />
+                </StackLayout>
+                <StackLayout Grid.Row="8" Spacing="0" Margin="0,0,0,0" Padding="0" 
+                    HorizontalOptions="CenterAndExpand">
+                    <Label TextColor="Gray" HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Account Enquiries:" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="accounts@supplypartners.com.au" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

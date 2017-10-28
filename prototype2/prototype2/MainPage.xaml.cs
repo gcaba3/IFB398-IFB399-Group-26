@@ -11,7 +11,7 @@ namespace prototype2
         {
             InitializeComponent();
             Title = "Library";
-            NavigationPage.SetHasBackButton(this, false);
+            //NavigationPage.SetHasBackButton(this, false);
 
             NavigationPage Products = new NavigationPage(new MyPage());
             Products.Title = "Products";
@@ -42,5 +42,10 @@ namespace prototype2
 
         }
 
+        async void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            NotificationPage notificationPage = new NotificationPage();
+            await Navigation.PushAsync(notificationPage);
+        }
     }
 }

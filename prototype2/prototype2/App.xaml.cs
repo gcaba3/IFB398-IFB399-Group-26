@@ -4,6 +4,14 @@ namespace prototype2
 {
     public partial class App : Application
     {
+        public class User
+        {
+            public readonly static User Default = new User();
+
+            public string Username { get; set; }
+        }
+
+            
         public App()
         {
             InitializeComponent();

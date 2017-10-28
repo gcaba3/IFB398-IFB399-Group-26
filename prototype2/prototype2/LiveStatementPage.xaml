@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.LiveStatementPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="5*" />
+                </Grid.RowDefinitions>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
+                    <Label Text="Outstanding Balance:" HorizontalTextAlignment="Center" FontSize="30" />
+                    <Label x:Name="outstandingBalance" Text="" HorizontalTextAlignment="Center" FontSize="30" />
+                    <Label Text="Unpaid Invoices" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" FontSize="30" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand">
+                    <ListView x:Name="invoiceList" HasUnevenRows="false" RowHeight="60">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40*" />
+                                            <ColumnDefinition Width="40*" />
+                                            <ColumnDefinition Width="20*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="60" />
+                                        </Grid.RowDefinitions>
+                                        <Label Text="{Binding InvoiceNumber, StringFormat='Invoice Number: {0}'}" Grid.Column="0" Grid.Row="0" />
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50*" />
+                                                <RowDefinition Height="50*" />
+                                            </Grid.RowDefinitions>
+                                            <StackLayout HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}}" Grid.Row="0" HorizontalTextAlignment="End" />
+                                                <Label Text="{Binding Amount, StringFormat='${0:N}'}" Grid.Row="1" HorizontalTextAlignment="End" />
+                                            </StackLayout>
+                                        </Grid>
+                                        <Button Text="Pay now" Grid.Column="2" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                            CommandParameter="{Binding InvoiceNumber}" Clicked="PayInvoice">
+                                        </Button>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2">
+                    <Button Text= "Pay all" 
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                    Clicked="Payall"></Button>
+
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

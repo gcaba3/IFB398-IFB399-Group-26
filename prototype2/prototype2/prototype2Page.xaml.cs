@@ -7,6 +7,7 @@ namespace prototype2
         public prototype2Page()
         {
             InitializeComponent();
+            Title = "Hello";
         }
     }
 }

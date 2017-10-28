@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.AccountPage">
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="prototype2.AccountPage"
+    MasterBehavior="Split">
     <MasterDetailPage.Master>
         <ContentPage Padding="10" BackgroundColor="Blue" Title="Account Page">
             <ContentPage.Content>
                 <StackLayout Margin="5,30,5,5">
-                    <Label Text="Hello test"/>
-                    <Button Text="Live Statement"/>
-                    <Button Text="Account Details"/>
-                    <Button Text="Payment"/>
-                    <Button Text="Contact Us"/>
-                    <Button Text="Logout"/>
+                    <Label x:Name="helloUser" Text="" TextColor="White"/>
+                    <Button Text="Live Statement" Clicked="OpenPage"/>
+                    <Button Text="Account Details" Clicked="OpenPage"/>
+                    <Button Text="Payment History" Clicked="OpenPage"/>
+                    <Button Text="Contact Us" Clicked="OpenPage"/>
+                    <Button Text="Logout" Clicked="logout"/>
                 </StackLayout>
             </ContentPage.Content>
         </ContentPage>

@@ -5,14 +5,12 @@ using Xamarin.Forms;
 
 namespace prototype2
 {
-    public partial class MyPage : TabbedPage
+    public partial class ContactUsPage : ContentPage
     {
-        public MyPage()
+        public ContactUsPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-
+            this.Title = "Contact Us";
         }
-
     }
 }

@@ -18,12 +18,16 @@ namespace prototype2
         async void Handle_ClickedAsync(object sender, System.EventArgs e)
         {
             if (ValidLogin()){
-                // Open open library page
+
+                App.User.Default.Username = username.Text;// set username
+
+                // open library page
                 NavigationPage MainPage = new NavigationPage(new AccountPage());
 
                 NavigationPage.SetHasNavigationBar(MainPage, false);
-                Navigation.InsertPageBefore(MainPage,this); 
-                await Navigation.PopAsync(); // pops the login page and changes root page to products page
+                Navigation.InsertPageBefore(MainPage,this); //changes root page to products page
+                await Navigation.PopAsync(); // pops the login page 
+
             } else {
                 await DisplayAlert("Incorrect login", "Either the username or password entered is incorrect. " +
                                    "Please try again.", "OK");
@@ -33,8 +37,8 @@ namespace prototype2
         }
 
         bool ValidLogin(){
-            string validUsername = " ";// fake stored username
-            string validPassword = " ";// fake stored password
+            string validUsername = "test";// fake stored username
+            string validPassword = "test";// fake stored password
 
             if((username.Text == validUsername)&&(password.Text == validPassword)){
                 return true;

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.PaymentHistoryPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Button Text="Filter" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Handle_Clicked" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Button Text="Sort" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Handle_Clicked" />
+                    </StackLayout>
+                </Grid>
+                <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand">
+                    <ListView x:Name="invoiceList" HasUnevenRows="false" RowHeight="60" ItemSelected="OnItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="25*" />
+                                            <ColumnDefinition Width="25*" />
+                                            <ColumnDefinition Width="25*" />
+                                            <ColumnDefinition Width="25*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="60" />
+                                        </Grid.RowDefinitions>
+                                        <StackLayout Grid.Column="0" Grid.Row="0">
+                                            <Label Text="Invoice No." />
+                                            <Label Text="{Binding InvoiceNumber, StringFormat='{0:0000}'}" />
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Grid.Row="0">
+                                            <Label Text="Due" />
+                                            <Label Text="{Binding AmountDue, StringFormat='${0}'}" />
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" Grid.Row="0">
+                                            <Label Text="Date Paid" />
+                                            <Label Text="{Binding DatePaid, StringFormat='{0:dd/MM/yyyy}'}}" />
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="3" Grid.Row="0">
+                                            <Label Text="Amount Paid" />
+                                            <Label Text="{Binding AmountPaid, StringFormat='${0}'}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

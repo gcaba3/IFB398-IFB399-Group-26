@@ -14,10 +14,51 @@ namespace prototype2
             NavigationPage.SetHasNavigationBar(this, false);
 
             Detail = new NavigationPage(new MainPage());
-            IsPresented = true;
 
-           
+            helloUser.Text = "Hello " + App.User.Default.Username + "!";
+
+
         }
 
+        async void OpenPage(object sender, System.EventArgs e)
+        {
+            Button PageSubpages = (Button)sender;
+
+
+            switch (PageSubpages.Text)
+            {
+                case "Live Statement":
+                    LiveStatementPage liveStatementPage = new LiveStatementPage();
+                    await Navigation.PushAsync(liveStatementPage);
+                    break;
+                case "Account Details":
+                    AccountDetailPage accountDetailPage = new AccountDetailPage();
+                    await Navigation.PushAsync(accountDetailPage);
+                    break;
+                case "Payment History":
+                    PaymentHistoryPage paymentHistoryPage = new PaymentHistoryPage();
+                    await Navigation.PushAsync(paymentHistoryPage);
+                    break;
+                case "Contact Us":
+                    ContactUsPage contactUsPage = new ContactUsPage();
+                    await Navigation.PushAsync(contactUsPage);
+                    break;
+
+
+                
+            }
+
+
+
+        }
+
+        async void logout(object sender, System.EventArgs e)
+        {
+            NavigationPage loginPage = new NavigationPage(new LoginPage());
+            NavigationPage.SetHasNavigationBar(loginPage, false);
+            Navigation.InsertPageBefore(loginPage, this); // changes the root page to the login page
+            await Navigation.PopAsync(); // pops the current page 
+
+        }
     }
 }
