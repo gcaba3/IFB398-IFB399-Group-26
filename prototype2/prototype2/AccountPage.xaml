@@ -11,7 +11,7 @@
                     <Button Text="Account Details" Clicked="OpenPage"/>
                     <Button Text="Payment History" Clicked="OpenPage"/>
                     <Button Text="Contact Us" Clicked="OpenPage"/>
-                    <Button Text="Logout" Clicked="logout"/>
+                    <Button Text="Logout" Clicked="Logout"/>
                 </StackLayout>
             </ContentPage.Content>
         </ContentPage>
