@@ -97,7 +97,7 @@ namespace prototype2
                 Text = "Add to quote",
             };
 
-            btnAddToQuote.Clicked += Clicked_btnAddToQuote;
+            //btnAddToQuote.Clicked += Clicked_btnAddToQuote;
 
             productGrid.Children.Add(btnAddToQuote, 2, 3);
 
@@ -128,10 +128,10 @@ namespace prototype2
             button.Image = (button.Image == "heart1.png") ? "heart2.png" : "heart1.png";
         }
 
-        async void Clicked_btnAddToQuote(object sender, EventArgs args)
+        /*async void Clicked_btnAddToQuote(object sender, EventArgs args)
         {
-            //await App.Current.MainPage.DisplayAlert("No", "I don't want to.", "damn it");
-        }
+            
+        }*/
 
     }
 }

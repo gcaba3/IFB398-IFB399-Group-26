@@ -86,7 +86,7 @@
                 InputTransparent="True"
                 />
             <Label 
-            Text="My Products"
+            Text="My Shop"
                 
             Style="{StaticResource NavLabelStyle}"/>
 
