@@ -12,6 +12,7 @@ namespace ProductsMyOrders
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NavigationBar : Grid
     {
+        public enum Tab { Products, MyProducts, MyOrders, Support, Events };
         public NavigationBar()
         {
             InitializeComponent();
@@ -24,12 +25,12 @@ namespace ProductsMyOrders
 
         void Clicked_Products(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new Products());
+            Navigation.PushAsync(new AccountPage(Tab.Products));
         }
 
         void Clicked_MyOrders(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new MyOrders());
+            Navigation.PushAsync(new AccountPage(Tab.MyOrders));
         }
     }
 }

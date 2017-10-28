@@ -4,22 +4,25 @@
              xmlns:control="clr-namespace:ProductsMyOrders"
              x:Class="ProductsMyOrders.MainPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
+        <ToolbarItem Text="Message" Order="Secondary" />
+        <ToolbarItem Text="Call" Order="Secondary" />
+        <ToolbarItem Text="Notification" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+
     <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <!--Top Bar-->
-        <control:TopBar Grid.Row="0" VerticalOptions="FillAndExpand"></control:TopBar>
-
         <!--page content-->
-        <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
         </StackLayout>
 
         <!--Navigation Bar-->
-        <control:NavigationBar Grid.Row="2" VerticalOptions="FillAndExpand"></control:NavigationBar>
+        <control:NavigationBar Grid.Row="1" VerticalOptions="FillAndExpand"></control:NavigationBar>
     </Grid>
 </ContentPage>

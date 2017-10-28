@@ -4,6 +4,13 @@
              xmlns:control="clr-namespace:ProductsMyOrders;"
              x:Class="ProductsMyOrders.MyOrders">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
+        <ToolbarItem Text="Message" Order="Secondary" />
+        <ToolbarItem Text="Call" Order="Secondary" />
+        <ToolbarItem Text="Notification" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TabLabelStyle"
@@ -40,18 +47,13 @@
     <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="75*"/>
+            <RowDefinition Height="80*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <!--Top Bar-->
-        <control:TopBar Grid.Row="0" VerticalOptions="FillAndExpand"
-                        TitleBarText="My Orders"></control:TopBar>
-
         <!--Tab bar-->
         <Grid 
-        Grid.Row="1"
+        Grid.Row="0"
       BackgroundColor="{StaticResource SPBlue}" 
       HorizontalOptions="FillAndExpand">
 
@@ -96,7 +98,7 @@
 
         <!--Start page content-->
 
-        <StackLayout Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <StackLayout HorizontalOptions="FillAndExpand" Margin="10,10,10,10" x:Name="stackLayoutMain"/>
                 <!--Main content gets added to this stack dynamically-->
@@ -106,6 +108,6 @@
         <!--End page content-->
 
         <!--Navigation Bar-->
-        <control:NavigationBar Grid.Row="3" VerticalOptions="FillAndExpand"></control:NavigationBar>
+        <control:NavigationBar Grid.Row="2" VerticalOptions="FillAndExpand"></control:NavigationBar>
     </Grid>
 </ContentPage>

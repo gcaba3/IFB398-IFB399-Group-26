@@ -15,7 +15,8 @@ namespace ProductsMyOrders
         public Products()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Title = "Products";
+            NavigationPage.SetHasBackButton(this, false);
 
             for (int i = 0; i < 12; i++)
             {

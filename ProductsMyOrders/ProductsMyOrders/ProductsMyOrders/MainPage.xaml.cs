@@ -12,7 +12,9 @@ namespace ProductsMyOrders
         public MainPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+
+            Title = "Base";
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

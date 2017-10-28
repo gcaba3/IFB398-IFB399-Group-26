@@ -19,7 +19,8 @@ namespace ProductsMyOrders
         public MyOrders()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Title = "My Orders";
+            NavigationPage.SetHasBackButton(this, false);
 
             stackLayoutQuotes = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
             stackLayoutOrders = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
