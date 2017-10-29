@@ -28,9 +28,19 @@ namespace prototype2
             Navigation.PushAsync(new AccountPage(Tab.Products));
         }
 
+        void Clicked_MyProducts(object sender, EventArgs args)
+        {
+            Navigation.PushAsync(new AccountPage(Tab.MyProducts));
+        }
+
         void Clicked_MyOrders(object sender, EventArgs args)
         {
             Navigation.PushAsync(new AccountPage(Tab.MyOrders));
+        }
+
+        void Clicked_Events(object sender, EventArgs args)
+        {
+            Navigation.PushAsync(new AccountPage(Tab.Events));
         }
     }
 }
