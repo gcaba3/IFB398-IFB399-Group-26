@@ -33,8 +33,18 @@ namespace prototype2
                     IsPresented = false;
                     break;
 
+                case NavigationBar.Tab.MyProducts:
+                    Detail = new NavigationPage(new MyProducts());
+                    IsPresented = false;
+                    break;
+
                 case NavigationBar.Tab.MyOrders:
                     Detail = new NavigationPage(new MyOrders());
+                    IsPresented = false;
+                    break;
+
+                case NavigationBar.Tab.Events:
+                    Detail = new NavigationPage(new Events());
                     IsPresented = false;
                     break;
             }
