@@ -205,5 +205,11 @@ namespace prototype2
 
             stackLayoutQuotes.Children.Add(quoteLayout);
         }
+
+        async void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            NotificationPage notificationPage = new NotificationPage();
+            await Navigation.PushAsync(notificationPage);
+        }
     }
 }

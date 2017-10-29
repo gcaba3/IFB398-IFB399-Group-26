@@ -14,7 +14,6 @@ namespace ProductsMyOrders
             NavigationPage.SetHasNavigationBar(this, false);
 
             Detail = new NavigationPage(new MainPage());
-            IsPresented = false;
 
 
         }
