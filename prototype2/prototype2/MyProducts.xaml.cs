@@ -131,5 +131,11 @@ namespace prototype2
             await App.Current.MainPage.DisplayAlert("No", "I don't want to.", "damn it");
         }
 
+        async void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            NotificationPage notificationPage = new NotificationPage();
+            await Navigation.PushAsync(notificationPage);
+        }
+
     }
 }

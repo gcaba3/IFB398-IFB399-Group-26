@@ -122,5 +122,11 @@ namespace prototype2
             
         }
 
+        async void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            NotificationPage notificationPage = new NotificationPage();
+            await Navigation.PushAsync(notificationPage);
+        }
+
     }
 }

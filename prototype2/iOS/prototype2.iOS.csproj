@@ -124,6 +124,28 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sp_login.png" />
+    <BundleResource Include="Resources\alarm.png" />
+    <BundleResource Include="Resources\funnel.png" />
+    <BundleResource Include="Resources\heart1.png" />
+    <BundleResource Include="Resources\heart2.png" />
+    <BundleResource Include="Resources\ic_menu_white_24dp.png" />
+    <BundleResource Include="Resources\ic_notifications_white_24dp.png" />
+    <BundleResource Include="Resources\ic_search_white_24dp.png" />
+    <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\map1.png" />
+    <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\myshop.png" />
+    <BundleResource Include="Resources\orders.png" />
+    <BundleResource Include="Resources\overflow.png" />
+    <BundleResource Include="Resources\products.png" />
+    <BundleResource Include="Resources\profilephoto.png" />
+    <BundleResource Include="Resources\rightarrow.png" />
+    <BundleResource Include="Resources\search.png" />
+    <BundleResource Include="Resources\solarpanelexample.png" />
+    <BundleResource Include="Resources\support.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>

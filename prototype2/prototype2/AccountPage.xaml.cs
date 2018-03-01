@@ -10,7 +10,8 @@ namespace prototype2
         public AccountPage()
         {
             InitializeComponent();
-            Title = "Account Page";
+            //Title = "Account Page";
+            Icon = "menu.png";
             NavigationPage.SetHasNavigationBar(this, false);
 
             Detail = new NavigationPage(new Products());
@@ -23,32 +24,9 @@ namespace prototype2
         public AccountPage(NavigationBar.Tab tab)
         {
             InitializeComponent();
-            Title = "Account Page";
+            //Title = "Account Page";
+            //Icon = "menu.png";
             NavigationPage.SetHasNavigationBar(this, false);
-
-            switch (tab)
-            {
-                case NavigationBar.Tab.Products:
-                    Detail = new NavigationPage(new Products());
-                    IsPresented = false;
-                    break;
-
-                case NavigationBar.Tab.MyProducts:
-                    Detail = new NavigationPage(new MyProducts());
-                    IsPresented = false;
-                    break;
-
-                case NavigationBar.Tab.MyOrders:
-                    Detail = new NavigationPage(new MyOrders());
-                    IsPresented = false;
-                    break;
-
-                case NavigationBar.Tab.Events:
-                    Detail = new NavigationPage(new Events());
-                    IsPresented = false;
-                    break;
-            }
-
 
         }
 

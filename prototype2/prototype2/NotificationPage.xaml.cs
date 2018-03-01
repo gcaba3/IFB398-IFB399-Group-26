@@ -15,8 +15,10 @@ namespace prototype2
             public string type { get; set; }
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<Notification> Notifications = new System.Collections.ObjectModel.ObservableCollection<Notification>();
-        public System.Collections.ObjectModel.ObservableCollection<Notification> PrivateNotifications = new System.Collections.ObjectModel.ObservableCollection<Notification>();
+        public System.Collections.ObjectModel.ObservableCollection<Notification> Notifications = 
+            new System.Collections.ObjectModel.ObservableCollection<Notification>();
+        public System.Collections.ObjectModel.ObservableCollection<Notification> PrivateNotifications = 
+            new System.Collections.ObjectModel.ObservableCollection<Notification>();
 
         public NotificationPage()
         {
@@ -71,7 +73,9 @@ namespace prototype2
 
             Notification selectedItem = (Notification)args.SelectedItem;
 
-            IndividualNotificationPage individualNotificationPage = new IndividualNotificationPage(selectedItem.NotificationNumber.ToString(),selectedItem.DatePosted,selectedItem.NotificationContent.ToString());
+            IndividualNotificationPage individualNotificationPage = 
+                new IndividualNotificationPage(selectedItem.NotificationNumber.ToString(),
+                                               selectedItem.DatePosted,selectedItem.NotificationContent.ToString());
             Navigation.PushAsync(individualNotificationPage);
 
         }

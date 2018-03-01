@@ -13,8 +13,10 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Text="Public" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
-                    <Button Grid.Column="1" Text="Private" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
+                    <Button Grid.Column="0" Text="Public" HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
+                    <Button Grid.Column="1" Text="Private" HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>

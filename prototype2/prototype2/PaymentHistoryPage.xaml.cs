@@ -15,7 +15,8 @@ namespace prototype2
             public int AmountPaid { get; set; }
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<Invoice> invoices = new System.Collections.ObjectModel.ObservableCollection<Invoice>();
+        public System.Collections.ObjectModel.ObservableCollection<Invoice> invoices = 
+            new System.Collections.ObjectModel.ObservableCollection<Invoice>();
 
 
         public PaymentHistoryPage()
