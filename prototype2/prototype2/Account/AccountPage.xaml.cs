@@ -53,9 +53,6 @@ namespace prototype2
                     ContactUsPage contactUsPage = new ContactUsPage();
                     await Navigation.PushAsync(contactUsPage);
                     break;
-
-
-                
             }
 
 

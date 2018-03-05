@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.AccountDetailPage">
     <ContentPage.Content>
-        <Grid>
+        <ScrollView>
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40*" />
                 <RowDefinition Height="60*" />
             </Grid.RowDefinitions>
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#2149af">
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Image Source="profilephoto.png" HeightRequest="100" WidthRequest="100"/>
-                    <Label x:Name="customerName" Text="hello" HorizontalTextAlignment="Center" Margin="0,20,0,0" />
+                    <Image x:Name="customerPhoto" Source="" HeightRequest="100" WidthRequest="100"/>
+                    <Label x:Name="customerName" Text="" HorizontalTextAlignment="Center" Margin="0,20,0,0" />
                 </StackLayout>
             </StackLayout>
             <Grid Grid.Row="1">
@@ -40,25 +41,34 @@
                     </StackLayout>
                     <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="10">
                         <Label Text="Account Password" TextColor="LightGray" />
-                        <Label x:Name="Password" Text="****" TextColor="Black" />
+                        <Label x:Name="customerPassword" Text="****" TextColor="Black" />
                     </StackLayout>
                 </Grid>
                 <StackLayout Grid.Row="2" VerticalOptions="CenterAndExpand" Padding="10">
                     <Label Text="Address:" TextColor="LightGray" />
-                    <Label x:Name="userAddress" Text="1 Samford Valley, VIC" TextColor="Black" />
+                    <Label x:Name="customerAddress" Text="1 Samford Valley, VIC" TextColor="Black" />
                 </StackLayout>
                 <StackLayout Grid.Row="3" VerticalOptions="CenterAndExpand" Padding="10">
                     <Label Text="Payment Details:" TextColor="LightGray" />
                     <Label>
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Card Number: " ForegroundColor="Black"/>
-                                <Span x:Name="userCardNumber" Text="*******4567" ForegroundColor="Black" />
+                                <Span Text="Credit Card: " ForegroundColor="Black"/>
+                                <Span x:Name="creditCard" Text="valid" ForegroundColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Paypal: " ForegroundColor="Black"/>
+                                <Span x:Name="paypal" Text="invalid" ForegroundColor="Black" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                 </StackLayout>
             </Grid>
         </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

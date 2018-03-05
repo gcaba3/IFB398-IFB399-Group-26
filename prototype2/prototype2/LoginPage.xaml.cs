@@ -15,11 +15,31 @@ namespace prototype2
 
         }
 
+        /*
+         * Function that handles the login button on xaml.
+         * Setups user object.
+         */
         async void Handle_ClickedAsync(object sender, System.EventArgs e)
         {
             if (ValidLogin()){
 
-                App.User.Default.Username = username.Text;// set username
+                //Query database statement for account details;
+
+                //Note* Change to access returned account details. Not hard coded.
+                //Set user account details
+                App.User.Default.ID = 1;
+                App.User.Default.ProfilePhoto = "profilephoto.jpg";
+                App.User.Default.Username = username.Text;
+                App.User.Default.Password = displayedPassword(password.Text.Length);
+                App.User.Default.FirstName = "Bruce";
+                App.User.Default.LastName = "Wayne";
+                App.User.Default.Address = "20 Gotham Lane";
+
+                //check if credit card is on database;
+                App.User.Default.HasCreditCard = true;
+
+                //check if paypal is on database;
+                App.User.Default.HasPaypal = false;
 
                 // open library page
                 NavigationPage MainPage = new NavigationPage(new AccountPage());
@@ -36,7 +56,14 @@ namespace prototype2
 
         }
 
-        bool ValidLogin(){
+        /*
+         * This function should query the database to check the entered credentials,
+         * exists in the database. 
+         * 
+         */
+        private bool ValidLogin(){
+            //Query database statement
+
             string validUsername = "test";// fake stored username
             string validPassword = "test";// fake stored password
 
@@ -46,6 +73,17 @@ namespace prototype2
                 return false;
             }
 
+        }
+
+        /*
+         * Returns the asterisks representation of the users password.
+         */
+        private string displayedPassword(int passwordLength){
+            string astPassword = "";
+            for (int i = 0; i < passwordLength; i++){
+                astPassword += "*";
+            }
+            return astPassword;
         }
 
 

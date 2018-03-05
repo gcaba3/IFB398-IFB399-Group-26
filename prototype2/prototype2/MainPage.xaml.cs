@@ -13,23 +13,6 @@ namespace prototype2
             Title = "Library";
             //NavigationPage.SetHasBackButton(this, false);
 
-            NavigationPage Products = new NavigationPage(new MyPage());
-            Products.Title = "Products";
-
-            NavigationPage Orders = new NavigationPage(new MyPage());
-            Orders.Title = "Orders";
-
-            NavigationPage Support = new NavigationPage(new MyPage());
-            Support.Title = "Support";
-
-            NavigationPage Events = new NavigationPage(new MyPage());
-            Events.Title = "Events";
-
-
-            this.Children.Add(Products);
-            this.Children.Add(Orders);
-            this.Children.Add(Support);
-            this.Children.Add(Events);
 
            
         }

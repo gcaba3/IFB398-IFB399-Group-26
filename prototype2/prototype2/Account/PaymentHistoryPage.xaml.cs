@@ -3,18 +3,11 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
+
 namespace prototype2
 {
     public partial class PaymentHistoryPage : ContentPage
     {
-        public class Invoice
-        {
-            public int InvoiceNumber { get; set; }
-            public DateTime DatePaid { get; set; }
-            public int AmountDue { get; set; }
-            public int AmountPaid { get; set; }
-        }
-
         public System.Collections.ObjectModel.ObservableCollection<Invoice> invoices = 
             new System.Collections.ObjectModel.ObservableCollection<Invoice>();
 
