@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
 using Xamarin.Forms;
 
 namespace prototype2
@@ -9,40 +13,63 @@ namespace prototype2
     {
         public int OutstandingBalance;
 
-        public class Invoice
-        {
-            public int InvoiceNumber { get; set; }
-            public DateTime Date { get; set; }
-            public int Amount { get; set; }
-        }
-
         public System.Collections.ObjectModel.ObservableCollection<Invoice> invoices = 
             new System.Collections.ObjectModel.ObservableCollection<Invoice>();
+
+
 
         public LiveStatementPage()
         {
             InitializeComponent();
             Title = "Live Statement";
             GenerateSource(); // generates the item source for the listview
-            SetBalance(); // sets the outstanding balance
 
 
         }
 
         //Creates the source of the list view
-        private void GenerateSource()
+        async private void GenerateSource()
         {
-            for (int i = 0; i < 20; i++)
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("http://10.0.2.2:3000");
+
+            try
             {
-                invoices.Add(new Invoice
-                {
-                    InvoiceNumber = i,
-                    Date = new DateTime(2017, 1, 1),
-                    Amount = 500
-                });
+                Stream responseBody = await httpClient.GetStreamAsync("invoice");
+
+
+                List<JObject> LoadJson (){
+                    using (StreamReader reader = new StreamReader(responseBody))
+                    {
+                        string jsonBody = reader.ReadToEnd();
+                        List<JObject> jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(jsonBody);
+                        return jsonObjects;
+                    }
+                }
+                List<JObject> idk = LoadJson();
+                foreach (JObject qwe in idk){
+                    Invoice userInvoice = new Invoice();
+                    userInvoice.invoiceNumber = qwe.GetValue("invoiceNumber").ToObject<int>();
+                    userInvoice.amountDue = qwe.GetValue("amountDue").ToObject<int>();
+                    userInvoice.dateDue = qwe.GetValue("dateDue").ToObject<DateTime>();
+
+                    invoices.Add(userInvoice);
+                }
+
+
+                invoiceList.ItemsSource = invoices;
+                SetBalance(); // sets the outstanding balance
+
+                //await DisplayAlert("Connected: Now format", output, "OK");
+            }
+            catch (HttpRequestException exc)
+            {
+                await DisplayAlert("Alert", "Exception caught: " + exc.Message, "OK");
             }
 
-            invoiceList.ItemsSource = invoices;
+            // Disposes of client so that it doesnt leak info
+            httpClient.Dispose();
+
         }
 
         //Sets the outstanding balance
@@ -61,7 +88,7 @@ namespace prototype2
 
             foreach (Invoice invoice in invoices)
             {
-                total += invoice.Amount;
+                total += invoice.amountDue;
             }
             return total;
 
@@ -80,7 +107,7 @@ namespace prototype2
             var invoiceEntry = (Xamarin.Forms.Button)sender;
             Invoice toDeleteItem;
             foreach(Invoice itm in invoices){
-                if (itm.InvoiceNumber.ToString() == invoiceEntry.CommandParameter.ToString()){
+                if (itm.invoiceNumber.ToString() == invoiceEntry.CommandParameter.ToString()){
                     toDeleteItem = itm;
                     invoices.Remove(toDeleteItem);
                     SetBalance();

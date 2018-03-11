@@ -30,7 +30,6 @@ namespace prototype2
             InitializeComponent();
 
             MainPage = new NavigationPage( new LoginPage());
-            //MainPage = new NavigationPage(new AccountPage());
         }
 
         protected override void OnStart()

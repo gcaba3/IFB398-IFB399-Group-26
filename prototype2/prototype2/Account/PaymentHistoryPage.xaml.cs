@@ -26,10 +26,10 @@ namespace prototype2
             {
                 invoices.Add(new Invoice
                 {
-                    InvoiceNumber = i,
-                    DatePaid = new DateTime(2017, 1, 1),
-                    AmountDue = 1000,
-                    AmountPaid = 1000
+                    invoiceNumber = i,
+                    datePaid = new DateTime(2017, 1, 1),
+                    amountDue = 1000,
+                    amountPaid = 1000
                 });
             }
 

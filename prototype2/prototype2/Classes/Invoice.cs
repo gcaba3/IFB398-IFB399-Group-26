@@ -3,10 +3,12 @@ namespace prototype2
 {
     public class Invoice
     {
-        public int InvoiceNumber { get; set; }
-        public DateTime DatePaid { get; set; }
-        public int AmountDue { get; set; }
-        public int AmountPaid { get; set; } 
+        public int invoiceNumber { get; set; }
+        public DateTime dateIssued { get; set; }
+        public DateTime dateDue { get; set; }
+        public DateTime datePaid { get; set; }
+        public int amountDue { get; set; }
+        public int amountPaid { get; set; } 
 
         public Invoice()
         {                

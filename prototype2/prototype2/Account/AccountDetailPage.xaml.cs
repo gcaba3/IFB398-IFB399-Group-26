@@ -13,7 +13,7 @@ namespace prototype2
             this.Title = "Account Details";
 
             //Display profile photo
-            customerPhoto.Source = App.User.Default.ProfilePhoto;
+            customerPhoto.Source = 
 
             //Display account details
             customerName.Text = App.User.Default.FirstName + ' ' + App.User.Default.LastName;
