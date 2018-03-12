@@ -13,7 +13,8 @@ namespace prototype2
     {
         public int OutstandingBalance;
 
-        public System.Collections.ObjectModel.ObservableCollection<Invoice> invoices = 
+        //Holds the user's invoices
+        public System.Collections.ObjectModel.ObservableCollection<Invoice> invoices =
             new System.Collections.ObjectModel.ObservableCollection<Invoice>();
 
 
@@ -27,18 +28,28 @@ namespace prototype2
 
         }
 
-        //Creates the source of the list view
+        //WARNING - has no validation so if any entry contains values thats not suppose to be used the like its type
+        //Will throw an exception thats not caught
+
+        //Note* write validation functions
+
+        //Creates the source of the list view based on the currently logged in user
         async private void GenerateSource()
         {
             HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://10.0.2.2:3000");
+            httpClient.BaseAddress = new Uri("http://10.0.2.2:3000");//address of server
 
             try
             {
-                Stream responseBody = await httpClient.GetStreamAsync("invoice");
+                //Invoices of the currently logged in user
+                String userInvoicesURI = "invoice?userId=" + App.User.Default.ID.ToString();
 
+                //queries the server for invoices of the current user
+                Stream responseBody = await httpClient.GetStreamAsync(userInvoicesURI);
 
-                List<JObject> LoadJson (){
+                //Creates a list of JSON objects based on the response of the server
+                List<JObject> LoadJson()
+                {
                     using (StreamReader reader = new StreamReader(responseBody))
                     {
                         string jsonBody = reader.ReadToEnd();
@@ -46,25 +57,32 @@ namespace prototype2
                         return jsonObjects;
                     }
                 }
-                List<JObject> idk = LoadJson();
-                foreach (JObject qwe in idk){
-                    Invoice userInvoice = new Invoice();
-                    userInvoice.invoiceNumber = qwe.GetValue("invoiceNumber").ToObject<int>();
-                    userInvoice.amountDue = qwe.GetValue("amountDue").ToObject<int>();
-                    userInvoice.dateDue = qwe.GetValue("dateDue").ToObject<DateTime>();
 
-                    invoices.Add(userInvoice);
+                //stores the JSON list in a local variable
+                List<JObject> jsonInvoices = LoadJson();
+
+                //Creates the user's unpaid invoices to fill in the invoices collection
+                foreach (JObject jsonInvoice in jsonInvoices)
+                {
+                    if (jsonInvoice.GetValue("amountPaid").ToObject<int>() <= 0)
+                    {
+                        Invoice userInvoice = new Invoice();
+                        userInvoice.invoiceNumber = jsonInvoice.GetValue("invoiceNumber").ToObject<int>();
+                        userInvoice.amountDue = jsonInvoice.GetValue("amountDue").ToObject<int>();
+                        userInvoice.dateDue = jsonInvoice.GetValue("dateDue").ToObject<DateTime>();
+
+                        invoices.Add(userInvoice);
+                    }
+
                 }
 
 
                 invoiceList.ItemsSource = invoices;
-                SetBalance(); // sets the outstanding balance
-
-                //await DisplayAlert("Connected: Now format", output, "OK");
+                GenerateOutstandingBalance(); // sets the outstanding balance
             }
             catch (HttpRequestException exc)
             {
-                await DisplayAlert("Alert", "Exception caught: " + exc.Message, "OK");
+                await DisplayAlert("Something went wrong", "Exception caught: " + exc.Message, "OK");
             }
 
             // Disposes of client so that it doesnt leak info
@@ -72,17 +90,9 @@ namespace prototype2
 
         }
 
-        //Sets the outstanding balance
-        private void SetBalance()
-        {
-            int pulledValue = GenerateOutstandingBalance(); 
 
-            this.OutstandingBalance = pulledValue;
-            outstandingBalance.Text = "$" + OutstandingBalance.ToString();
-        }
-
-        //totals all the unpaid balances and sets it to the outstanding balance
-        private int GenerateOutstandingBalance()
+        //totals all the unpaid invoices and sets it to the outstanding balance
+        private void GenerateOutstandingBalance()
         {
             int total = 0;
 
@@ -90,27 +100,32 @@ namespace prototype2
             {
                 total += invoice.amountDue;
             }
-            return total;
+            this.OutstandingBalance = total;
+            outstandingBalance.Text = "$" + total.ToString();
 
         }
 
-        //clears all the invoices collection
+        //Authorizes the payment of all invoices. Updates the invoices on server
         void Payall(object sender, System.EventArgs e)
         {
+            //Query server to delete all invoices of the user
+            //Generate source again
             invoices.Clear();
-            SetBalance();
+            GenerateOutstandingBalance();
         }
 
-        //removes the entry with the matching name of the button sender's command parameter
+        //Query's the server to delete the specified invoice id of the user
         void PayInvoice(object sender, System.EventArgs e)
         {
             var invoiceEntry = (Xamarin.Forms.Button)sender;
             Invoice toDeleteItem;
-            foreach(Invoice itm in invoices){
-                if (itm.invoiceNumber.ToString() == invoiceEntry.CommandParameter.ToString()){
+            foreach (Invoice itm in invoices)
+            {
+                if (itm.invoiceNumber.ToString() == invoiceEntry.CommandParameter.ToString())
+                {
                     toDeleteItem = itm;
                     invoices.Remove(toDeleteItem);
-                    SetBalance();
+                    GenerateOutstandingBalance();
                     break;
                 }
             }

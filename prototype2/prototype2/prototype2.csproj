@@ -109,7 +109,6 @@
     <Compile Include="Account\PaymentHistoryPage.xaml.cs">
       <DependentUpon>PaymentHistoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Invoices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
