@@ -12,7 +12,7 @@ namespace prototype2
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NavigationBar : Grid
     {
-        public enum Tab { Products, MyProducts, MyOrders, Support, Events };
+        public enum Tab { Products, MyShop, MyOrders, Support, Events };
         public NavigationBar()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace prototype2
 
         void Clicked_MyProducts(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new AccountPage(Tab.MyProducts));
+            Navigation.PushAsync(new AccountPage(Tab.MyShop));
         }
 
         void Clicked_MyOrders(object sender, EventArgs args)

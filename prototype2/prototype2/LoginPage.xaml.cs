@@ -21,7 +21,8 @@ namespace prototype2
          */
         async void Handle_ClickedAsync(object sender, System.EventArgs e)
         {
-            if (ValidLogin()){
+            if (ValidLogin())
+            {
 
                 //Query database statement for account details;
 
@@ -41,14 +42,19 @@ namespace prototype2
                 //check if paypal is on database;
                 App.User.Default.HasPaypal = false;
 
+                // Creates data for use throughout the app (quotes, product info)
+                Data.InitializeData();
+
                 // open library page
                 NavigationPage MainPage = new NavigationPage(new AccountPage());
 
                 NavigationPage.SetHasNavigationBar(MainPage, false);
-                Navigation.InsertPageBefore(MainPage,this); //changes root page to products page
+                Navigation.InsertPageBefore(MainPage, this); //changes root page to products page
                 await Navigation.PopAsync(); // pops the login page 
 
-            } else {
+            }
+            else
+            {
                 await DisplayAlert("Incorrect login", "Either the username or password entered is incorrect. " +
                                    "Please try again.", "OK");
             }
@@ -61,15 +67,19 @@ namespace prototype2
          * exists in the database. 
          * 
          */
-        private bool ValidLogin(){
+        private bool ValidLogin()
+        {
             //Query database statement
 
             string validUsername = "test";// fake stored username
             string validPassword = "test";// fake stored password
 
-            if((username.Text == validUsername)&&(password.Text == validPassword)){
+            if ((username.Text == validUsername) && (password.Text == validPassword))
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
 
@@ -78,9 +88,11 @@ namespace prototype2
         /*
          * Returns the asterisks representation of the users password.
          */
-        private string displayedPassword(int passwordLength){
+        private string displayedPassword(int passwordLength)
+        {
             string astPassword = "";
-            for (int i = 0; i < passwordLength; i++){
+            for (int i = 0; i < passwordLength; i++)
+            {
                 astPassword += "*";
             }
             return astPassword;

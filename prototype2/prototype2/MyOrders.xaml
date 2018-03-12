@@ -6,7 +6,9 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
-            <ToolbarItem Text="Search" Priority="1" Order="Primary" Icon="ic_notifications_white_24dp.png" Clicked="Handle_Clicked"/>
+        <ToolbarItem Text="Message" Order="Secondary" />
+        <ToolbarItem Text="Call" Order="Secondary" />
+        <ToolbarItem Text="Notification" Order="Secondary" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -57,7 +59,7 @@
 
             <Button
         Grid.Column="0"
-        Clicked = "Quotes_Clicked"
+        Clicked = "Clicked_btnQuotes"
                 x:Name="btnQuotesTab"
             Style="{StaticResource TabButtonStyle}"
         />
@@ -69,7 +71,7 @@
         />
             <Button
         Grid.Column="1"
-        Clicked = "Orders_Clicked"
+        Clicked = "Clicked_btnOrders"
                 x:Name="btnOrdersTab"
             Style="{StaticResource TabButtonStyle}"
         />
@@ -82,7 +84,7 @@
 
             <Button
         Grid.Column="2"
-                Clicked="Invoices_Clicked"
+                Clicked="Clicked_btnInvoices"
                 x:Name="btnInvoicesTab"
             Style="{StaticResource TabButtonStyle}"
         />

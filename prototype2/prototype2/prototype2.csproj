@@ -62,17 +62,23 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Order.cs" />
+    <Compile Include="Classes\Product.cs" />
+    <Compile Include="Classes\Quote.cs" />
+    <Compile Include="Classes\SalesDocument.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="MyOrders.xaml.cs">
       <DependentUpon>MyOrders.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyProducts.xaml.cs">
-      <DependentUpon>MyProducts.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MyShop.cs" />
     <Compile Include="NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Events.xaml.cs">
       <DependentUpon>Events.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Products.xaml.cs">
       <DependentUpon>Products.xaml</DependentUpon>
@@ -108,6 +114,9 @@
     </Compile>
     <Compile Include="Account\PaymentHistoryPage.xaml.cs">
       <DependentUpon>PaymentHistoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuotePage.xaml.cs">
+      <DependentUpon>QuotePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -155,14 +164,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyProducts.xaml">
+    <EmbeddedResource Include="OrderPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\" />
-    <Folder Include="Account\" />
+    <EmbeddedResource Include="QuotePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />

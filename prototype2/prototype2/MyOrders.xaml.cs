@@ -1,4 +1,5 @@
-﻿using System;
+﻿using prototype2.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace prototype2
         enum Tab { Quotes, Orders, Invoices };
         Tab selectedTab;
 
+        private const string buttonIndicator = "rightarrow"; // filepath of the image to be added to the buttons
+        private const int fontSize = 16;
+        private double pageWidth;
+        private Color buttonColor = Color.FromHex("#eaeafc");
+
         StackLayout stackLayoutQuotes, stackLayoutOrders, stackLayoutInvoices;
         public MyOrders()
         {
@@ -26,12 +32,44 @@ namespace prototype2
             stackLayoutOrders = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
             stackLayoutInvoices = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
 
-            for (int i = 0; i < 12; i++)
+
+            pageWidth = App.Current.MainPage.Width;
+            InitializeLayoutPositions();
+
+            AddIncompleteQuote();
+
+            for (int i = Data.quotes.Count - 1; i >= 0; i--)
             {
-                AddQuoteToStack();
+                AddDocumentToStack(stackLayoutQuotes, Data.quotes[i]);
+            }
+
+            buttonColor = Color.LightGreen;
+
+            for (int i = Data.orders.Count - 1; i >= 0; i--)
+            {
+                AddDocumentToStack(stackLayoutOrders, Data.orders[i]);
+            }
+
+            for (int i = Data.invoices.Count - 1; i >= 0; i--)
+            {
+                buttonColor = GetInvoiceColor(Data.invoices[i].Status.ToString());
+                AddDocumentToStack(stackLayoutInvoices, Data.invoices[i]);
             }
 
             DisplayQuotes();
+
+            Grid displayGrid = new Grid();
+            displayGrid.Children.Add(stackLayoutQuotes, 0, 0);
+            displayGrid.Children.Add(stackLayoutOrders, 0, 0);
+            displayGrid.Children.Add(stackLayoutInvoices, 0, 0);
+
+            stackLayoutMain.Children.Add(displayGrid);
+        }
+
+        private void InitializeLayoutPositions()
+        {
+            stackLayoutOrders.TranslateTo(pageWidth, 0, 0, Easing.CubicIn);
+            stackLayoutInvoices.TranslateTo(pageWidth * 2, 0, 0, Easing.CubicIn);
         }
 
         private void DisplayQuotes()
@@ -39,7 +77,7 @@ namespace prototype2
             selectedTab = Tab.Quotes;
             labelQuotes.TextColor = (Color)App.Current.Resources["SPBlue"];
             btnQuotesTab.BackgroundColor = Color.White;
-            stackLayoutMain.Children.Add(stackLayoutQuotes);
+            stackLayoutQuotes.IsVisible = true;
         }
 
         private void DisplayOrders()
@@ -47,7 +85,7 @@ namespace prototype2
             selectedTab = Tab.Orders;
             btnOrdersTab.BackgroundColor = Color.White;
             labelOrders.TextColor = (Color)App.Current.Resources["SPBlue"];
-            stackLayoutMain.Children.Add(stackLayoutOrders);
+            stackLayoutOrders.IsVisible = true;
         }
 
         private void DisplayInvoices()
@@ -55,7 +93,7 @@ namespace prototype2
             selectedTab = Tab.Invoices;
             btnInvoicesTab.BackgroundColor = Color.White;
             labelInvoices.TextColor = (Color)App.Current.Resources["SPBlue"];
-            stackLayoutMain.Children.Add(stackLayoutInvoices);
+            stackLayoutInvoices.IsVisible = true;
         }
 
 
@@ -77,139 +115,164 @@ namespace prototype2
             btnInvoicesTab.BackgroundColor = (Color)App.Current.Resources["SPBlue"];
             labelInvoices.TextColor = Color.White;
         }
-        private void Quotes_Clicked(object sender, EventArgs args)
+
+        private void AddIncompleteQuote()
         {
-            if (selectedTab == Tab.Orders) HideOrders();
-            else HideInvoices();
-            stackLayoutMain.IsVisible = false;
-            stackLayoutMain.Children.RemoveAt(0);
+            if (Data.newQuote.Status == QuoteStatus.Incomplete.ToString()) AddDocumentToStack(stackLayoutQuotes, Data.newQuote);
+        }
+
+        private void Clicked_btnQuotes(object sender, EventArgs args)
+        {
+            if (selectedTab == Tab.Quotes)
+                return;
+
+            AnimateToTab(0, pageWidth, pageWidth * 2);
+            if (selectedTab == Tab.Orders)
+                HideOrders();
+            else
+                HideInvoices();
+
             DisplayQuotes();
-            stackLayoutMain.IsVisible = true;
         }
-        private void Orders_Clicked(object sender, EventArgs args)
+        private void Clicked_btnOrders(object sender, EventArgs args)
         {
-            if (selectedTab == Tab.Quotes) HideQuotes();
-            else HideInvoices();
-            stackLayoutMain.IsVisible = false;
-            stackLayoutMain.Children.RemoveAt(0);
+            if (selectedTab == Tab.Orders)
+                return;
+
+            AnimateToTab(-pageWidth, 0, pageWidth);
+            if (selectedTab == Tab.Quotes)
+                HideQuotes();
+            else
+                HideInvoices();
+
             DisplayOrders();
-            stackLayoutMain.IsVisible = true;
         }
-        private void Invoices_Clicked(object sender, EventArgs args)
+        private void Clicked_btnInvoices(object sender, EventArgs args)
         {
-            if (selectedTab == Tab.Quotes) HideQuotes();
-            else HideOrders();
-            stackLayoutMain.IsVisible = false;
-            stackLayoutMain.Children.RemoveAt(0);
+            if (selectedTab == Tab.Invoices)
+                return;
+
+            AnimateToTab(-pageWidth * 2, -pageWidth, 0);
+            if (selectedTab == Tab.Quotes)
+                HideQuotes();
+            else
+                HideOrders();
+
             DisplayInvoices();
-            stackLayoutMain.IsVisible = true;
+        }
+
+        private async void AnimateToTab(double quotesPosition, double ordersPosition, double invoicesPosition)
+        {
+            await Task.WhenAll(
+            stackLayoutQuotes.TranslateTo(quotesPosition, 0, 500, Easing.SinOut),
+            stackLayoutOrders.TranslateTo(ordersPosition, 0, 500, Easing.SinOut),
+            stackLayoutInvoices.TranslateTo(invoicesPosition, 0, 500, Easing.SinOut)
+            );
         }
 
         /// <summary>
         /// Adds a generic example quote to the quoteLayout StackLayout
         /// </summary>
-        private void AddQuoteToStack()
+        private void AddDocumentToStack(StackLayout stack, SalesDocument document)
         {
-            var quoteGrid = new Grid
+            var documentGrid = new Grid
             {
                 ColumnDefinitions =
                 {
                     new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(30, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(39, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(30, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(45, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(45, GridUnitType.Star) },
                     new ColumnDefinition { Width = new GridLength(6, GridUnitType.Star) },
                     new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
+                },
+
+                RowDefinitions =
+                {
+                    new RowDefinition { Height = new GridLength(3, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(42, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(42, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(3, GridUnitType.Star) },
                 }
             };
 
-            quoteGrid.Children.Add(new Button
+            Button btnViewDocument = new Button
             {
-                BackgroundColor = Color.FromHex("#eaeafc"),
-            }, 0, 6, 0, 2);
-            quoteGrid.Children.Add(new Label
-            {
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                Text = "Quote Number",
-                FontSize = 16,
-            }, 1, 0);
+                BackgroundColor = buttonColor,
+            };
 
-            quoteGrid.Children.Add(new Label
+            btnViewDocument.ClassId = document.Number.ToString();
+            btnViewDocument.Clicked += Clicked_btnViewDocument;
+
+            documentGrid.Children.Add(btnViewDocument, 0, 5, 0, 4);
+
+            documentGrid.Children.Add(new Label
             {
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                Text = "###",
-                FontSize = 16,
+                VerticalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.Start,
+                Text = "#" + document.Number,
+                FontSize = fontSize,
                 InputTransparent = true,
             }, 1, 1);
 
-            quoteGrid.Children.Add(new Label
+            documentGrid.Children.Add(new Label
             {
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                Text = "Issue Date",
-                FontSize = 16,
+                VerticalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.Start,
+                Text = document.Status.ToString(),
+                FontSize = fontSize,
                 InputTransparent = true,
-            }, 2, 0);
+            }, 1, 2);
 
-            quoteGrid.Children.Add(new Label
+            documentGrid.Children.Add(new Label
             {
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                Text = "DD.MM.YYYY",
-                FontSize = 16,
+                HorizontalOptions = LayoutOptions.End,
+                Text = "$" + document.TotalPrice.ToString("N2"),
+                FontSize = fontSize,
                 InputTransparent = true,
             }, 2, 1);
 
-            quoteGrid.Children.Add(new Label
-            {
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                Text = "Price",
-                FontSize = 16,
-                InputTransparent = true,
-            }, 3, 0);
-
-            quoteGrid.Children.Add(new Label
-            {
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Start,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
-                Text = "$XXXXX",
-                FontSize = 16,
-                InputTransparent = true,
-            }, 3, 1);
-
-            quoteGrid.Children.Add(new Image
+            documentGrid.Children.Add(new Image
             {
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
-                Source = "rightarrow",
+                Source = buttonIndicator,
                 InputTransparent = true,
-            }, 4, 5, 0, 2);
+            }, 3, 4, 0, 4);
 
-            StackLayout quoteLayout = new StackLayout();
-            quoteLayout.Children.Add(quoteGrid);
+            documentGrid.Children.Add(new Label
+            {
+                FontSize = fontSize,
+                HorizontalOptions = LayoutOptions.End,
+                Text = document.Date.ToString("MM/dd/yyyy hh:mm"),
+                InputTransparent = true,
+            }, 2, 2);
 
-            stackLayoutQuotes.Children.Add(quoteLayout);
+            StackLayout documentLayout = new StackLayout();
+            documentLayout.Children.Add(documentGrid);
+
+            stack.Children.Add(documentLayout);
         }
 
-        async void Handle_Clicked(object sender, System.EventArgs e)
+        private Color GetInvoiceColor(string status)
         {
-            NotificationPage notificationPage = new NotificationPage();
-            await Navigation.PushAsync(notificationPage);
+            if (status == InvoiceStatus.Unpaid.ToString())
+                return Color.Orange;
+            if (status == InvoiceStatus.Partial.ToString())
+                return Color.LightBlue;
+            if (status == InvoiceStatus.Paid.ToString())
+                return Color.LightGreen;
+            return Color.Red;
+        }
+
+        private void Clicked_btnViewDocument(object sender, EventArgs eventaArgs)
+        {
+            Button button = (Button)sender;
+            int documentNumber = Int32.Parse(button.ClassId);
+            if (selectedTab == Tab.Quotes)
+                Navigation.PushAsync(new QuotePage(documentNumber));
+            else if (selectedTab == Tab.Orders)
+                Navigation.PushAsync(new OrderPage(documentNumber));
+            // else open invoice page
         }
     }
 }

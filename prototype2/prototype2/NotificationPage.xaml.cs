@@ -15,9 +15,9 @@ namespace prototype2
             public string type { get; set; }
         }
 
-        public System.Collections.ObjectModel.ObservableCollection<Notification> Notifications = 
+        public System.Collections.ObjectModel.ObservableCollection<Notification> Notifications =
             new System.Collections.ObjectModel.ObservableCollection<Notification>();
-        public System.Collections.ObjectModel.ObservableCollection<Notification> PrivateNotifications = 
+        public System.Collections.ObjectModel.ObservableCollection<Notification> PrivateNotifications =
             new System.Collections.ObjectModel.ObservableCollection<Notification>();
 
         public NotificationPage()
@@ -31,13 +31,13 @@ namespace prototype2
         //Creates the source of the list view
         private void GenerateSource()
         {
-            
+
             for (int i = 0; i < 5; i++)
             {
                 Notifications.Add(new Notification
                 {
                     NotificationNumber = i,
-                    DatePosted= new DateTime(2017, 1, 1),
+                    DatePosted = new DateTime(2017, 1, 1),
                     NotificationContent = "Small Beginning of Message. Small Beginning of Message. Small Beginning of Message.",
                     type = "Private"
 
@@ -60,9 +60,12 @@ namespace prototype2
             SortPrivateNotifications();
         }
 
-        void SortPrivateNotifications(){
-            foreach (Notification ntf in Notifications){
-                if(ntf.type=="Private"){
+        void SortPrivateNotifications()
+        {
+            foreach (Notification ntf in Notifications)
+            {
+                if (ntf.type == "Private")
+                {
                     PrivateNotifications.Add(ntf);
                 }
             }
@@ -73,9 +76,9 @@ namespace prototype2
 
             Notification selectedItem = (Notification)args.SelectedItem;
 
-            IndividualNotificationPage individualNotificationPage = 
+            IndividualNotificationPage individualNotificationPage =
                 new IndividualNotificationPage(selectedItem.NotificationNumber.ToString(),
-                                               selectedItem.DatePosted,selectedItem.NotificationContent.ToString());
+                                               selectedItem.DatePosted, selectedItem.NotificationContent.ToString());
             Navigation.PushAsync(individualNotificationPage);
 
         }
@@ -84,9 +87,12 @@ namespace prototype2
         {
             Button button = (Button)sender;
             //DisplayAlert(button.Text,"","Ok");
-            if(button.Text=="Private"){
+            if (button.Text == "Private")
+            {
                 notificationList.ItemsSource = PrivateNotifications;
-            }else{
+            }
+            else
+            {
                 notificationList.ItemsSource = Notifications;
             }
         }

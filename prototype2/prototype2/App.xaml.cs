@@ -11,7 +11,7 @@ namespace prototype2
          */
         public class User
         {
-            public readonly static User Default = new User(); 
+            public readonly static User Default = new User();
 
             public int ID { get; set; } // User key / account number
             public string ProfilePhoto { get; set; }
@@ -24,12 +24,12 @@ namespace prototype2
             public bool HasPaypal { get; set; }
         }
 
-            
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage( new LoginPage());
+            MainPage = new NavigationPage(new LoginPage());
             //MainPage = new NavigationPage(new AccountPage());
         }
 

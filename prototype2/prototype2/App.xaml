@@ -16,6 +16,11 @@
                     <x:String>#142c69</x:String>
                 </x:Arguments>
             </Color>
+            <Color x:FactoryMethod="FromHex" x:Key="SPRed">
+                <x:Arguments>
+                    <x:String>#d83127</x:String>
+                </x:Arguments>
+            </Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

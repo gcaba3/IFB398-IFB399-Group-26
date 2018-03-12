@@ -25,13 +25,18 @@ namespace prototype2
             if (App.User.Default.HasCreditCard)
             {
                 creditCard.Text = "valid";
-            } else {
+            }
+            else
+            {
                 creditCard.Text = "invalid";
             }
 
-            if (App.User.Default.HasPaypal){
+            if (App.User.Default.HasPaypal)
+            {
                 paypal.Text = "valid";
-            } else {
+            }
+            else
+            {
                 paypal.Text = "invalid";
             }
         }

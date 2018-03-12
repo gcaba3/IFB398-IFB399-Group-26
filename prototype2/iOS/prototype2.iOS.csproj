@@ -103,15 +103,13 @@
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <InProject>false</InProject>
+      <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
-      <InProject>false</InProject>
+      <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
@@ -143,8 +141,22 @@
     <BundleResource Include="Resources\profilephoto.png" />
     <BundleResource Include="Resources\rightarrow.png" />
     <BundleResource Include="Resources\search.png" />
-    <BundleResource Include="Resources\solarpanelexample.png" />
     <BundleResource Include="Resources\support.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\LGChemRESULithiumbattery.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\phonodiamond270.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\SG10ECThreePhase10kWInverter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suntech310wModule.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ABBPVI3000TLOUTD.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />

@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:prototype2;"
+             x:Class="prototype2.QuotePage">
+
+    <Grid ColumnSpacing="0" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--page content-->
+        <Grid Grid.Row="0" Margin="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+
+
+            <!--General Overview Bar-->
+            <StackLayout Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid HorizontalOptions="FillAndExpand" RowSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="45*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                 Grid.Column="0"
+                    Grid.Row="0"
+                Text="Quote Number"
+                HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="Small"/>
+                    <Label
+                    x:Name="txtNumber"
+                 Grid.Column="0"
+                    Grid.Row="1"
+                HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="Small"/>
+                    <Label
+                 Grid.Column="1"
+                    Grid.Row="0"
+                Text="Status"
+                HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="Small"/>
+                    <Label
+                    x:Name="txtStatus"
+                 Grid.Column="1"
+                    Grid.Row="1"
+                HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="Small"/>
+                    <Label
+                        x:Name="labelQuotationDate"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="Small"/>
+                    <Label
+                        x:Name="txtQuotationDate"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="Small"/>
+                </Grid>
+            </StackLayout>
+
+            <!-- Full quote details-->
+            <Frame Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource SPBlue}" Padding="1">
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+
+                    <!--Product Details Headings-->
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Grid HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="22.5*"/>
+                                <ColumnDefinition Width="22.5*"/>
+                                <ColumnDefinition Width="22.5*"/>
+                                <ColumnDefinition Width="22.5*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label
+                    Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                    Text="Description"
+                    HorizontalTextAlignment="Center"
+                    FontSize="Small"
+                    />
+                            <Label
+                    Grid.Column="3"
+                    Text="Quantity"
+                    HorizontalTextAlignment="Center"
+                    FontSize="Small"
+                    />
+                            <Label
+                    Grid.Column="4"
+                    Text="$ per unit"
+                    HorizontalTextAlignment="Center"
+                    FontSize="Small"
+                    />
+                        </Grid>
+                    </StackLayout>
+
+                    <!--Product Details-->
+                    <ScrollView HorizontalOptions="FillAndExpand">
+                        <StackLayout
+                x:Name="productDetailsStack">
+                            <BoxView HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource SPBlue}" HeightRequest="1"/>
+                            <!--Separator line-->
+                            <!--List of products and their info get stacked here-->
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--Price Totals-->
+
+                    <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+                        <BoxView HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource SPBlue}" HeightRequest="1"/>
+                        <!--Separator line-->
+                        <Grid Margin="5" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1" Grid.Row="0" Text="Sub Total" FontSize="Small"/>
+                            <Label Grid.Column="2" Grid.Row="0" x:Name="txtSubTotal" FontSize="Small" HorizontalTextAlignment="End"/>
+                            <Label Grid.Column="1" Grid.Row="1" Text="Discount @ x.xx%" FontSize="Small"/>
+                            <Label Grid.Column="2" Grid.Row="1" x:Name="txtDiscount" FontSize="Small" HorizontalTextAlignment="End"/>
+                            <Label Grid.Column="1" Grid.Row="2" Text="Amount Excl GST" FontSize="Small"/>
+                            <Label Grid.Column="2" Grid.Row="2" x:Name="txtExclGST" FontSize="Small" HorizontalTextAlignment="End"/>
+                            <Label Grid.Column="1" Grid.Row="3" Text="GST" FontSize="Small"/>
+                            <Label Grid.Column="2" Grid.Row="3" x:Name="txtGST" FontSize="Small" HorizontalTextAlignment="End"/>
+                            <Label Grid.Column="1" Grid.Row="4" Text="TOTAL" FontSize="Small" TextColor="Black"/>
+                            <Label Grid.Column="2" Grid.Row="4" x:Name="txtTotal" FontSize="Small" TextColor="Black" HorizontalTextAlignment="End"/>
+                        </Grid>
+
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+
+
+
+            <!--Quote Controls-->
+            <StackLayout x:Name="stackQuoteControls" Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Label
+                    Text="Controls and further information go here"/>
+            </StackLayout>
+
+        </Grid>
+
+
+        <!--Navigation Bar-->
+        <control:NavigationBar Grid.Row="1" VerticalOptions="FillAndExpand"></control:NavigationBar>
+    </Grid>
+</ContentPage>

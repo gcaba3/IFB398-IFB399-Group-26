@@ -32,10 +32,10 @@ namespace prototype2
         }
 
         public void addEventToList(string name, string date, string description, string price, string state)
-        {   
+        {
 
             var eventGrid = new Grid
-            {   
+            {
                 RowDefinitions =
                 {
                     new RowDefinition {},
@@ -56,7 +56,7 @@ namespace prototype2
                 Text = name,
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
-                
+
             }, 0, 0);
 
             eventGrid.Children.Add(new Label
@@ -73,12 +73,12 @@ namespace prototype2
                 FontSize = 10,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Start,
-                
-            }, 0,3, 2,3);
+
+            }, 0, 3, 2, 3);
 
             eventGrid.Children.Add(new Label
             {
-                Text = "$" + price ,
+                Text = "$" + price,
                 FontSize = 10,
                 VerticalOptions = LayoutOptions.Center,
             }, 1, 0);
@@ -110,7 +110,7 @@ namespace prototype2
         public void OpenEvent(object sender, EventArgs args)
         {
             Grid tappedEvent = (Grid)sender;
-            foreach(Label ree in tappedEvent.Children)
+            foreach (Label ree in tappedEvent.Children)
             {
                 if (ree.ClassId.Equals("name"))
                 {
@@ -119,7 +119,7 @@ namespace prototype2
                 }
             }
 
-            
+
         }
 
         async void Handle_Clicked(object sender, System.EventArgs e)

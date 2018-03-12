@@ -24,10 +24,31 @@ namespace prototype2
         public AccountPage(NavigationBar.Tab tab)
         {
             InitializeComponent();
-            //Title = "Account Page";
-            //Icon = "menu.png";
+            Title = "Account Page";
             NavigationPage.SetHasNavigationBar(this, false);
 
+            switch (tab)
+            {
+                case NavigationBar.Tab.Products:
+                    Detail = new NavigationPage(new Products());
+                    IsPresented = false;
+                    break;
+
+                case NavigationBar.Tab.MyShop:
+                    Detail = new NavigationPage(new MyShop());
+                    IsPresented = false;
+                    break;
+
+                case NavigationBar.Tab.MyOrders:
+                    Detail = new NavigationPage(new MyOrders());
+                    IsPresented = false;
+                    break;
+
+                case NavigationBar.Tab.Events:
+                    Detail = new NavigationPage(new Events());
+                    IsPresented = false;
+                    break;
+            }
         }
 
         async void OpenPage(object sender, System.EventArgs e)

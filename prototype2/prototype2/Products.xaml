@@ -1,34 +1,144 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:control="clr-namespace:prototype2" x:Class="prototype2.Products">
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:prototype2"
+             x:Class="prototype2.Products">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
-        <ToolbarItem Text="Search" Priority="1" Order="Primary" Icon="ic_notifications_white_24dp.png" Clicked="Handle_Clicked" />
+        <ToolbarItem Text="Message" Order="Secondary" />
+        <ToolbarItem Text="Call" Order="Secondary" />
+        <ToolbarItem Text="Notification" Order="Secondary" />
     </ContentPage.ToolbarItems>
-    <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
+
+    <!--Page content for this page and the MyProducts page is laid out using this class:-->
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="90*" />
-            <RowDefinition Height="10*" />
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <!--page content-->
-        <ScrollView Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <StackLayout HorizontalOptions="FillAndExpand" x:Name="productStack" Margin="10">
-                <!--Search bar, filter and products-->
-                <SearchBar HorizontalOptions="FillAndExpand" Text="Search for products" />
-                <Grid HorizontalOptions="FillAndExpand">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*" />
-                        <ColumnDefinition Width="10*" />
-                        <ColumnDefinition Width="15*" />
-                        <ColumnDefinition Width="65*" />
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" Source="funnel.png" HorizontalOptions="Start" />
-                    <Label Grid.Column="2" Text="Filter" HorizontalOptions="Start" />
+        <Grid Grid.Row="0"
+    ColumnSpacing="0" RowSpacing="0" Margin="0" x:Name="gridPage">
+
+            <!--page content-->
+            <ScrollView Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout
+                HorizontalOptions="FillAndExpand"
+                x:Name="stackProducts"
+                     x:FieldModifier="protected"
+                Margin="10">
+                    <!--Search bar, filter and products-->
+                    <SearchBar
+                HorizontalOptions="FillAndExpand"
+            Text="Search for products"/>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="65*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image
+                        Grid.Column="1"
+                Source="funnel.png"
+                HorizontalOptions="Start"/>
+                        <Label
+                        Grid.Column="2"
+                Text="Filter"
+                HorizontalOptions="Start"/>
+                    </Grid>
+
+                    <!--Product StackLayouts get stacked here by AddProductToStack-->
+
+                </StackLayout>
+
+            </ScrollView>
+
+            <!--Add to quote popup content-->
+            <BoxView 
+        x:Name="boxBackground" 
+        Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+        BackgroundColor="Black" Opacity="0.5" IsVisible="False"/>
+            <Frame x:Name="framePopup" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="White" OutlineColor="Black" HasShadow="True" IsVisible="False" InputTransparent="True">
+                <Grid x:Name="gridAddToQuotePopup" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="White" IsVisible="False">
+                    <Label
+                x:Name="labelPopupType"
+            FontSize="Large"
+            Grid.Row="0"        
+            Grid.Column="0"
+            TextColor="Black"
+            Text="Add to quote"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"/>
+
+                    <Label
+            x:Name="labelPopupProductName"
+            FontSize="Large"
+            Grid.Row="0"
+            Grid.Column="1"
+                Grid.ColumnSpan="2"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"/>
+
+                    <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            FontSize="Large"
+            Text="Quantity"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"/>
+
+                    <Frame
+            Grid.Row="1"
+            Grid.Column="2"
+            OutlineColor="Black"
+            BackgroundColor="Transparent"
+            InputTransparent="True"
+            />
+
+                    <Entry
+                x:Name="entryQuantity"
+                TextChanged="TextChanged_Quantity"
+                Grid.Row="1"
+                Grid.Column="2"
+                TextColor="Black"
+                Keyboard="Numeric"
+                HorizontalTextAlignment="Center"/>
+
+                    <Button
+        Grid.Row="2"
+        Grid.Column="0"
+        Text="Cancel"
+                BackgroundColor="Transparent"
+                BorderColor="{StaticResource SPBlue}"
+                BorderWidth="1"
+                TextColor="Black"
+        Clicked="Clicked_btnCancel"/>
+
+                    <Button
+                x:Name="btnRemove"
+                BackgroundColor="{StaticResource SPRed}"
+                BorderColor="{StaticResource SPRed}"
+                TextColor="White"
+                IsVisible="False"
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="Remove"
+                Clicked="Clicked_btnRemove"/>
+
+                    <Button
+                x:Name="btnConfirm"
+                TextColor="White"
+                Grid.Row="2"
+                Grid.Column="2"
+                Text="Confirm"
+                Clicked="Clicked_btnConfirm"/>
                 </Grid>
-                <!--Product StackLayouts get stacked here by AddProductToStack-->
-            </StackLayout>
-        </ScrollView>
+            </Frame>
+        </Grid>
         <!--Navigation Bar-->
-        <control:NavigationBar Grid.Row="1" VerticalOptions="FillAndExpand">
-        </control:NavigationBar>
+        <control:NavigationBar Grid.Row="1" VerticalOptions="FillAndExpand"></control:NavigationBar>
     </Grid>
 </ContentPage>
