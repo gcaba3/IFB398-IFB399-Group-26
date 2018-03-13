@@ -17,11 +17,12 @@ namespace prototype2
         Tab selectedTab;
 
         private const string buttonIndicator = "rightarrow"; // filepath of the image to be added to the buttons
-        private const int fontSize = 16;
+        private const int fontSize = 16, tabAnimationTime = 500;
         private double pageWidth;
         private Color buttonColor = Color.FromHex("#eaeafc");
 
         StackLayout stackLayoutQuotes, stackLayoutOrders, stackLayoutInvoices;
+        ScrollView scrollViewQuotes, scrollViewOrders, scrollViewInvoices;
         public MyOrders()
         {
             InitializeComponent();
@@ -32,36 +33,43 @@ namespace prototype2
             stackLayoutOrders = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
             stackLayoutInvoices = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
 
+            scrollViewQuotes = new ScrollView { HorizontalOptions = LayoutOptions.FillAndExpand };
+            scrollViewOrders = new ScrollView { HorizontalOptions = LayoutOptions.FillAndExpand, IsEnabled = false};
+            scrollViewInvoices = new ScrollView { HorizontalOptions = LayoutOptions.FillAndExpand, IsEnabled = false };
 
             pageWidth = App.Current.MainPage.Width;
             InitializeLayoutPositions();
-
             AddIncompleteQuote();
 
-            for (int i = Data.quotes.Count - 1; i >= 0; i--)
+            foreach (Quote quote in Data.quotes)
             {
-                AddDocumentToStack(stackLayoutQuotes, Data.quotes[i]);
+                AddDocumentToStack(stackLayoutQuotes, quote);
             }
 
-            buttonColor = Color.LightGreen;
+            buttonColor = Color.FromHex("ceffcf");
 
-            for (int i = Data.orders.Count - 1; i >= 0; i--)
+            foreach (Order order in Data.orders)
             {
-                AddDocumentToStack(stackLayoutOrders, Data.orders[i]);
+                AddDocumentToStack(stackLayoutOrders, order);
             }
 
-            for (int i = Data.invoices.Count - 1; i >= 0; i--)
+            foreach (Invoice invoice in Data.invoices)
             {
-                buttonColor = GetInvoiceColor(Data.invoices[i].Status.ToString());
-                AddDocumentToStack(stackLayoutInvoices, Data.invoices[i]);
+                buttonColor = GetInvoiceColor(invoice.Status);
+                AddDocumentToStack(stackLayoutInvoices, invoice);
             }
+                
 
             DisplayQuotes();
 
+            scrollViewQuotes.Content = stackLayoutQuotes;
+            scrollViewOrders.Content = stackLayoutOrders;
+            scrollViewInvoices.Content = stackLayoutInvoices;
+
             Grid displayGrid = new Grid();
-            displayGrid.Children.Add(stackLayoutQuotes, 0, 0);
-            displayGrid.Children.Add(stackLayoutOrders, 0, 0);
-            displayGrid.Children.Add(stackLayoutInvoices, 0, 0);
+            displayGrid.Children.Add(scrollViewQuotes, 0, 0);
+            displayGrid.Children.Add(scrollViewOrders, 0, 0);
+            displayGrid.Children.Add(scrollViewInvoices, 0, 0);
 
             stackLayoutMain.Children.Add(displayGrid);
         }
@@ -77,7 +85,7 @@ namespace prototype2
             selectedTab = Tab.Quotes;
             labelQuotes.TextColor = (Color)App.Current.Resources["SPBlue"];
             btnQuotesTab.BackgroundColor = Color.White;
-            stackLayoutQuotes.IsVisible = true;
+            scrollViewQuotes.IsEnabled = true;
         }
 
         private void DisplayOrders()
@@ -85,7 +93,7 @@ namespace prototype2
             selectedTab = Tab.Orders;
             btnOrdersTab.BackgroundColor = Color.White;
             labelOrders.TextColor = (Color)App.Current.Resources["SPBlue"];
-            stackLayoutOrders.IsVisible = true;
+            scrollViewOrders.IsEnabled = true;
         }
 
         private void DisplayInvoices()
@@ -93,7 +101,7 @@ namespace prototype2
             selectedTab = Tab.Invoices;
             btnInvoicesTab.BackgroundColor = Color.White;
             labelInvoices.TextColor = (Color)App.Current.Resources["SPBlue"];
-            stackLayoutInvoices.IsVisible = true;
+            scrollViewInvoices.IsEnabled = true;
         }
 
 
@@ -101,12 +109,16 @@ namespace prototype2
         {
             btnQuotesTab.BackgroundColor = (Color)App.Current.Resources["SPBlue"];
             labelQuotes.TextColor = Color.White;
+            scrollViewQuotes.IsEnabled = false;
+
         }
 
         private void HideOrders()
         {
             btnOrdersTab.BackgroundColor = (Color)App.Current.Resources["SPBlue"];
             labelOrders.TextColor = Color.White;
+            scrollViewOrders.IsEnabled = false;
+
 
         }
 
@@ -114,11 +126,12 @@ namespace prototype2
         {
             btnInvoicesTab.BackgroundColor = (Color)App.Current.Resources["SPBlue"];
             labelInvoices.TextColor = Color.White;
+            scrollViewInvoices.IsEnabled = false;
         }
 
         private void AddIncompleteQuote()
         {
-            if (Data.newQuote.Status == QuoteStatus.Incomplete.ToString()) AddDocumentToStack(stackLayoutQuotes, Data.newQuote);
+            if (Data.newQuote.Status == QuoteStatus.Incomplete) AddDocumentToStack(stackLayoutQuotes, Data.newQuote);
         }
 
         private void Clicked_btnQuotes(object sender, EventArgs args)
@@ -164,9 +177,9 @@ namespace prototype2
         private async void AnimateToTab(double quotesPosition, double ordersPosition, double invoicesPosition)
         {
             await Task.WhenAll(
-            stackLayoutQuotes.TranslateTo(quotesPosition, 0, 500, Easing.SinOut),
-            stackLayoutOrders.TranslateTo(ordersPosition, 0, 500, Easing.SinOut),
-            stackLayoutInvoices.TranslateTo(invoicesPosition, 0, 500, Easing.SinOut)
+            stackLayoutQuotes.TranslateTo(quotesPosition, 0, tabAnimationTime, Easing.SinOut),
+            stackLayoutOrders.TranslateTo(ordersPosition, 0, tabAnimationTime, Easing.SinOut),
+            stackLayoutInvoices.TranslateTo(invoicesPosition, 0, tabAnimationTime, Easing.SinOut)
             );
         }
 
@@ -209,7 +222,7 @@ namespace prototype2
             {
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.Start,
-                Text = "#" + document.Number,
+                Text = document.Number,
                 FontSize = fontSize,
                 InputTransparent = true,
             }, 1, 1);
@@ -218,7 +231,7 @@ namespace prototype2
             {
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.Start,
-                Text = document.Status.ToString(),
+                Text = document.Status,
                 FontSize = fontSize,
                 InputTransparent = true,
             }, 1, 2);
@@ -255,19 +268,19 @@ namespace prototype2
 
         private Color GetInvoiceColor(string status)
         {
-            if (status == InvoiceStatus.Unpaid.ToString())
-                return Color.Orange;
-            if (status == InvoiceStatus.Partial.ToString())
-                return Color.LightBlue;
-            if (status == InvoiceStatus.Paid.ToString())
+            if (status == InvoiceStatus.Unpaid)
+                return Color.FromHex("fccf49");
+            if (status == InvoiceStatus.Partial)
+                return Color.FromHex("6ce4fc");
+            if (status == InvoiceStatus.Paid)
                 return Color.LightGreen;
-            return Color.Red;
+            return Color.FromHex("fc5a5d");
         }
 
         private void Clicked_btnViewDocument(object sender, EventArgs eventaArgs)
         {
             Button button = (Button)sender;
-            int documentNumber = Int32.Parse(button.ClassId);
+            string documentNumber = button.ClassId;
             if (selectedTab == Tab.Quotes)
                 Navigation.PushAsync(new QuotePage(documentNumber));
             else if (selectedTab == Tab.Orders)

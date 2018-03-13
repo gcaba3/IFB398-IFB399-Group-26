@@ -99,10 +99,7 @@
         <!--Start page content-->
 
         <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <StackLayout HorizontalOptions="FillAndExpand" Margin="10,10,10,10" x:Name="stackLayoutMain"/>
-                <!--Main content gets added to this stack dynamically-->
-            </ScrollView>
+            <StackLayout HorizontalOptions="FillAndExpand" Margin="10,10,10,10" x:Name="stackLayoutMain"/>
         </StackLayout>
 
         <!--End page content-->

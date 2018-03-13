@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace prototype2.Classes
 {
-    public enum QuoteStatus { Empty, Incomplete, PendingResponse, Validated, OrderPlaced };
-
+    public struct QuoteStatus
+    {
+        public const string Empty = "Empty Sale";
+        public const string Incomplete = "Incomplete";
+        public const string PendingResponse = "Pending Response";
+        public const string Validated = "Validated";
+        public const string OrderPlaced = "Order Placed";
+    }
     public class Quote : SalesDocument
     {
+        
     }
 }

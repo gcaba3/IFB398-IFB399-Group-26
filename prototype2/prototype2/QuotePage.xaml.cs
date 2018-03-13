@@ -12,34 +12,34 @@ namespace prototype2
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class QuotePage : ContentPage
     {
-        public QuotePage(int number)
+        public QuotePage(string quoteNumber)
         {
             InitializeComponent();
 
-            DisplayData(number);
+            DisplayData(quoteNumber);
         }
 
         /// <summary>
         /// Finds the data for the quote and fills out the quote page with the data
         /// </summary>
-        /// <param name="number"></param>
-        private void DisplayData(int number)
+        /// <param name="quoteNumber"></param>
+        private void DisplayData(string quoteNumber)
         {
             Classes.Quote quote;
-            if (number == 0) quote = Data.newQuote;
-            else quote = Data.quotes.Single(Quote => Quote.Number == number);
+            if (quoteNumber == "Q00000") quote = Data.newQuote;
+            else quote = Data.quotes.Single(Quote => Quote.Number == quoteNumber.ToString());
 
             txtNumber.Text = quote.Number.ToString();
             txtStatus.Text = quote.Status.ToString();
 
-            if (quote.Status == Classes.QuoteStatus.Incomplete.ToString())
+            if (quote.Status == Classes.QuoteStatus.Incomplete)
             {
                 labelQuotationDate.Text = "Last Edited";
                 AddIncompleteQuoteButtons();
             }
 
 
-            else if (quote.Status == Classes.QuoteStatus.PendingResponse.ToString())
+            else if (quote.Status == Classes.QuoteStatus.PendingResponse)
             {
                 labelQuotationDate.Text = "Request Sent";
                 AddCancelButton();

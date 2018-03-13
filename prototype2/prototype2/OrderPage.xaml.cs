@@ -12,7 +12,7 @@ namespace prototype2
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderPage : ContentPage
     {
-        public OrderPage(int number)
+        public OrderPage(string number)
         {
             InitializeComponent();
 
@@ -23,11 +23,11 @@ namespace prototype2
         /// Finds the data for the order and fills out the order page with the data
         /// </summary>
         /// <param name="number"></param>
-        private void DisplayData(int number)
+        private void DisplayData(string number)
         {
             Classes.Order order;
 
-            order = Data.orders.Single(Order => Order.Number == number);
+            order = Data.orders.Single(Order => Order.Number == number.ToString());
 
             txtNumber.Text = order.Number.ToString();
             txtStatus.Text = order.Status.ToString();
