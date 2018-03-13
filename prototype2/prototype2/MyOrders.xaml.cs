@@ -41,22 +41,22 @@ namespace prototype2
             InitializeLayoutPositions();
             AddIncompleteQuote();
 
-            foreach (Quote quote in Data.quotes)
+            for (int i = Data.quotes.Count - 1; i >= 0; i--)
             {
-                AddDocumentToStack(stackLayoutQuotes, quote);
+                AddDocumentToStack(stackLayoutQuotes, Data.quotes[i]);
             }
 
             buttonColor = Color.FromHex("ceffcf");
 
-            foreach (Order order in Data.orders)
+            for (int i = Data.orders.Count - 1; i >= 0; i--)
             {
-                AddDocumentToStack(stackLayoutOrders, order);
+                AddDocumentToStack(stackLayoutOrders, Data.orders[i]);
             }
 
-            foreach (Invoice invoice in Data.invoices)
+            for (int i = Data.invoices.Count - 1; i >= 0; i--)
             {
-                buttonColor = GetInvoiceColor(invoice.Status);
-                AddDocumentToStack(stackLayoutInvoices, invoice);
+                buttonColor = GetInvoiceColor(Data.invoices[i].Status);
+                AddDocumentToStack(stackLayoutInvoices, Data.invoices[i]);
             }
                 
 

@@ -105,110 +105,106 @@ namespace prototype2
         /// </summary>
         private static void GetQuotesFromDatabase()
         {
+            AddSampleQuotePlacedOrderFour();
+            AddSampleQuotePlacedOrderThree();
+            AddSampleQuotePlacedOrderTwo();
+            AddSampleQuotePlacedOrderOne();
+            AddSampleQuoteValidated();
+            AddSampleQuotePendingResponse();
+        }
+
+        private static void AddSampleQuotePlacedOrderFour()
+        {
             Dictionary<Product, int> quoteProducts = new Dictionary<Product, int>
             {
-                { products[1], 22 },
-                { products[3], 3 }
+                { products[0], 15 },
+                { products[2], 5 }
             };
-            Quote quote = new Quote
-            {
-                Number = "Q" + (quotes.Count + 1).ToString("D5"),
-                Status = QuoteStatus.PendingResponse,
-                Products = quoteProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 13, 12, 34, 52)
-            };
-            CalculateSalesPrice(quote);
+            string status = QuoteStatus.OrderPlaced;
+            DateTime date = new DateTime(2017, 12, 2, 3, 31, 1);
 
-            quotes.Add(quote);
+            AddSampleQuote(quoteProducts, status, date);
+        }
 
-           quoteProducts = new Dictionary<Product, int>
-            {
-                { products[0], 24 },
-                { products[2], 1 }
-            };
-            quote = new Quote
-            {
-                Number = "Q" + (quotes.Count + 1).ToString("D5"),
-                Status = QuoteStatus.Validated,
-                Products = quoteProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 12, 10, 50, 46)
-            };
-            CalculateSalesPrice(quote);
-
-            quotes.Add(quote);
-
-            quoteProducts = new Dictionary<Product, int>
-            {
-                { products[1], 12 },
-                { products[3], 1 }
-            };
-            quote = new Quote
-            {
-                Number = "Q" + (quotes.Count + 1).ToString("D5"),
-                Status = QuoteStatus.OrderPlaced,
-                Products = quoteProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 11, 2, 13, 54)
-            };
-            CalculateSalesPrice(quote);
-
-            quotes.Add(quote);
-
-            quoteProducts = new Dictionary<Product, int>
-            {
-                { products[1], 9 },
-                { products[4], 4 }
-            };
-            quote = new Quote
-            {
-                Number = "Q" + (quotes.Count + 1).ToString("D5"),
-                Status = QuoteStatus.OrderPlaced,
-                Products = quoteProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 1, 14, 12, 1, 59)
-            };
-            CalculateSalesPrice(quote);
-
-            quotes.Add(quote);
-
-            quoteProducts = new Dictionary<Product, int>
+        private static void AddSampleQuotePlacedOrderThree()
+        {
+            Dictionary<Product, int> quoteProducts = new Dictionary<Product, int>
             {
                 { products[4], 5 },
                 { products[1], 10 },
                 { products[2], 15 }
             };
-            quote = new Quote
+            string status = QuoteStatus.OrderPlaced;
+            DateTime date = new DateTime(2018, 1, 3, 11, 21, 51);
+
+            AddSampleQuote(quoteProducts, status, date);
+        }
+
+        private static void AddSampleQuotePlacedOrderTwo()
+        {
+            Dictionary<Product, int> quoteProducts = new Dictionary<Product, int>
+            {
+                { products[1], 9 },
+                { products[4], 4 }
+            };
+            string status = QuoteStatus.OrderPlaced;
+            DateTime date = new DateTime(2018, 1, 14, 12, 1, 59);
+
+            AddSampleQuote(quoteProducts, status, date);
+        }
+
+        private static void AddSampleQuotePlacedOrderOne()
+        {
+            Dictionary<Product, int> quoteProducts = new Dictionary<Product, int>
+            {
+                { products[1], 12 },
+                { products[3], 1 }
+            };
+            string status = QuoteStatus.OrderPlaced;
+            DateTime date = new DateTime(2018, 3, 11, 2, 13, 54);
+
+            AddSampleQuote(quoteProducts, status, date);
+        }
+
+        private static void AddSampleQuoteValidated()
+        {
+            Dictionary<Product, int> quoteProducts = new Dictionary<Product, int>
+            {
+                { products[0], 24 },
+                { products[2], 1 }
+            };
+            string status = QuoteStatus.Validated;
+            DateTime date = new DateTime(2018, 3, 12, 10, 50, 46);
+
+            AddSampleQuote(quoteProducts, status, date);
+        }
+
+        private static void AddSampleQuotePendingResponse()
+        {
+            Dictionary<Product, int> quoteProducts = new Dictionary<Product, int>
+            {
+                { products[1], 22 },
+                { products[3], 3 }
+            };
+            string status = QuoteStatus.PendingResponse;
+            DateTime date = new DateTime(2018, 3, 13, 12, 34, 52);
+
+            AddSampleQuote(quoteProducts, status, date);
+        }
+
+        private static void AddSampleQuote(Dictionary<Product, int> quoteProducts, string status, DateTime date)
+        {
+            Quote quote = new Quote
             {
                 Number = "Q" + (quotes.Count + 1).ToString("D5"),
-                Status = QuoteStatus.OrderPlaced,
+                Status = status,
                 Products = quoteProducts,
                 TotalPrice = 0,
-                Date = new DateTime(2018, 1, 3, 11, 21, 51)
+                Date = date
             };
             CalculateSalesPrice(quote);
 
             quotes.Add(quote);
-
-            quoteProducts = new Dictionary<Product, int>
-            {
-                { products[0], 15 },
-                { products[2], 5 }
-            };
-            quote = new Quote
-            {
-                Number = "Q" + (quotes.Count + 1).ToString("D5"),
-                Status = QuoteStatus.OrderPlaced,
-                Products = quoteProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2017, 12, 2, 3, 31, 1)
-            };
-            CalculateSalesPrice(quote);
-
-            quotes.Add(quote);
-
-
         }
 
         public static Product GetProductFromId(string productId)
@@ -293,137 +289,134 @@ namespace prototype2
         /// </summary>
         private static void GetOrdersFromDatabase()
         {
+            AddSampleOrderCompleteFour();
+            AddSampleOrderCompleteThree();
+            AddSampleOrderCompleteTwo();
+            AddSampleOrderCompleteOne();
+            AddSampleOrderInTransit();
+            AddSampleOrderDispatchReady();
+            AddSampleOrderPacking();
+            AddSampleOrderConfirmedSale();
+        }
+
+        private static void AddSampleOrderCompleteFour()
+        {
+            Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
+            {
+                { products[0], 15 },
+                { products[2], 5 }
+            };
+
+            string status = OrderStatus.Complete;
+            DateTime date = new DateTime(2017, 12, 2, 4, 33, 1);
+
+            AddSampleOrder(orderProducts, status, date);
+        }
+        private static void AddSampleOrderCompleteThree()
+        {
+            Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
+            { 
+                { products[4], 5 },
+                { products[1], 10 },
+                { products[2], 15 }
+            };
+
+            string status = OrderStatus.Complete;
+            DateTime date = new DateTime(2018, 1, 4, 12, 22, 50);
+
+            AddSampleOrder(orderProducts, status, date);
+        }
+        private static void AddSampleOrderCompleteTwo()
+        {
             Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
             {
                 { products[1], 9 },
                 { products[4], 4 }
             };
-            Order order = new Order
-            {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.ConfirmedSale,
-                Products = orderProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 13, 2, 4, 3)
-            };
-            CalculateSalesPrice(order);
 
-            orders.Add(order);
+            string status = OrderStatus.Complete;
+            DateTime date = new DateTime(2018, 1, 15, 1, 2, 15);
 
-            orderProducts = new Dictionary<Product, int>
-            {
-                { products[0], 15 },
-                { products[3], 3 }
+            AddSampleOrder(orderProducts, status, date);
+        }
+        private static void AddSampleOrderCompleteOne()
+        {
+        Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
+        {
+            { products[1], 12 },
+            { products[3], 1 }
             };
-            order = new Order
-            {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.Packing,
-                Products = orderProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 11, 4, 14, 14)
-            };
-            CalculateSalesPrice(order);
 
-            orderProducts = new Dictionary<Product, int>
-            {
-                { products[1], 20 },
-                { products[4], 4 }
-            };
-            order = new Order
-            {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.DispatchReady,
-                Products = orderProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 10, 3, 13, 13)
-            };
-            CalculateSalesPrice(order);
+            string status = OrderStatus.Complete;
+            DateTime date = new DateTime(2018, 3, 12, 3, 14, 55);
 
-            orderProducts = new Dictionary<Product, int>
+            AddSampleOrder(orderProducts, status, date);
+        }
+        private static void AddSampleOrderInTransit()
+        {
+            Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
             {
                 { products[1], 15 },
                 { products[3], 4 }
             };
-            order = new Order
+
+            string status = OrderStatus.InTransit;
+            DateTime date = new DateTime(2018, 3, 9, 1, 19, 19);
+
+            AddSampleOrder(orderProducts, status, date);
+        }
+        private static void AddSampleOrderDispatchReady()
+        {
+            Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
             {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.InTransit,
-                Products = orderProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 9, 1, 19, 19)
+                { products[1], 20 },
+                { products[4], 4 }
             };
-            CalculateSalesPrice(order);
 
-            orders.Add(order);
+            string status = OrderStatus.DispatchReady;
+            DateTime date = new DateTime(2018, 3, 10, 3, 13, 13);
 
-            orderProducts = new Dictionary<Product, int>
+            AddSampleOrder(orderProducts, status, date);
+        }
+        private static void AddSampleOrderPacking()
+        {
+            Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
             {
-                { products[1], 12 },
-                { products[3], 1 }
+                { products[0], 15 },
+                { products[3], 3 }
             };
-            order = new Order
-            {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.Complete,
-                Products = orderProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 12, 3, 14, 55)
-            };
-            CalculateSalesPrice(order);
+            string status = OrderStatus.Packing;
+            DateTime date = new DateTime(2018, 3, 11, 4, 14, 14);
 
-            orders.Add(order);
-
-            orderProducts = new Dictionary<Product, int>
+            AddSampleOrder(orderProducts, status, date);
+        }
+        private static void AddSampleOrderConfirmedSale()
+        {
+            Dictionary<Product, int> orderProducts = new Dictionary<Product, int>
             {
                 { products[1], 9 },
                 { products[4], 4 }
             };
-            order = new Order
+
+            string status = OrderStatus.ConfirmedSale;
+            DateTime date = new DateTime(2018, 3, 13, 2, 4, 3);
+
+            AddSampleOrder(orderProducts, status, date);
+        }
+
+        private static void AddSampleOrder(Dictionary<Product, int> orderProducts, string status, DateTime date)
+        {
+            Order order = new Order
             {
                 Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.Complete,
+                Status = status,
                 Products = orderProducts,
                 TotalPrice = 0,
-                Date = new DateTime(2018, 1, 15, 1, 2, 1)
+                Date = date
             };
             CalculateSalesPrice(order);
 
             orders.Add(order);
-
-            orderProducts = new Dictionary<Product, int> {
-                { products[4], 5 },
-                { products[1], 10 },
-                { products[2], 15 }
-            };
-            order = new Order
-            {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.Complete,
-                Products = orderProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 1, 4, 12, 22, 50)
-            };
-            CalculateSalesPrice(order);
-
-            orders.Add(order);
-
-            orderProducts = new Dictionary<Product, int>
-            {
-                { products[0], 15 },
-                { products[2], 5 }
-            };
-            order = new Order
-            {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
-                Status = OrderStatus.Complete,
-                Products = orderProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2017, 12, 2, 4, 33, 1)                
-            };
-            CalculateSalesPrice(order);
-
-            orders.Add(order);                    
         }
 
         /// <summary>
@@ -431,74 +424,75 @@ namespace prototype2
         /// </summary>
         private static void GetInvoicesFromDatabase()
         {
+            AddSampleInvoicePaid();
+            AddSampleInvoiceOverdue();
+            AddSampleInvoicePartial();
+            AddSampleInvoiceUnpaid();
+        }
+
+        private static void AddSampleInvoicePaid()
+        {
             Dictionary<Product, int> invoiceProducts = new Dictionary<Product, int>
             {
-                { products[1], 12 },
-                { products[3], 1 }
+                { products[0], 15 },
+                { products[2], 5 }
             };
-            Invoice invoice = new Invoice
-            {
-                Number = "I" + (invoices.Count + 1).ToString("D5"),
-                Status = InvoiceStatus.Unpaid,
-                Products = invoiceProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 3, 12, 3, 14, 55)
-            };
-            CalculateSalesPrice(invoice);
 
-            invoices.Add(invoice);
-
-            invoiceProducts = new Dictionary<Product, int>
-            {
-                { products[1], 9 },
-                { products[4], 4 }
-            };
-            invoice = new Invoice
-            {
-                Number = "I" + (invoices.Count + 1).ToString("D5"),
-                Status = InvoiceStatus.Partial,
-                Products = invoiceProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2018, 1, 15, 1, 2, 1)
-            };
-            CalculateSalesPrice(invoice);
-
-            invoices.Add(invoice);
-
-            invoiceProducts = new Dictionary<Product, int>
+            string status = InvoiceStatus.Paid;
+            DateTime date = new DateTime(2017, 2, 12, 4, 33, 1);
+            AddSampleInvoice(invoiceProducts, status, date);
+        }
+        private static void AddSampleInvoiceOverdue()
+        {
+            Dictionary<Product, int> invoiceProducts = new Dictionary<Product, int>
             {
                 { products[4], 5 },
                 { products[1], 10 },
                 { products[2], 15 }
             };
-            invoice = new Invoice
+
+            string status = InvoiceStatus.Overdue;
+            DateTime date = new DateTime(2018, 1, 4, 12, 22, 50);
+            AddSampleInvoice(invoiceProducts, status, date);
+        }
+        private static void AddSampleInvoicePartial()
+        {
+            Dictionary<Product, int> invoiceProducts = new Dictionary<Product, int>
+            {
+                { products[1], 9 },
+                { products[4], 4 }
+            };
+
+            string status = InvoiceStatus.Partial;
+            DateTime date = new DateTime(2018, 1, 15, 1, 2, 1);
+            AddSampleInvoice(invoiceProducts, status, date);
+        }
+        private static void AddSampleInvoiceUnpaid()
+        {
+            Dictionary<Product, int> invoiceProducts = new Dictionary<Product, int>
+            {
+                { products[1], 12 },
+                { products[3], 1 }
+            };
+
+            string status = InvoiceStatus.Unpaid;
+            DateTime date = new DateTime(2018, 3, 12, 3, 14, 55);
+            AddSampleInvoice(invoiceProducts, status, date);
+        }
+
+        private static void AddSampleInvoice(Dictionary<Product, int> invoiceProducts, string status, DateTime date)
+        {
+            Invoice invoice = new Invoice
             {
                 Number = "I" + (invoices.Count + 1).ToString("D5"),
-                Status = InvoiceStatus.Overdue,
+                Status = status,
                 Products = invoiceProducts,
                 TotalPrice = 0,
-                Date = new DateTime(2018, 1, 4, 12, 22, 50)
+                Date = date
             };
             CalculateSalesPrice(invoice);
 
             invoices.Add(invoice);
-
-            invoiceProducts = new Dictionary<Product, int>
-            {
-                { products[0], 15 },
-                { products[2], 5 }
-            };
-            invoice = new Invoice
-            {
-                Number = "I" + (invoices.Count + 1).ToString("D5"),
-                Status = InvoiceStatus.Paid,
-                Products = invoiceProducts,
-                TotalPrice = 0,
-                Date = new DateTime(2017, 2, 12, 4, 33, 1)                
-            };
-            CalculateSalesPrice(invoice);
-
-            invoices.Add(invoice);                     
         }
     }
 }
