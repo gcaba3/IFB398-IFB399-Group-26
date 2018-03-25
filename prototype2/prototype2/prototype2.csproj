@@ -29,11 +29,7 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
-    <EmbeddedResource Include="prototype2Page.xaml" />
     <EmbeddedResource Include="LoginPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="NotificationPage.xaml">
@@ -67,31 +63,31 @@
     <Compile Include="Classes\Quote.cs" />
     <Compile Include="Classes\SalesDocument.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="MyOrders.xaml.cs">
-      <DependentUpon>MyOrders.xaml</DependentUpon>
+    <Compile Include="EditQuotePopup.xaml.cs">
+      <DependentUpon>EditQuotePopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyShop.cs" />
+    <Compile Include="MyOrders\InvoicePage.cs" />
+    <Compile Include="MyOrders\MyOrdersPage.xaml.cs">
+      <DependentUpon>MyOrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyShopPage.cs" />
     <Compile Include="NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Events.xaml.cs">
       <DependentUpon>Events.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrderPage.xaml.cs">
-      <DependentUpon>OrderPage.xaml</DependentUpon>
+    <Compile Include="MyOrders\OrderPage.cs" />
+    <Compile Include="PDFViewer\PDFViewerPage.xaml.cs">
+      <DependentUpon>PDFViewerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Products.xaml.cs">
-      <DependentUpon>Products.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="prototype2Page.xaml.cs">
-      <DependentUpon>prototype2Page.xaml</DependentUpon>
+    <Compile Include="PDFViewer\PDFWebView.cs" />
+    <Compile Include="ProductsPage.xaml.cs">
+      <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
@@ -115,9 +111,14 @@
     <Compile Include="Account\PaymentHistoryPage.xaml.cs">
       <DependentUpon>PaymentHistoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="QuotePage.xaml.cs">
-      <DependentUpon>QuotePage.xaml</DependentUpon>
+    <Compile Include="MyOrders\QuoteIncompletePage.cs" />
+    <Compile Include="MyOrders\QuotePage.cs" />
+    <Compile Include="MyOrders\QuotePendingResponsePage.cs" />
+    <Compile Include="MyOrders\SalesDocumentPage.xaml.cs">
+      <DependentUpon>SalesDocumentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyOrders\QuoteValidatedPage.cs" />
+    <Compile Include="MyOrders\QuoteOrderPlacedPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -146,13 +147,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Products.xaml">
+    <EmbeddedResource Include="ProductsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyOrders.xaml">
+    <EmbeddedResource Include="MyOrders\MyOrdersPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -164,13 +165,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="OrderPage.xaml">
+    <EmbeddedResource Include="EditQuotePopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="QuotePage.xaml">
+    <EmbeddedResource Include="MyOrders\SalesDocumentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PDFViewer\PDFViewerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="prototype2.EditQuotePopup"
+    x:Name="framePopup" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                   BackgroundColor="White" OutlineColor="Black" HasShadow="True" IsVisible="False" Opacity="0" InputTransparent="True">
+    <Grid x:Name="gridEditQuotePopup" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                      Opacity="0" BackgroundColor="White" IsVisible="False">
+        <Label
+                x:Name="labelPopupType"
+            FontSize="Large"
+            Grid.Row="0"        
+            Grid.Column="0"
+            TextColor="Black"
+            Text="Add to quote"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"/>
+
+        <Label
+            x:Name="labelPopupProductName"
+            FontSize="Large"
+            Grid.Row="0"
+            Grid.Column="1"
+                Grid.ColumnSpan="2"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            FontSize="Large"
+            Text="Quantity"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"/>
+
+        <Frame
+            Grid.Row="1"
+            Grid.Column="2"
+            OutlineColor="Black"
+            BackgroundColor="Transparent"
+            InputTransparent="True"
+            />
+
+        <Entry
+                x:Name="entryQuantity"
+                TextChanged="TextChanged_Quantity"
+                Grid.Row="1"
+                Grid.Column="2"
+                TextColor="Black"
+                Keyboard="Numeric"
+                HorizontalTextAlignment="Center"/>
+
+        <Button
+            x:Name="btnCancel"
+        Grid.Row="2"
+        Grid.Column="0"
+        Text="Cancel"
+                BackgroundColor="White"
+                BorderColor="{StaticResource SPBlue}"
+                BorderWidth="1"
+                TextColor="Black"
+        Clicked="Clicked_btnCancel"/>
+
+        <Button
+                x:Name="btnRemove"
+                BackgroundColor="{StaticResource SPRed}"
+                BorderColor="{StaticResource SPRed}"
+                TextColor="White"
+                IsVisible="False"
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="Remove"
+                Clicked="Clicked_btnRemove"/>
+
+        <Button
+                x:Name="btnConfirm"
+                TextColor="White"
+                Grid.Row="2"
+                Grid.Column="2"
+                Text="Confirm"
+                Clicked="Clicked_btnConfirm"/>
+    </Grid>
+</Frame>

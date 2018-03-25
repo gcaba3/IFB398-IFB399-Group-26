@@ -14,7 +14,7 @@ namespace prototype2
             Icon = "menu.png";
             NavigationPage.SetHasNavigationBar(this, false);
 
-            Detail = new NavigationPage(new Products());
+            Detail = new NavigationPage(new ProductsPage());
 
             helloUser.Text = "Hello " + App.User.Default.Username + "!";
 
@@ -24,23 +24,23 @@ namespace prototype2
         public AccountPage(NavigationBar.Tab tab)
         {
             InitializeComponent();
-            Title = "Account Page";
+            //Title = "Account Page";
             NavigationPage.SetHasNavigationBar(this, false);
 
             switch (tab)
             {
                 case NavigationBar.Tab.Products:
-                    Detail = new NavigationPage(new Products());
+                    Detail = new NavigationPage(new ProductsPage());
                     IsPresented = false;
                     break;
 
                 case NavigationBar.Tab.MyShop:
-                    Detail = new NavigationPage(new MyShop());
+                    Detail = new NavigationPage(new MyShopPage());
                     IsPresented = false;
                     break;
 
                 case NavigationBar.Tab.MyOrders:
-                    Detail = new NavigationPage(new MyOrders());
+                    Detail = new NavigationPage(new MyOrdersPage());
                     IsPresented = false;
                     break;
 

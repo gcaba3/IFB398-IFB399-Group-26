@@ -8,12 +8,14 @@ namespace prototype2
         public const string Paid = "Paid";
         public const string Overdue = "Overdue";
     }
-    public class Invoice : Classes.SalesDocument
+    public class Invoice : SalesDocument
     {        
         public int InvoiceNumber { get; set; }
         public DateTime DatePaid { get; set; }
-        public int AmountDue { get; set; }
-        public int AmountPaid { get; set; }
+        public DateTime DateDue { get; set; }
+        public double AmountDue { get; set; }
+        public double AmountPaid { get; set; }
+        public string Source { get; set; }
 
         public Invoice()
         {

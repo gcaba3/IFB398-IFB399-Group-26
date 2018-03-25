@@ -1,5 +1,4 @@
-﻿using prototype2.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +14,7 @@ namespace prototype2
         public static Quote newQuote;
         public static List<Order> orders;
         public static List<Invoice> invoices;
+        public static int numSalesOrders, numInvoices; // just used to make up document numbers for now
 
         public static void InitializeData()
         {
@@ -23,13 +23,16 @@ namespace prototype2
             quotes = new List<Quote>();
             orders = new List<Order>();
             invoices = new List<Invoice>();
+            numSalesOrders = 0;
+            numInvoices = 0;
 
             CreateFreshQuote();
 
             GetProductsFromDatabase();
             CreateFavorites();
-            GetQuotesFromDatabase();
+            
             GetOrdersFromDatabase();
+            GetQuotesFromDatabase();
             GetInvoicesFromDatabase();            
         }
 
@@ -46,10 +49,10 @@ namespace prototype2
         {
             products.Add(new Product
             {
-                Name = "Phono Diamond 270w Module",
+                Description = "[PH270W] Phono Diamond 270W Poly",
                 Category = "Solar Panel",
                 Manufacturer = "Phono Solar",
-                Price = 309.99,
+                Price = 156.60,
                 Stock = 120,
                 ImagePath = "phonodiamond270.png",
                 Id = products.Count
@@ -57,10 +60,10 @@ namespace prototype2
 
             products.Add(new Product
             {
-                Name = "Suntech 310w Module",
+                Description = "[STP320-24/Vem] Suntech Power 320W Poly",
                 Category = "Solar Panel",
                 Manufacturer = "Suntech",
-                Price = 409.99,
+                Price = 201.60,
                 Stock = 114,
                 ImagePath = "Suntech310wModule.jpg",
                 Id = products.Count
@@ -68,10 +71,10 @@ namespace prototype2
 
             products.Add(new Product
             {
-                Name = "ABB PVI 3000TL OUTD",
+                Description = "[ABBPVI-5.0] PVI 5000 OUTD",
                 Category = "Solar Inverter",
                 Manufacturer = "ABB",
-                Price = 300.00,
+                Price = 1280,
                 Stock = 32,
                 ImagePath = "ABBPVI3000TLOUTD.jpg",
                 Id = products.Count
@@ -79,7 +82,7 @@ namespace prototype2
 
             products.Add(new Product
             {
-                Name = "SG10EC Three Phase 10kW Inverter",
+                Description = "[SG5KTL-D ] Sungrow 5kW dual MPPT inverter",
                 Category = "Solar Inverter",
                 Manufacturer = "Sungrow",
                 Price = 1499.00,
@@ -90,10 +93,10 @@ namespace prototype2
 
             products.Add(new Product
             {
-                Name = "LG Chem RESU 6.4EX Lithium battery",
+                Description = "[LGRESU6.5] RESU 6.5",
                 Category = "Battery",
                 Manufacturer = "LG",
-                Price = 30,
+                Price = 4599,
                 Stock = 56,
                 ImagePath = "LGChemRESULithiumbattery",
                 Id = products.Count
@@ -105,15 +108,15 @@ namespace prototype2
         /// </summary>
         private static void GetQuotesFromDatabase()
         {
-            AddSampleQuotePlacedOrderFour();
-            AddSampleQuotePlacedOrderThree();
-            AddSampleQuotePlacedOrderTwo();
-            AddSampleQuotePlacedOrderOne();
+            //AddSampleQuotePlacedOrderFour();
+            //AddSampleQuotePlacedOrderThree();
+            //AddSampleQuotePlacedOrderTwo();
+            //AddSampleQuotePlacedOrderOne();
             AddSampleQuoteValidated();
             AddSampleQuotePendingResponse();
         }
 
-        private static void AddSampleQuotePlacedOrderFour()
+        /*private static void AddSampleQuotePlacedOrderFour()
         {
             Dictionary<Product, int> quoteProducts = new Dictionary<Product, int>
             {
@@ -121,7 +124,7 @@ namespace prototype2
                 { products[2], 5 }
             };
             string status = QuoteStatus.OrderPlaced;
-            DateTime date = new DateTime(2017, 12, 2, 3, 31, 1);
+            DateTime date = new DateTime(2017, 12, 2, 15, 31, 1);
 
             AddSampleQuote(quoteProducts, status, date);
         }
@@ -161,10 +164,10 @@ namespace prototype2
                 { products[3], 1 }
             };
             string status = QuoteStatus.OrderPlaced;
-            DateTime date = new DateTime(2018, 3, 11, 2, 13, 54);
+            DateTime date = new DateTime(2018, 3, 11, 14, 13, 54);
 
             AddSampleQuote(quoteProducts, status, date);
-        }
+        }*/
 
         private static void AddSampleQuoteValidated()
         {
@@ -194,15 +197,17 @@ namespace prototype2
 
         private static void AddSampleQuote(Dictionary<Product, int> quoteProducts, string status, DateTime date)
         {
+            numSalesOrders++;
             Quote quote = new Quote
             {
-                Number = "Q" + (quotes.Count + 1).ToString("D5"),
+                Number = "SO" + numSalesOrders.ToString("D5"),
                 Status = status,
                 Products = quoteProducts,
                 TotalPrice = 0,
                 Date = date
             };
-            CalculateSalesPrice(quote);
+
+            UpdatePrice(quote);
 
             quotes.Add(quote);
         }
@@ -224,7 +229,7 @@ namespace prototype2
             favourites.Remove(removedProduct);
         }
 
-        private static void CalculateSalesPrice(SalesDocument document)
+        public static void UpdatePrice(SalesDocument document)
         {
             double price = 0;
             foreach (KeyValuePair<Product, int> product in document.Products)
@@ -234,11 +239,11 @@ namespace prototype2
             document.TotalPrice = price - (price * 0.1);
         }
 
-        private static void CreateFreshQuote()
+        public static void CreateFreshQuote()
         {
             newQuote = new Quote
             {
-                Number = "Q00000",
+                Number = "SO00000",
                 Status = QuoteStatus.Empty,
                 Products = new Dictionary<Product, int>(),
                 TotalPrice = 0,
@@ -259,7 +264,8 @@ namespace prototype2
                 if (quantity == 0)
                 {
                     newQuote.Products.Remove(product);
-                    CheckIfNewQuoteEmpty();
+                    if (CheckIfNewQuoteEmpty())
+                        return;
                 }
                 else if (newQuote.Products[product] != quantity) newQuote.Products[product] = quantity;
             }
@@ -269,6 +275,8 @@ namespace prototype2
                 newQuote.Status = QuoteStatus.Incomplete;
             }
             newQuote.Date = DateTime.Now;
+
+            UpdatePrice(newQuote);
         }
 
         public static void RemoveFromQuote(String productId)
@@ -279,9 +287,28 @@ namespace prototype2
             newQuote.Date = DateTime.Now;
         }
 
-        private static void CheckIfNewQuoteEmpty()
+        private static bool CheckIfNewQuoteEmpty()
         {
-            if (newQuote.Products.Count == 0) newQuote.Status = QuoteStatus.Empty;
+            if (newQuote.Products.Count == 0)
+            {
+                newQuote.Status = QuoteStatus.Empty;
+                return true;
+            }
+
+            return false;
+        }
+
+        public static Quote GetQuoteFromId(string quoteNumber)
+        {
+            if (quoteNumber == "SO00000")
+                return newQuote;
+            else
+                return quotes.Single(Quote => Quote.Number == quoteNumber.ToString());
+        }
+
+        public static void DeleteQuote(Quote quote)
+        {
+            quotes.Remove(quote);
         }
 
         /// <summary>
@@ -308,7 +335,7 @@ namespace prototype2
             };
 
             string status = OrderStatus.Complete;
-            DateTime date = new DateTime(2017, 12, 2, 4, 33, 1);
+            DateTime date = new DateTime(2017, 12, 14, 4, 33, 1);
 
             AddSampleOrder(orderProducts, status, date);
         }
@@ -335,7 +362,7 @@ namespace prototype2
             };
 
             string status = OrderStatus.Complete;
-            DateTime date = new DateTime(2018, 1, 15, 1, 2, 15);
+            DateTime date = new DateTime(2018, 1, 15, 13, 2, 15);
 
             AddSampleOrder(orderProducts, status, date);
         }
@@ -348,7 +375,7 @@ namespace prototype2
             };
 
             string status = OrderStatus.Complete;
-            DateTime date = new DateTime(2018, 3, 12, 3, 14, 55);
+            DateTime date = new DateTime(2018, 3, 12, 15, 14, 55);
 
             AddSampleOrder(orderProducts, status, date);
         }
@@ -361,7 +388,7 @@ namespace prototype2
             };
 
             string status = OrderStatus.InTransit;
-            DateTime date = new DateTime(2018, 3, 9, 1, 19, 19);
+            DateTime date = new DateTime(2018, 3, 9, 13, 19, 19);
 
             AddSampleOrder(orderProducts, status, date);
         }
@@ -374,7 +401,7 @@ namespace prototype2
             };
 
             string status = OrderStatus.DispatchReady;
-            DateTime date = new DateTime(2018, 3, 10, 3, 13, 13);
+            DateTime date = new DateTime(2018, 3, 10, 15, 13, 13);
 
             AddSampleOrder(orderProducts, status, date);
         }
@@ -386,7 +413,7 @@ namespace prototype2
                 { products[3], 3 }
             };
             string status = OrderStatus.Packing;
-            DateTime date = new DateTime(2018, 3, 11, 4, 14, 14);
+            DateTime date = new DateTime(2018, 3, 11, 16, 14, 14);
 
             AddSampleOrder(orderProducts, status, date);
         }
@@ -399,24 +426,30 @@ namespace prototype2
             };
 
             string status = OrderStatus.ConfirmedSale;
-            DateTime date = new DateTime(2018, 3, 13, 2, 4, 3);
+            DateTime date = new DateTime(2018, 3, 13, 14, 4, 3);
 
             AddSampleOrder(orderProducts, status, date);
         }
 
         private static void AddSampleOrder(Dictionary<Product, int> orderProducts, string status, DateTime date)
         {
+            numSalesOrders++;
             Order order = new Order
             {
-                Number = "SO" + (orders.Count + 1).ToString("D5"),
+                Number = "SO" + numSalesOrders.ToString("D5"),
                 Status = status,
                 Products = orderProducts,
                 TotalPrice = 0,
                 Date = date
             };
-            CalculateSalesPrice(order);
+            UpdatePrice(order);
 
             orders.Add(order);
+        }
+
+        public static Order GetOrderFromId(string orderNumber)
+        {
+            return orders.Single(Order => Order.Number == orderNumber.ToString());
         }
 
         /// <summary>
@@ -439,8 +472,8 @@ namespace prototype2
             };
 
             string status = InvoiceStatus.Paid;
-            DateTime date = new DateTime(2017, 2, 12, 4, 33, 1);
-            AddSampleInvoice(invoiceProducts, status, date);
+            DateTime date = new DateTime(2017, 2, 12, 16, 33, 1);
+            AddSampleInvoice(invoiceProducts, status, date, "SO00001", 0);
         }
         private static void AddSampleInvoiceOverdue()
         {
@@ -453,7 +486,7 @@ namespace prototype2
 
             string status = InvoiceStatus.Overdue;
             DateTime date = new DateTime(2018, 1, 4, 12, 22, 50);
-            AddSampleInvoice(invoiceProducts, status, date);
+            AddSampleInvoice(invoiceProducts, status, date, "SO00002", 0);
         }
         private static void AddSampleInvoicePartial()
         {
@@ -464,8 +497,8 @@ namespace prototype2
             };
 
             string status = InvoiceStatus.Partial;
-            DateTime date = new DateTime(2018, 1, 15, 1, 2, 1);
-            AddSampleInvoice(invoiceProducts, status, date);
+            DateTime date = new DateTime(2018, 1, 15, 13, 2, 1);
+            AddSampleInvoice(invoiceProducts, status, date, "SO00003", 4000);
         }
         private static void AddSampleInvoiceUnpaid()
         {
@@ -476,23 +509,49 @@ namespace prototype2
             };
 
             string status = InvoiceStatus.Unpaid;
-            DateTime date = new DateTime(2018, 3, 12, 3, 14, 55);
-            AddSampleInvoice(invoiceProducts, status, date);
+            DateTime date = new DateTime(2018, 3, 12, 15, 14, 55);
+            AddSampleInvoice(invoiceProducts, status, date, "SO00004", 0);
         }
 
-        private static void AddSampleInvoice(Dictionary<Product, int> invoiceProducts, string status, DateTime date)
+        private static void AddSampleInvoice(Dictionary<Product, int> invoiceProducts, string status, DateTime date, string source, double amountPaid)
         {
+            numInvoices++;
             Invoice invoice = new Invoice
             {
-                Number = "I" + (invoices.Count + 1).ToString("D5"),
+                Number = "IN" + (invoices.Count + 1).ToString("D5"),
                 Status = status,
                 Products = invoiceProducts,
                 TotalPrice = 0,
-                Date = date
+                Date = date,
+                DateDue = date.AddDays(60),
+                Source = source,
+                AmountPaid = amountPaid
             };
-            CalculateSalesPrice(invoice);
+            UpdatePrice(invoice);
+
+            invoice.AmountDue = invoice.TotalPrice - invoice.AmountDue;
 
             invoices.Add(invoice);
+        }
+
+        public static Invoice GetInvoiceFromId(string invoiceNumber)
+        {
+            return invoices.Single(Invoice => Invoice.Number == invoiceNumber.ToString());
+        }
+
+        public static void ConvertQuoteToOrder(Quote quote)
+        {
+            Order order = new Order
+            {
+                Date = DateTime.Now,
+                Number = quote.Number,
+                Products = quote.Products,
+                Status = OrderStatus.ConfirmedSale,
+                TotalPrice = quote.TotalPrice,
+            };
+
+            orders.Add(order);
+            quotes.Remove(quote);
         }
     }
 }

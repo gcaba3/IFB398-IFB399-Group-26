@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prototype2.Classes
+namespace prototype2
 {
     public abstract class SalesDocument
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prototype2.Classes
+namespace prototype2
 {
     public struct QuoteStatus
     {
@@ -12,7 +12,7 @@ namespace prototype2.Classes
         public const string Incomplete = "Incomplete";
         public const string PendingResponse = "Pending Response";
         public const string Validated = "Validated";
-        public const string OrderPlaced = "Order Placed";
+        //public const string OrderPlaced = "Order Placed";
     }
     public class Quote : SalesDocument
     {

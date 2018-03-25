@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prototype2.Classes
+namespace prototype2
 {
     public struct OrderStatus
     {
@@ -15,7 +15,6 @@ namespace prototype2.Classes
         public const string Complete = "Complete";
     }
     public class Order : SalesDocument
-    {       
-        
+    {
     }
 }

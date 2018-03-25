@@ -23,15 +23,26 @@
                 <Setter Property="InputTransparent"
                         Value="true"/>
             </Style>
-            <Style x:Key="NavImageStyle"
+            <Style x:Key="NavGridStyle"
                    TargetType="Image">
                 <Setter Property="HorizontalOptions"
                         Value="FillAndExpand"/>
                 <Setter Property="VerticalOptions"
                         Value="FillAndExpand"/>
                 <Setter Property="Grid.RowSpacing"
-                        Value="0"/>
+                        Value="0"/>                
             </Style>
+            <RowDefinitionCollection
+                x:Key="NavGridDefinitions">
+                <RowDefinition
+                        Height="10*"/>
+                <RowDefinition
+                        Height="55*"/>
+                <RowDefinition
+                        Height="35*"/>
+                <RowDefinition
+                        Height="10*"/>
+            </RowDefinitionCollection>
             <Style x:Key="NavButtonStyle"
                    TargetType="Button">
                 <Setter Property="HorizontalOptions"
@@ -43,18 +54,13 @@
                 <Setter Property="Grid.Row"
                         Value="0"/>
                 <Setter Property="Grid.RowSpan"
-                        Value="3"/>
+                        Value="4"/>
             </Style>
         </ResourceDictionary>
     </Grid.Resources>
-    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand">
-        <Grid Style="{StaticResource NavImageStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="45*"/>
-            </Grid.RowDefinitions>
+    <Grid Grid.Column="0" HorizontalOptions="FillAndExpand" Style="{StaticResource NavGridStyle}" RowDefinitions="{StaticResource NavGridDefinitions}">
             <Button
+                x:Name="btnProducts"
             Clicked="Clicked_Products"
             Style="{StaticResource NavButtonStyle}">
             </Button>
@@ -63,21 +69,15 @@
                 Grid.Row="1"
                 InputTransparent="True"
                 />
-            <Label 
+        <Label 
             Text="Products"
             Style="{StaticResource NavLabelStyle}"/>
-        </Grid>
 
     </Grid>
-    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand">
-        <Grid Style="{StaticResource NavImageStyle}" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="45*"/>
-            </Grid.RowDefinitions>
-            <Button
-            Clicked="Clicked_MyProducts"
+    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" Style="{StaticResource NavGridStyle}" RowDefinitions="{StaticResource NavGridDefinitions}">
+        <Button
+            Clicked="Clicked_MyShop"
+                x:Name="btnMyShop"
             Style="{StaticResource NavButtonStyle}">
             </Button>
             <Image 
@@ -89,18 +89,11 @@
             Text="My Shop"
                 
             Style="{StaticResource NavLabelStyle}"/>
-
         </Grid>
-    </Grid>
-    <Grid Grid.Column="2" HorizontalOptions="FillAndExpand">
-        <Grid Style="{StaticResource NavImageStyle}" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="45*"/>
-            </Grid.RowDefinitions>
-            <Button
+<Grid Grid.Column="2" HorizontalOptions="FillAndExpand" Style="{StaticResource NavGridStyle}" RowDefinitions="{StaticResource NavGridDefinitions}">
+    <Button
             Clicked="Clicked_MyOrders"
+                x:Name="btnMyOrders"
             Style="{StaticResource NavButtonStyle}">
             </Button>
             <Image
@@ -108,21 +101,15 @@
                 Grid.Row="1"
                 InputTransparent="True"
                 />
-            <Label 
+        <Label 
             Text="My Orders"
                 
             Style="{StaticResource NavLabelStyle}"/>
-        </Grid>
     </Grid>
-    <Grid Grid.Column="3" HorizontalOptions="FillAndExpand">
-        <Grid Style="{StaticResource NavImageStyle}" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="45*"/>
-            </Grid.RowDefinitions>
-            <Button
+<Grid Grid.Column="3" HorizontalOptions="FillAndExpand" Style="{StaticResource NavGridStyle}" RowDefinitions="{StaticResource NavGridDefinitions}">
+    <Button
             Clicked="Clicked_Btn"
+                x:Name="btnSupport"
             Style="{StaticResource NavButtonStyle}">
             </Button>
             <Image
@@ -130,21 +117,14 @@
                 Grid.Row="1"
                 InputTransparent="True"
                 />
-            <Label 
+        <Label 
             Text="Support"
             Style="{StaticResource NavLabelStyle}"/>
-        </Grid>
-
     </Grid>
-    <Grid Grid.Column="4" HorizontalOptions="FillAndExpand">
-        <Grid Style="{StaticResource NavImageStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="45*"/>
-            </Grid.RowDefinitions>
-            <Button
+<Grid Grid.Column="4" HorizontalOptions="FillAndExpand" Style="{StaticResource NavGridStyle}" RowDefinitions="{StaticResource NavGridDefinitions}">
+    <Button
             Clicked="Clicked_Events"
+                x:Name="btnEvents"
             Style="{StaticResource NavButtonStyle}">
             </Button>
             <Image 
@@ -152,9 +132,8 @@
                 Grid.Row="1"      
                 InputTransparent="True"
                 />
-            <Label
+        <Label
                 Text="Events"
                 Style="{StaticResource NavLabelStyle}"/>
-        </Grid>
     </Grid>
 </Grid>

@@ -13,9 +13,46 @@ namespace prototype2
     public partial class NavigationBar : Grid
     {
         public enum Tab { Products, MyShop, MyOrders, Support, Events };
+        private static Button productsButton, myShopButton, myOrdersButton, supportButton, eventsButton;
+
         public NavigationBar()
         {
             InitializeComponent();
+            AssignButtons();
+        }
+
+        private void AssignButtons()
+        {
+            productsButton = btnProducts;
+            myShopButton = btnMyShop;
+            myOrdersButton = btnMyOrders;
+            supportButton = btnSupport;
+            eventsButton = btnEvents;
+        }
+
+        public static void ChangeProductsTabColor()
+        {
+            productsButton.BackgroundColor = (Color)App.Current.Resources["SPRed"];
+        }
+
+        public static void ChangeMyShopTabColor()
+        {
+            myShopButton.BackgroundColor = (Color)App.Current.Resources["SPRed"];
+        }
+
+        public static void ChangeMyOrdersTabColor()
+        {
+            myOrdersButton.BackgroundColor = (Color)App.Current.Resources["SPRed"];
+        }
+
+        public static void ChangeSupportTabColor()
+        {
+            supportButton.BackgroundColor = (Color)App.Current.Resources["SPRed"];
+        }
+
+        public static void ChangeEventsTabColor()
+        {
+            eventsButton.BackgroundColor = (Color)App.Current.Resources["SPRed"];
         }
 
         async void Clicked_Btn(object sender, EventArgs args)
@@ -28,7 +65,7 @@ namespace prototype2
             Navigation.PushAsync(new AccountPage(Tab.Products));
         }
 
-        void Clicked_MyProducts(object sender, EventArgs args)
+        void Clicked_MyShop(object sender, EventArgs args)
         {
             Navigation.PushAsync(new AccountPage(Tab.MyShop));
         }
@@ -41,6 +78,6 @@ namespace prototype2
         void Clicked_Events(object sender, EventArgs args)
         {
             Navigation.PushAsync(new AccountPage(Tab.Events));
-        }
+        }        
     }
 }

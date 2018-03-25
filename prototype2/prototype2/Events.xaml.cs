@@ -15,8 +15,9 @@ namespace prototype2
         public Events()
         {
             InitializeComponent();
-            Title = "Products";
+            Title = "Events";
             NavigationPage.SetHasBackButton(this, false);
+            NavigationBar.ChangeEventsTabColor();
 
             for (int i = 0; i < 10; i++)
             {
