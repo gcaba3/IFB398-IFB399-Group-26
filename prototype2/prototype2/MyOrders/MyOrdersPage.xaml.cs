@@ -15,7 +15,7 @@ namespace prototype2
         enum Tab { Quotes, Orders, Invoices };
         Tab selectedTab;
 
-        //private const string buttonIndicator = "rightarrow"; // filepath of the image to be added to the buttons
+        private const string buttonIndicator = "rightarrow.png"; // filepath of the image to be added to the buttons
         private const int fontSize = 16, tabAnimationTime = 500;
         private double pageWidth;
         private Color buttonColor = Color.FromHex("#eaeafc");
@@ -186,9 +186,9 @@ namespace prototype2
                 ColumnDefinitions =
                 {
                     new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(48, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(48, GridUnitType.Star) },
-                    //new ColumnDefinition { Width = new GridLength(6, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(45, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(45, GridUnitType.Star) },
+                    new ColumnDefinition { Width = new GridLength(6, GridUnitType.Star) },
                     new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
                 },
 
@@ -239,19 +239,19 @@ namespace prototype2
                 InputTransparent = true,
             }, 2, 1);
 
-            /*documentGrid.Children.Add(new Image
+            documentGrid.Children.Add(new Image
             {
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
                 Source = buttonIndicator,
                 InputTransparent = true,
-            }, 3, 4, 0, 4);*/
+            }, 3, 4, 0, 4);
 
             documentGrid.Children.Add(new Label
             {
                 FontSize = fontSize,
                 HorizontalOptions = LayoutOptions.End,
-                Text = document.Date.ToString("MM/dd/yyyy HH:mm tt"),
+                Text = document.Date.ToString("dd/MM/yyyy"),
                 InputTransparent = true,
             }, 2, 2);
 

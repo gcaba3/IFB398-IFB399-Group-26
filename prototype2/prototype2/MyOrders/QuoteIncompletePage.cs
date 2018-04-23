@@ -148,10 +148,10 @@ namespace prototype2
             Data.CreateFreshQuote();
         }
 
-        private void UpdateDateLabel()
+        protected override void UpdateDateLabel()
         {
-            labelDate.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
-        }        
+            labelDate.Text = document.Date.ToString("dd/MM/yyyy hh:mm:ss tt");
+        }
 
         private void RemoveProductFromQuoteStack(string productId)
         {

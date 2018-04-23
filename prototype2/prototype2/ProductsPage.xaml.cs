@@ -112,10 +112,10 @@ namespace prototype2
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
             }, 1, 0);
-
+            
             productGrid.Children.Add(new Label
             {
-                Text = "In Stock: " + product.Stock,
+                Text = GetProductStockText(product.Stock),
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
             }, 1, 1);
@@ -135,6 +135,14 @@ namespace prototype2
                 VerticalOptions = LayoutOptions.Center,
             }, 1, 3);
         }
+
+
+        private string GetProductStockText(int numStock)
+        {
+            if (numStock > 10)
+                return "In Stock: " + numStock;
+            return "In Stock: Limited";
+        }            
 
         private void AddToQuoteButton(Grid productGrid, Product product)
         {
@@ -253,7 +261,7 @@ namespace prototype2
         }
 
         /// <summary>
-        /// Edits the AddToQuote popup to have the correct labels, entry and button statess
+        /// Edits the AddToQuote popup to have the correct labels, entry and button states
         /// corresponding to the product and the user's new quote
         /// </summary>
         /// <param name="btnAddToQuote"></param>

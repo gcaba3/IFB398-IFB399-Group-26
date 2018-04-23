@@ -86,7 +86,7 @@ namespace prototype2
                 Category = "Solar Inverter",
                 Manufacturer = "Sungrow",
                 Price = 1499.00,
-                Stock = 26,
+                Stock = 6,
                 ImagePath = "SG10ECThreePhase10kWInverter.jpg",
                 Id = products.Count
             });

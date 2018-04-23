@@ -38,10 +38,15 @@ namespace prototype2
             }
 
             AddFreightToStack();
-            
-            labelDate.Text = document.Date.ToString("MM/dd/yyyy HH:mm:ss");
+
+            UpdateDateLabel();
 
             UpdatePriceLabels();            
+        }
+
+        protected virtual void UpdateDateLabel()
+        {
+            labelDate.Text = document.Date.ToString("dd/MM/yyyy");
         }
 
         protected void AddLabelsToProductGrid(Grid grid, Product product, int quantity)
@@ -138,9 +143,7 @@ namespace prototype2
             }
 
             double gst = Math.Round(subtotal * 0.1, 2, MidpointRounding.AwayFromZero);
-
-            txtSubTotal.Text = subtotal.ToString("N2");
-            txtDiscount.Text = "0.00";
+            
             txtExclGST.Text = subtotal.ToString("N2");
             txtGST.Text = gst.ToString("N2");
             document.TotalPrice = subtotal + gst;
