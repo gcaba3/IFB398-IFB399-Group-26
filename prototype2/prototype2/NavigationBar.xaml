@@ -108,7 +108,7 @@
     </Grid>
 <Grid Grid.Column="3" HorizontalOptions="FillAndExpand" Style="{StaticResource NavGridStyle}" RowDefinitions="{StaticResource NavGridDefinitions}">
     <Button
-            Clicked="Clicked_Btn"
+            Clicked="Clicked_Support"
                 x:Name="btnSupport"
             Style="{StaticResource NavButtonStyle}">
             </Button>

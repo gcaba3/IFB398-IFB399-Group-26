@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="prototype2.CreateTicket">
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="DarkGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <Entry Grid.Row="0" Placeholder="Enter Subject Here!" x:Name="Subject" />
+
+            <Editor Grid.Row="1" x:Name="Message" Text="Enter Your Message Here!" TextChanged="EditorPlaceHolder" ></Editor>
+
+            <Button Grid.Row="2" Clicked="SubmitTicket" Text="Send Ticket"></Button>
+            <!--
+            title
+            
+            text
+            
+            submit ticket
+            
+            -->
+            
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

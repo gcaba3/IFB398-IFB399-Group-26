@@ -58,13 +58,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Event.cs" />
     <Compile Include="Classes\Order.cs" />
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Classes\Quote.cs" />
     <Compile Include="Classes\SalesDocument.cs" />
+    <Compile Include="Classes\Ticket.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="EditQuotePopup.xaml.cs">
       <DependentUpon>EditQuotePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventPages\EventSingle.xaml.cs">
+      <DependentUpon>EventSingle.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyOrders\InvoicePage.cs" />
     <Compile Include="MyOrders\MyOrdersPage.xaml.cs">
@@ -74,7 +79,7 @@
     <Compile Include="NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Events.xaml.cs">
+    <Compile Include="EventPages\Events.xaml.cs">
       <DependentUpon>Events.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyOrders\OrderPage.cs" />
@@ -119,6 +124,15 @@
     </Compile>
     <Compile Include="MyOrders\QuoteValidatedPage.cs" />
     <Compile Include="MyOrders\QuoteOrderPlacedPage.cs" />
+    <Compile Include="Support\CreateTicket.xaml.cs">
+      <DependentUpon>CreateTicket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Support\SupportPage.xaml.cs">
+      <DependentUpon>SupportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Support\TicketSingle.xaml.cs">
+      <DependentUpon>TicketSingle.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -162,7 +176,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Events.xaml">
+    <EmbeddedResource Include="EventPages\Events.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -181,6 +195,30 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PDFViewer\PDFViewerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EventPages\EventSingle.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Support\SupportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Support\CreateTicket.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Support\TicketSingle.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

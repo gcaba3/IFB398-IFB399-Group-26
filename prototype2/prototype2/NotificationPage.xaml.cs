@@ -26,7 +26,11 @@ namespace prototype2
             this.Title = "Notifications";
 
             GenerateSource();
+            privateButton.BackgroundColor = Color.FromHex("#E0E0E0");
+            publicButton.BackgroundColor = Color.FromHex("#B3B3B3");
         }
+
+
 
         //Creates the source of the list view
         private void GenerateSource()
@@ -83,17 +87,21 @@ namespace prototype2
 
         }
 
-        void Handle_Clicked(object sender, System.EventArgs e)
+        void Handle_Clicked(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            //DisplayAlert(button.Text,"","Ok");
-            if (button.Text == "Private")
+            Button label = (Button)sender;
+            if (label.Text == "Private")
             {
                 notificationList.ItemsSource = PrivateNotifications;
+                privateButton.BackgroundColor = Color.FromHex("#B3B3B3");
+                publicButton.BackgroundColor = Color.FromHex("#E0E0E0");
+
             }
             else
             {
                 notificationList.ItemsSource = Notifications;
+                privateButton.BackgroundColor = Color.FromHex("#E0E0E0");
+                publicButton.BackgroundColor = Color.FromHex("#B3B3B3");
             }
         }
     }

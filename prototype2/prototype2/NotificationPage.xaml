@@ -8,15 +8,17 @@
                     <RowDefinition Height="10*" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Padding="0" Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Text="Public" HorizontalOptions="FillAndExpand" 
+
+                    <Button Grid.Column="0" x:Name="publicButton" BackgroundColor="#B3B3B3" Text="Public" HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
-                    <Button Grid.Column="1" Text="Private" HorizontalOptions="FillAndExpand" 
+                    <Button Grid.Column="1" x:Name="privateButton" BackgroundColor="#B3B3B3" Text="Private" HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
+
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -28,29 +30,25 @@
                     <Button Grid.Column="1" Text="Search" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                     <Button Grid.Column="2" Text="Sort" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                 </Grid>
-                <StackLayout Grid.Row="2" VerticalOptions="FillAndExpand">
-                    <ListView x:Name="notificationList" HasUnevenRows="false" RowHeight="60" ItemSelected="OnItemSelected">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="60" />
-                                        </Grid.RowDefinitions>
-                                        <StackLayout Grid.Column="0" Grid.Row="0" Spacing="0">
-                                            <Label Text="{Binding NotificationNumber, StringFormat='Notification {0}'}" FontSize="20"/>
-                                            <Label Text="{Binding DatePosted, StringFormat='Posted on {0:dd/MM/yyyy}'}" FontSize="10"/>
-                                            <Label Text="{Binding NotificationContent, StringFormat='Notification {0}'}" FontSize="15"/>
-                                        </StackLayout>
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
+                <ListView Grid.Row="2" VerticalOptions="FillAndExpand" x:Name="notificationList" HasUnevenRows="false" RowHeight="60" ItemSelected="OnItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="4,2" HorizontalOptions="Start" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" TextColor="Black" Text="{Binding NotificationNumber, StringFormat='Notification {0}'}" HorizontalTextAlignment="Start" FontSize="20"/>
+                                    <Label Grid.Row="1" TextColor="Black" Text="{Binding DatePosted, StringFormat='Posted on {0:dd/MM/yyyy}'}" HorizontalTextAlignment="Start" FontSize="10"/>
+                                    <Label Grid.Row="2" TextColor="Black" Text="{Binding NotificationContent, StringFormat='Notification {0}'}" HorizontalTextAlignment="Start" FontSize="15"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

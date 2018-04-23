@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="prototype2.EventSingle">
+    <ContentPage.Content>
+        <Grid ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <!--<RowDefinition Height="5*"/>-->
+            </Grid.RowDefinitions>
+
+            <!--Top Row-->
+            <Grid Grid.Row="0" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <!--Picture-->
+                <Image Grid.Column="0" x:Name="Picture" />
+                <!--Info-->
+                <Grid Grid.Column="1" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Label Grid.Row="0" x:Name="Name" />
+                    <Label Grid.Row="1" x:Name="Description" />
+                </Grid>
+                <!--Price-->
+                <Label Grid.Column="2" x:Name="Price" />
+            </Grid>
+            
+            <!--2nd row-->
+            <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label Grid.Column="0" x:Name="Address" />
+                <Label Grid.Column="1" x:Name="Date" />
+            </Grid>
+
+            <!--3rd row
+            <Grid Grid.Row="2" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label Grid.Column="0" Text="Number of Tickets" />
+                <Entry Grid.Column="1" x:Name="NumTicketsEntry" Keyboard="Numeric" Placeholder="Enter Number Here" />
+            </Grid>
+                -->
+
+            <!--payment button-->
+            <Button Grid.Row="3" Text="Proceed to Payment" Clicked="paymentButton" />
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:prototype2;"
+             x:Class="prototype2.SupportPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
+        <ToolbarItem Text="Search" Priority="1" Order="Primary" Icon="ic_notifications_white_24dp.png" Clicked="Handle_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <!--Start page content-->
+            <Button Grid.Row="0" Text="New Ticket" Clicked="NewTicket" HorizontalOptions="FillAndExpand"></Button>
+            <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" x:Name="TicketsScrollView">
+                    <StackLayout HorizontalOptions="FillAndExpand" Margin="10,10,10,10" x:Name="stackLayoutMain"/>
+                    <!--Main content gets added to this stack dynamically-->
+                </ScrollView>
+            </StackLayout>
+
+            <!--End page content-->
+            <!--Navigation Bar-->
+            <control:NavigationBar Grid.Row="2" VerticalOptions="FillAndExpand"></control:NavigationBar>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

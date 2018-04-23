@@ -44,6 +44,11 @@ namespace prototype2
                     IsPresented = false;
                     break;
 
+                case NavigationBar.Tab.Support:
+                    Detail = new NavigationPage(new SupportPage());
+                    IsPresented = false;
+                    break;
+
                 case NavigationBar.Tab.Events:
                     Detail = new NavigationPage(new Events());
                     IsPresented = false;

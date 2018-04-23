@@ -6,30 +6,50 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using prototype2.Classes;
 
 namespace prototype2
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Events : ContentPage
+    public partial class SupportPage : ContentPage
     {
-        public Events()
+        private List<Ticket> ticketlist;
+        public SupportPage()
         {
             InitializeComponent();
-            Title = "Events";
+            Title = "Support";
             NavigationPage.SetHasBackButton(this, false);
-            NavigationBar.ChangeEventsTabColor();
+            NavigationBar.ChangeSupportTabColor();
 
+            ticketlist = new List<Ticket>();
+
+            //generate test data
             for (int i = 0; i < 10; i++)
             {
+            }
+            updateTickets();
+        }
 
-                addEventToList(("name" + i.ToString()),
-                               ("date" + i.ToString()),
-                               ("This is description #" + i.ToString()),
-                               (i.ToString() + ".00"),
-                               ("state" + i.ToString())
-                               );
+
+
+        public void updateTickets()
+        {
+            //remove old list
+            for (int i = 0; i < stackLayoutMain.Children.Count; i++)
+            {
+                stackLayoutMain.Children.RemoveAt(0);
             }
 
+            //display list on screen
+            for (int i = 0; i < ticketlist.Count; i++)
+            {
+                addEventToList(ticketlist[i].Title,
+                               (ticketlist[i].Date),
+                               (ticketlist[i].Messages),
+                               (ticketlist[i].Number.ToString("#00000")),
+                               (ticketlist[i].State)
+                               );
+            }
         }
 
         public void addEventToList(string name, string date, string description, string price, string state)
@@ -107,20 +127,16 @@ namespace prototype2
             stackLayoutMain.Children.Add(frame);
         }
 
-
         public void OpenEvent(object sender, EventArgs args)
         {
-            Grid tappedEvent = (Grid)sender;
-            foreach (Label ree in tappedEvent.Children)
-            {
-                if (ree.ClassId.Equals("name"))
-                {
-                    App.Current.MainPage.DisplayAlert("Tapped on event named " + ree.Text + "!", "Not implemented.", "OK");
-                    break;
-                }
-            }
+            //gets the index of sender in parent, thats also its position in eventlist
+            int index = stackLayoutMain.Children.IndexOf((Frame)((Grid)sender).Parent);
+            Navigation.PushAsync(new TicketSingle(ticketlist[index]));
+        }
 
-
+        public void NewTicket(object sender, EventArgs args)
+        {
+            Navigation.PushAsync(new CreateTicket());
         }
 
         async void Handle_Clicked(object sender, System.EventArgs e)
@@ -128,6 +144,5 @@ namespace prototype2
             NotificationPage notificationPage = new NotificationPage();
             await Navigation.PushAsync(notificationPage);
         }
-
     }
 }

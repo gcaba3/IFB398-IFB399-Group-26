@@ -57,6 +57,7 @@ namespace prototype2
 
         async void Clicked_Btn(object sender, EventArgs args)
         {
+            
             await App.Current.MainPage.DisplayAlert("Clicked!", "Not implemented.", "OK");
         }
 
@@ -73,6 +74,11 @@ namespace prototype2
         void Clicked_MyOrders(object sender, EventArgs args)
         {
             Navigation.PushAsync(new AccountPage(Tab.MyOrders));
+        }
+
+        void Clicked_Support(object sender, EventArgs args)
+        {
+            Navigation.PushAsync(new AccountPage(Tab.Support));
         }
 
         void Clicked_Events(object sender, EventArgs args)
