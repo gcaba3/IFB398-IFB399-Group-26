@@ -71,6 +71,9 @@
     <Compile Include="EventPages\EventSingle.xaml.cs">
       <DependentUpon>EventSingle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyOrders\BillingAddressView.xaml.cs">
+      <DependentUpon>BillingAddressView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyOrders\InvoicePage.cs" />
     <Compile Include="MyOrders\MyOrdersPage.xaml.cs">
       <DependentUpon>MyOrdersPage.xaml</DependentUpon>
@@ -219,6 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Support\TicketSingle.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MyOrders\BillingAddressView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

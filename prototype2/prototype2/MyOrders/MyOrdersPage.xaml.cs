@@ -317,5 +317,11 @@ namespace prototype2
 
             await Navigation.PushAsync(new InvoicePage(invoice));
         }
+
+        async void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            NotificationPage notificationPage = new NotificationPage();
+            await Navigation.PushAsync(notificationPage);
+        }
     }
 }

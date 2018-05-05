@@ -4,9 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="prototype2.EditQuotePopup"
     x:Name="framePopup" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
-                   BackgroundColor="White" OutlineColor="Black" HasShadow="True" IsVisible="False" Opacity="0" InputTransparent="True">
+                   BackgroundColor="White" OutlineColor="Black" HasShadow="True" IsVisible="False" Opacity="0" InputTransparent="False">
     <Grid x:Name="gridEditQuotePopup" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
-                      Opacity="0" BackgroundColor="White" IsVisible="False">
+                      Opacity="0" BackgroundColor="White" IsVisible="False" InputTransparent="False">
         <Label
                 x:Name="labelPopupType"
             FontSize="Large"

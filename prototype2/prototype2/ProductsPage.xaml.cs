@@ -139,9 +139,10 @@ namespace prototype2
 
         private string GetProductStockText(int numStock)
         {
+            string returnString = "In Stock: ";
             if (numStock > 10)
-                return "In Stock: " + numStock;
-            return "In Stock: Limited";
+                returnString += "Limited";
+            return returnString;
         }            
 
         private void AddToQuoteButton(Grid productGrid, Product product)
@@ -303,6 +304,12 @@ namespace prototype2
                 btnAddToQuote.TextColor = (Color)App.Current.Resources["SPBlue"];
                 btnAddToQuote.BackgroundColor = Color.Transparent;
             }
-        }           
+        }
+
+        async void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            NotificationPage notificationPage = new NotificationPage();
+            await Navigation.PushAsync(notificationPage);
+        }
     }
 }

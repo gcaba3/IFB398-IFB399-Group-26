@@ -11,7 +11,7 @@ namespace prototype2
         {
             InitializeComponent();
             //Title = "Account Page";
-            Icon = "menu.png";
+            //Icon = "menu.png";
             NavigationPage.SetHasNavigationBar(this, false);
 
             Detail = new NavigationPage(new ProductsPage());
@@ -54,6 +54,8 @@ namespace prototype2
                     IsPresented = false;
                     break;
             }
+
+            helloUser.Text = "Hello " + App.User.Default.Username + "!";
         }
 
         async void OpenPage(object sender, System.EventArgs e)

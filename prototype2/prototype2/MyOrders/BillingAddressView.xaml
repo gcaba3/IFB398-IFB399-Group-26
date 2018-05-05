@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="prototype2.MyOrders.BillingAddressView">
+    <Grid>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Label Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" Text="Billing Address: " FontSize="Medium" FontAttributes="Bold" TextColor="Black" Margin="4"/>
+            <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End" Text="View/Change" FontSize="Medium" TextColor="Blue" Margin="4"/>
+            <Image Grid.Row="0" Grid.Column="2" Source="drop_down_arrow.png" Margin="4" x:Name="imageBillingArrow"/>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Margin="4"/>
+
+            <Button x:Name="btnBillingDropDown" 
+                Clicked="Clicked_BillingDropDown"
+                Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="2"/>
+        </Grid>
+
+
+
+    </Grid>
+
+    <StackLayout x:Name="viewBillingAddress" IsVisible="False">
+        <Label Text="Name" HorizontalOptions="Start"/>
+        <Entry HorizontalOptions="FillAndExpand"/>
+        
+        <Grid>
+            <Label Grid.Column="0" Grid.Row="0" Text="Email" HorizontalOptions="Start"/>
+            <Entry Grid.Column="0" Grid.Row="1" HorizontalOptions="FillAndExpand"/>
+
+            <Label Grid.Column="1" Grid.Row="0" Text="Phone" HorizontalOptions="Start"/>
+            <Entry Grid.Column="1" Grid.Row="1" HorizontalOptions="FillAndExpand"/>
+        </Grid>
+        
+        <Label Text="Street and Number" HorizontalOptions="FillAndExpand"/>
+        <Entry HorizontalOptions="FillAndExpand"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Text="Suburb" HorizontalOptions="Start"/>
+            <Entry Grid.Column="0" Grid.Row="1" HorizontalOptions="FillAndExpand"/>
+
+            <Label Grid.Column="1" Grid.Row="0" Text="Post Code" HorizontalOptions="Start"/>
+            <Entry Grid.Column="1" Grid.Row="1" HorizontalOptions="FillAndExpand"/>
+        </Grid>
+
+        <Label Text="State" HorizontalOptions="FillAndExpand"/>
+        <Entry HorizontalOptions="FillAndExpand"/>
+
+    </StackLayout>
+</StackLayout>
