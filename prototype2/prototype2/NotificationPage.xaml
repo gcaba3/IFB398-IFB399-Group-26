@@ -30,11 +30,12 @@
                     <Button Grid.Column="1" Text="Search" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                     <Button Grid.Column="2" Text="Sort" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
                 </Grid>
-                <ListView Grid.Row="2" VerticalOptions="FillAndExpand" x:Name="notificationList" HasUnevenRows="false" RowHeight="60" ItemSelected="OnItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="4,2" HorizontalOptions="Start" >
+                <ListView Grid.Row="2" VerticalOptions="FillAndExpand" x:Name="notificationList" HasUnevenRows="false" RowHeight="120" ItemSelected="OnItemSelected" >
+                    <ListView.ItemTemplate >
+                        <DataTemplate >
+                            <ViewCell >
+
+                                <Grid Padding="4,2" HorizontalOptions="Start" BackgroundColor="White" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
@@ -45,6 +46,7 @@
                                     <Label Grid.Row="1" TextColor="Black" Text="{Binding DatePosted, StringFormat='Posted on {0:dd/MM/yyyy}'}" HorizontalTextAlignment="Start" FontSize="10"/>
                                     <Label Grid.Row="2" TextColor="Black" Text="{Binding NotificationContent, StringFormat='Notification {0}'}" HorizontalTextAlignment="Start" FontSize="15"/>
                                 </Grid>
+
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

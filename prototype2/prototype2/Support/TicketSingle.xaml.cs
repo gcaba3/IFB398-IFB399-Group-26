@@ -29,12 +29,20 @@ namespace prototype2
             //fill the page here
             //name
             Name.Text = thisTicket.Title;
+
+            //split messages and place into page
+            string [] ticketmessages = thisTicket.Messages.Split(new string[] { ";" }, StringSplitOptions.None);
+            for (int i = 0; i < ticketmessages.Length; i++)
+            {
+                // place message into grid
+            };
             
         }
 
         private void sendMessage()
         {
             //send the newly message here
+            //thisTicket.Messages += EnteredMessage
         }
     }
 }

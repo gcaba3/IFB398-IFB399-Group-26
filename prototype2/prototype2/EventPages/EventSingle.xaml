@@ -11,7 +11,7 @@
             <!--Top Row-->
             <Grid Grid.Row="0" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                 <!--Picture-->
-                <Image Grid.Column="0" x:Name="Picture" />
+                <Image Grid.Column="0" x:Name="Picture"  />
                 <!--Info-->
                 <Grid Grid.Column="1" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <Label Grid.Row="0" x:Name="Name" />

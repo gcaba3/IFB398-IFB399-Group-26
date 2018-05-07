@@ -13,7 +13,7 @@ namespace prototype2
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SupportPage : ContentPage
     {
-        private List<Ticket> ticketlist;
+        public List<Ticket> ticketlist;
         public SupportPage()
         {
             InitializeComponent();
@@ -26,8 +26,17 @@ namespace prototype2
             //generate test data
             for (int i = 0; i < 10; i++)
             {
+                //Ticket newTicket = new Ticket();
+                //newTicket.Title = "Title" + i.ToString();
+                //newTicket.Date = i.ToString();
+                //newTicket.Messages = "Message1-!-Message2-!-Message3" + i.ToString();
+                //newTicket.Number = i;
+                //newTicket.State = "In Process";
+                //ticketlist.Add(newTicket);
             }
             updateTickets();
+
+            
         }
 
 
@@ -43,7 +52,7 @@ namespace prototype2
             //display list on screen
             for (int i = 0; i < ticketlist.Count; i++)
             {
-                addEventToList(ticketlist[i].Title,
+                addTicketToList(ticketlist[i].Title,
                                (ticketlist[i].Date),
                                (ticketlist[i].Messages),
                                (ticketlist[i].Number.ToString("#00000")),
@@ -52,7 +61,7 @@ namespace prototype2
             }
         }
 
-        public void addEventToList(string name, string date, string description, string price, string state)
+        public void addTicketToList(string name, string date, string description, string price, string state)
         {
 
             var eventGrid = new Grid

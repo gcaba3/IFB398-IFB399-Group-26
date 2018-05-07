@@ -79,11 +79,13 @@ namespace prototype2
                 },
             };
 
-            eventGrid.Children.Add(new StackLayout
+
+            eventGrid.Children.Add(new Image
             {
+                Source = ImageSource.FromUri(new Uri("http://supplypartners.com.au/files/uploads/2015/10/2018_MASTERCLASS_LOGO-150x150@2x.png")),
                 BackgroundColor = Color.BlanchedAlmond,
                 HorizontalOptions = LayoutOptions.CenterAndExpand
-            },0,0);
+            },0,1,0,2);
 
             eventGrid.Children.Add(new Label
             {
@@ -113,15 +115,21 @@ namespace prototype2
                 FontSize = 10,
                 VerticalOptions = LayoutOptions.Center,
 
-            }, 2, 0);
+            }, 2,3, 0,2);
 
-            eventGrid.Children.Add(new Label
+
+            Button newbutton = new Button
             {
+                Text = "Buy Tickets",
+                FontSize = 10,
                 ClassId = "eventState",
-                BackgroundColor = Color.BlanchedAlmond,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
-                
-            }, 3, 0);
+            };
+            newbutton.Clicked += PaymentButton;
+
+            eventGrid.Children.Add(newbutton, 3,4, 0,2);
+
+
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += OpenEvent;
@@ -142,6 +150,11 @@ namespace prototype2
             //gets the index of sender in parent, thats also its position in eventlist
             int index = stackLayoutMain.Children.IndexOf((Frame)((Grid)sender).Parent);
             Navigation.PushAsync(new EventSingle(eventlist[index]));
+        }
+
+        private void PaymentButton(object sender, System.EventArgs e)
+        {
+            Device.OpenUri(new Uri("http://supplypartners.com.au/events/#Price"));
         }
 
         async void Handle_Clicked(object sender, System.EventArgs e)
