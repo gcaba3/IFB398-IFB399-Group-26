@@ -14,10 +14,14 @@ namespace prototype2
 {
     public partial class LiveStatementPage : ContentPage
     {
-        public int OutstandingBalance;
+        public double OutstandingBalance;
 
         //Holds the user's invoices
         public System.Collections.ObjectModel.ObservableCollection<Invoice> invoices =
+            new System.Collections.ObjectModel.ObservableCollection<Invoice>();
+
+        //Used to control the list view
+        public System.Collections.ObjectModel.ObservableCollection<Invoice> displayInvoices =
             new System.Collections.ObjectModel.ObservableCollection<Invoice>();
 
 
@@ -26,87 +30,58 @@ namespace prototype2
             InitializeComponent();
 
             Title = "Live Statement";
-            DisplayAlert("Reached 1", "", "OK");
-            GenerateSource(); // generates the item source for the listview
-
-
-        }
-
-        //WARNING - has no validation so if any entry contains values thats not suppose to be used the like its type
-        //Will throw an exception thats not caught
-
-        //Note* write validation functions
-
-        //Creates the source of the list view based on the currently logged in user
-        async void GenerateSource()
-        {
-            HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://10.0.2.2:3000");//address of server
-
-            try
-            {
-                //Invoices of the currently logged in user
-                String userInvoicesURI = "invoice?userId=" + App.User.Default.ID.ToString();
-
-                //queries the server for invoices of the current user
-                Stream responseBody = await httpClient.GetStreamAsync(userInvoicesURI);
-
-                //Creates a list of JSON objects based on the response of the server
-                List<JObject> LoadJson()
-                {
-                    using (StreamReader reader = new StreamReader(responseBody))
-                    {
-                        string jsonBody = reader.ReadToEnd();
-                        List<JObject> jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(jsonBody);
-                        return jsonObjects;
-                    }
-                }
-
-                //stores the JSON list in a local variable
-                List<JObject> jsonInvoices = LoadJson();
-
-                //Creates the user's unpaid invoices to fill in the invoices collection
-                foreach (JObject jsonInvoice in jsonInvoices)
-                {
-                    if (jsonInvoice.GetValue("amountPaid").ToObject<int>() <= 0)
-                    {
-                        Invoice userInvoice = new Invoice();
-                        //userInvoice.invoiceNumber = jsonInvoice.GetValue("invoiceNumber").ToObject<int>();
-                        //userInvoice.amountDue = jsonInvoice.GetValue("amountDue").ToObject<int>();
-                        //userInvoice.dateDue = jsonInvoice.GetValue("dateDue").ToObject<DateTime>();
-
-                        invoices.Add(userInvoice);
-                    }
-
-                }
-
-
-                invoiceList.ItemsSource = invoices;
-                //GenerateOutstandingBalance(); // sets the outstanding balance
-            }
-            catch (HttpRequestException exc)
-            {
-                await DisplayAlert("Something went wrong", "Exception caught: " + exc.Message, "OK");
-            }
-
-            // Disposes of client so that it doesnt leak info
-            httpClient.Dispose();
+            GenerateSource(); // Pulls all the users invoices
+            UpdateListView("All"); // Displays the list view
+            GenerateOutstandingBalance(); // Shows outstanding balance of users invoices
 
         }
 
 
-        //totals all the unpaid invoices and sets it to the outstanding balance
-        private void GenerateOutstandingBalance()
+        //Creates the source of the list view
+        private void GenerateSource()
         {
-            int total = 0;
-
-            foreach (Invoice invoice in invoices)
+            for (int i = 0; i < 5; i++)
             {
-                //total += invoice.amountDue;
+                invoices.Add(new Invoice
+                {
+                    InvoiceNumber = i,
+                    DateDue = new DateTime(2017, 1, 1),
+                    AmountDue = 1000,
+                    AmountPaid = 0
+                });
             }
-            this.OutstandingBalance = total;
-            outstandingBalance.Text = "$" + total.ToString();
 
+            for (int i = 5; i <= 10; i++)
+            {
+                invoices.Add(new Invoice
+                {
+                    InvoiceNumber = i,
+                    DateDue = new DateTime(2017, 1, 1),
+                    AmountDue = 1000,
+                    AmountPaid = 1000
+                });
+            }
+
+
+        }
+
+        void UpdateListView(String action){
+            if(action == "All"){
+                displayInvoices = invoices;
+            }
+
+            invoiceList.ItemsSource = invoices;
+
+        }
+
+        void GenerateOutstandingBalance(){
+            double total = 0;
+            foreach(Invoice invoice in invoices){
+                total += invoice.AmountDue - invoice.AmountPaid;
+            }
+            OutstandingBalance = total;
+
+            outstandingBalance.Text = "$" + OutstandingBalance.ToString(); // Push to view
         }
 
         //Authorizes the payment of all invoices. Updates the invoices on server
@@ -118,23 +93,26 @@ namespace prototype2
             GenerateOutstandingBalance();
         }
 
-        //Query's the server to delete the specified invoice id of the user
-        void PayInvoice(object sender, System.EventArgs e)
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var invoiceEntry = (Xamarin.Forms.Button)sender;
-            Invoice toDeleteItem;
-            foreach (Invoice itm in invoices)
-            {
-                
-                //if (itm.invoiceNumber.ToString() == invoiceEntry.CommandParameter.ToString())
-                //{
-                //    toDeleteItem = itm;
-                //    invoices.Remove(toDeleteItem);
-                //    GenerateOutstandingBalance();
-                //    break;
-                //}
-            }
+            //Open invoice page
+            Invoice selectedInvoice = args.SelectedItem as Invoice;
 
+            await DisplayAlert("Open Invoice IN0000" + selectedInvoice.InvoiceNumber, "Temp. This should open individual invoice page", "OK"); // Replace
         }
+
+        async void OnFilter(object sender, EventArgs args)
+        {
+            var action = await DisplayActionSheet("Filter By:", "Cancel", null, "All", "Paid", "Unpaid", "Partial", "Overdue");
+            await DisplayAlert("Action Chosen", action, "exit");
+        }
+
+        async void OnSort(object sender, EventArgs args)
+        {
+            var action = await DisplayActionSheet("Sort By:", "Cancel", null, "Invoice Id", "Date Due");
+            await DisplayAlert("Action Chosen", action, "exit");
+        }
+
+
     }
 }

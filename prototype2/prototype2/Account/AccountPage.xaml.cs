@@ -73,10 +73,6 @@ namespace prototype2
                     AccountDetailPage accountDetailPage = new AccountDetailPage();
                     await Navigation.PushAsync(accountDetailPage);
                     break;
-                case "Payment History":
-                    PaymentHistoryPage paymentHistoryPage = new PaymentHistoryPage();
-                    await Navigation.PushAsync(paymentHistoryPage);
-                    break;
                 case "Contact Us":
                     ContactUsPage contactUsPage = new ContactUsPage();
                     await Navigation.PushAsync(contactUsPage);

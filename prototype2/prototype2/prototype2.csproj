@@ -136,6 +136,8 @@
     <Compile Include="Support\TicketSingle.xaml.cs">
       <DependentUpon>TicketSingle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Connection.cs" />
+    <Compile Include="Classes\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

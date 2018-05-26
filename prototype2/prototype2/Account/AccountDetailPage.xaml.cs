@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using prototype2.Classes;
 using Xamarin.Forms;
 
 namespace prototype2
@@ -11,6 +12,8 @@ namespace prototype2
         {
             InitializeComponent();
             this.Title = "Account Details";
+
+            connect();
 
             //Display profile photo
             customerPhoto.Source = App.User.Default.ProfilePhoto;
@@ -39,6 +42,23 @@ namespace prototype2
             {
                 paypal.Text = "invalid";
             }
+        }
+
+        async private void connect(){
+            try{
+                Connection.SetDestination("https://supply-partners-capstone.willdooit.net:8443/");
+                List<Test> tests = await Connection.GetTest();
+
+                foreach (Test test in tests){
+                    Connection.ShowTest(test);
+                }
+
+            } catch (Exception exc){
+                await DisplayAlert(exc.GetBaseException().ToString(), exc.Message, "ok");
+            }
+
+
+
         }
 
         //Note* Write validation functions e.g. passwords should only contain '*' characters.

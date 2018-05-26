@@ -5,53 +5,78 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*" />
-                    <RowDefinition Height="auto" />
                     <RowDefinition Height="5*" />
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="auto" />
+
                 </Grid.RowDefinitions>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
-                    <Label Text="Outstanding Balance:" HorizontalTextAlignment="Center" FontSize="30" />
+                    <Label Text="Outstanding Balance" HorizontalTextAlignment="Center" FontSize="30" />
                     <Label x:Name="outstandingBalance" Text="" HorizontalTextAlignment="Center" FontSize="30" />
-                    <Label Text="Unpaid Invoices" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" FontSize="30" />
+                    <Label Text="Invoices" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" FontSize="30" />
                 </StackLayout>
-                <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand">
-                    <ListView x:Name="invoiceList" HasUnevenRows="false" RowHeight="60">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1">
+                    <Button Text= "Pay all" 
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                    Clicked="Payall"></Button>
+                </StackLayout>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <StackLayout Grid.Column="0" Grid.Row="0">
+                            <Button Text= "Filter" 
+                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                            Clicked="OnFilter"></Button>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Grid.Row="0">
+                            <Button Text= "Sort" 
+                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                            Clicked="OnSort"></Button>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+                <StackLayout Grid.Row="3" VerticalOptions="FillAndExpand">
+                    <ListView x:Name="invoiceList" HasUnevenRows="false" RowHeight="60" ItemSelected="OnItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="40*" />
-                                            <ColumnDefinition Width="40*" />
-                                            <ColumnDefinition Width="20*" />
+                                            <ColumnDefinition Width="25*" />
+                                            <ColumnDefinition Width="25*" />
+                                            <ColumnDefinition Width="25*" />
+                                            <ColumnDefinition Width="25*" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="60" />
                                         </Grid.RowDefinitions>
-                                        <Label Text="{Binding InvoiceNumber, StringFormat='Invoice Number: {0}'}" Grid.Column="0" Grid.Row="0" />
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="50*" />
-                                                <RowDefinition Height="50*" />
-                                            </Grid.RowDefinitions>
-                                            <StackLayout HorizontalOptions="FillAndExpand">
-                                                <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}}" Grid.Row="0" HorizontalTextAlignment="End" />
-                                                <Label Text="{Binding Amount, StringFormat='${0:N}'}" Grid.Row="1" HorizontalTextAlignment="End" />
-                                            </StackLayout>
-                                        </Grid>
-                                        <Button Text="Pay now" Grid.Column="2" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                            CommandParameter="{Binding InvoiceNumber}" Clicked="PayInvoice">
-                                        </Button>
+                                        <StackLayout Grid.Column="0" Grid.Row="0">
+                                            <Label Text="Invoice No." />
+                                            <Label Text="{Binding InvoiceNumber, StringFormat='IN{0:0000}'}" />
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Grid.Row="0">
+                                            <Label Text="Due" />
+                                            <Label Text="{Binding AmountDue, StringFormat='${0}'}" />
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" Grid.Row="0">
+                                            <Label Text="Due Date" />
+                                            <Label Text="{Binding DateDue, StringFormat='{0:dd/MM/yyyy}'}}" />
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="3" Grid.Row="0">
+                                            <Label Text="Amount Paid" />
+                                            <Label Text="{Binding AmountPaid, StringFormat='${0}'}" />
+                                        </StackLayout>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackLayout>
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2">
-                    <Button Text= "Pay all" 
-                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                    Clicked="Payall"></Button>
-
                 </StackLayout>
             </Grid>
         </ScrollView>
