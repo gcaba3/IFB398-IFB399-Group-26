@@ -17,8 +17,8 @@
 
                         <Button BackgroundColor="#d83127" Text="Login" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                                 TextColor="White" Margin="0,0,0,50" Clicked="Handle_ClickedAsync"></Button>
-                        <Label Text="Forgot Password?" HorizontalTextAlignment="Center" TextColor="Blue"></Label>
-                        <Label Text="Register" HorizontalTextAlignment="Center" TextColor="Blue"></Label>             
+                        <Button BackgroundColor="LightGray" Text="Forgot Password?" TextColor="Blue" Clicked="OpenLink"></Button>
+                        <Button BackgroundColor="LightGray" Text="Register" TextColor="Blue" Clicked="OpenLink"></Button>           
                     </StackLayout>     
                 </StackLayout>
             </StackLayout>

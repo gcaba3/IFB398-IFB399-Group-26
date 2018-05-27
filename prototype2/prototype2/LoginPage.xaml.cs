@@ -98,6 +98,10 @@ namespace prototype2
             return astPassword;
         }
 
+        void OpenLink(object sender, System.EventArgs e){
+            Device.OpenUri(new Uri("http://supplypartners.com.au/"));
+        }
+
 
     }
 }

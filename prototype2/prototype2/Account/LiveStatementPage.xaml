@@ -16,7 +16,7 @@
 
                 </StackLayout>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1">
-                    <Button Text= "Pay all Unpaid Invoices" 
+                    <Button Text= "Pay all Overdue Invoices" 
                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                     Clicked="Payall"></Button>
                 </StackLayout>

@@ -15,9 +15,9 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" x:Name="publicButton" BackgroundColor="#B3B3B3" Text="Public" HorizontalOptions="FillAndExpand" 
-                    VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
+                    VerticalOptions="FillAndExpand" Clicked="Switch"/>
                     <Button Grid.Column="1" x:Name="privateButton" BackgroundColor="#B3B3B3" Text="Private" HorizontalOptions="FillAndExpand" 
-                    VerticalOptions="FillAndExpand" Clicked="Handle_Clicked"/>
+                    VerticalOptions="FillAndExpand" Clicked="Switch"/>
 
                 </Grid>
                 <Grid Grid.Row="1">
@@ -26,9 +26,9 @@
                         <ColumnDefinition Width="60*" />
                         <ColumnDefinition Width="20*" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Text="Filter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-                    <Button Grid.Column="1" Text="Search" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-                    <Button Grid.Column="2" Text="Sort" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                    <Button Grid.Column="0" Text="Sort" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Sort"/>
+                    <SearchBar x:Name="searchQuery" Grid.Column="1" HorizontalTextAlignment="Start" Placeholder="Search here..." HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                    <Button Grid.Column="2" Text="Go" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Search"/>
                 </Grid>
                 <ListView Grid.Row="2" VerticalOptions="FillAndExpand" x:Name="notificationList" HasUnevenRows="false" RowHeight="120" ItemSelected="OnItemSelected" >
                     <ListView.ItemTemplate >
@@ -42,7 +42,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" TextColor="Black" Text="{Binding NotificationNumber, StringFormat='Notification {0}'}" HorizontalTextAlignment="Start" FontSize="20"/>
+                                    <Label Grid.Row="0" TextColor="Black" Text="{Binding NotificationTitle, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="20"/>
                                     <Label Grid.Row="1" TextColor="Black" Text="{Binding DatePosted, StringFormat='Posted on {0:dd/MM/yyyy}'}" HorizontalTextAlignment="Start" FontSize="10"/>
                                     <Label Grid.Row="2" TextColor="Black" Text="{Binding NotificationContent, StringFormat='Notification {0}'}" HorizontalTextAlignment="Start" FontSize="15"/>
                                 </Grid>

@@ -28,30 +28,99 @@ namespace prototype2
 
             Title = "Live Statement";
             GenerateSource(); // Pulls all the users invoices
-            invoiceList.ItemsSource = invoices; // Just initializes the view
             UpdateListView(); // Displays the list view
             GenerateOutstandingBalance(); // Shows outstanding balance of users invoices
 
         }
 
+        //View Controllers
+
+        //Authorizes the payment of all invoices. Updates the invoices on server
+        async void Payall(object sender, System.EventArgs e)
+        {
+            //Query server to delete all invoices of the user
+            //Generate source again
+            String confirmationMessage = ConfirmationMessageMaker();
+            var answer = await DisplayAlert("Confirm Payment", confirmationMessage, "Confirm", "Cancel");
+            if(answer){
+                foreach(Invoice invoice in invoices){
+                    var amountRemaining = invoice.AmountDue - invoice.AmountPaid;
+                    if(invoice.DateDue < DateTime.Today && !amountRemaining.Equals(0.0)){
+                        invoice.AmountPaid += amountRemaining;
+                    }
+                }
+
+            }
+
+            GenerateOutstandingBalance();
+            UpdateListView();
+        }
+
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            //Open invoice page
+            Invoice selectedInvoice = args.SelectedItem as Invoice;
+
+            String invoiceID = String.Format("IN{0:00000}", selectedInvoice.InvoiceNumber); // Formatting to work with james thing
+
+            if(selectedInvoice.InvoiceNumber > 4){
+                await DisplayAlert("Open Invoice: " + invoiceID, "Sorry for now invoices from IN00001 to IN00004 are valid... for now...", "OK"); // Get rid of this when connected to database
+            } else {
+                // This is using james's way to open an individual invoice page. Change when connected to database
+                Invoice invoice = Data.GetInvoiceFromId(invoiceID); 
+
+                await Navigation.PushAsync(new InvoicePage(invoice));
+            }
+        }
+
+        async void OnFilter(object sender, EventArgs args)
+        {
+            var action = await DisplayActionSheet("Filter By:", "Cancel", null, "All", "New", "Overdue", "Paid", "Unpaid", "Partially Paid");
+            if (action != "Cancel")
+            {
+                filterAction = action;
+            }
+            UpdateListView();
+        }
+
+        //Helper functions
 
         //Creates the source of the list view
         private void GenerateSource()
         {
-            //Oldest most overdue invoices
-            for (int i = 0; i < 3; i++)
+            //Valid invoice openings - based on james individual invoice page
+            invoices.Add(new Invoice
             {
-                invoices.Add(new Invoice
-                {
-                    InvoiceNumber = i,
-                    DateDue = new DateTime(2017, 1, 1 + i),
-                    AmountDue = 1000,
-                    AmountPaid = 0
-                });
-            }
+                InvoiceNumber = 1,
+                DateDue = new DateTime(2017, 04, 14),
+                AmountDue = 9623,
+                AmountPaid = 9623
+            });
+            invoices.Add(new Invoice
+            {
+                InvoiceNumber = 2,
+                DateDue = new DateTime(2018, 05, 03),
+                AmountDue = 48632,
+                AmountPaid = 0
+            });
+            invoices.Add(new Invoice
+            {
+                InvoiceNumber = 3,
+                DateDue = new DateTime(2018, 03, 16),
+                AmountDue = 22231,
+                AmountPaid = 4000
+            });
+            invoices.Add(new Invoice
+            {
+                InvoiceNumber = 4,
+                DateDue = new DateTime(2018, 11, 5),
+                AmountDue = 4310,
+                AmountPaid = 0
+            });
+            //Extra padding
 
             //Oldest fully paid invoices
-            for (int i = 3; i < 6; i++)
+            for (int i = 5; i < 8; i++)
             {
                 invoices.Add(new Invoice
                 {
@@ -62,8 +131,8 @@ namespace prototype2
                 });
             }
 
-            //Old partially paid invoices
-            for (int i = 6; i < 9; i++)
+            //OverDue partially paid invoices
+            for (int i = 8; i < 11; i++)
             {
                 invoices.Add(new Invoice
                 {
@@ -74,8 +143,8 @@ namespace prototype2
                 });
             }
 
-            //Newest
-            for (int i = 9; i < 12; i++)
+            //Newest unpaid invocies
+            for (int i = 11; i < 14; i++)
             {
                 invoices.Add(new Invoice
                 {
@@ -112,9 +181,55 @@ namespace prototype2
 
         }
 
-        ObservableCollection<Invoice> ApplySortAction( ObservableCollection<Invoice> displayList){
-            for (int i = 0; i <= displayList.Count - 1; i++){
-                for (int j = 0; j <= displayList.Count - 1; j++){
+        void GenerateOutstandingBalance()
+        {
+            double total = 0; // Total for all the overdue invoces
+            foreach (Invoice invoice in invoices)
+            {
+                var amountRemaining = invoice.AmountDue - invoice.AmountPaid;
+                if (invoice.DateDue < DateTime.Today && !amountRemaining.Equals(0.0))
+                {
+                    total += amountRemaining;
+                }
+            }
+            OutstandingBalance = total;
+
+            outstandingBalance.Text = "$" + OutstandingBalance.ToString(); // Push to view
+        }
+
+        async void OnSort(object sender, EventArgs args)
+        {
+            var action = await DisplayActionSheet("Sort By:", "Cancel", null,"Invoice Number Asc", "Invoice Number Desc", "Date Due Asc", "Date Due Desc", "Amount Due Asc", "Amount Due Desc", "Amount Paid Asc","Amount Paid Desc");
+            if (action != "Cancel")
+            {
+                sortAction = action;
+            }
+            UpdateListView();
+        }
+
+        String ConfirmationMessageMaker(){
+            String returnMessage = "";
+            foreach(Invoice invoice in invoices){
+                var amountRemaining = invoice.AmountDue - invoice.AmountPaid;
+                if(invoice.DateDue < DateTime.Today && !amountRemaining.Equals(0.0)){
+                    String invoiceMessage = String.Format("Invoice IN0000{0} - Pay: ${1}\n", invoice.InvoiceNumber, amountRemaining);
+                    returnMessage += invoiceMessage;
+                }
+            }
+
+            returnMessage += String.Format("Total: {0}", OutstandingBalance);
+
+            return returnMessage;
+
+
+        }
+
+        ObservableCollection<Invoice> ApplySortAction(ObservableCollection<Invoice> displayList)
+        {
+            for (int i = 0; i <= displayList.Count - 1; i++)
+            {
+                for (int j = 0; j <= displayList.Count - 1; j++)
+                {
                     if (sortAction == "Invoice Number Asc")
                     {
                         if (displayList[i].InvoiceNumber <= displayList[j].InvoiceNumber)
@@ -129,8 +244,10 @@ namespace prototype2
                             displayList.Move(i, j);
                         }
                     }
-                    else if(sortAction == "Date Due Asc"){
-                        if(displayList[i].DateDue <= displayList[j].DateDue){
+                    else if (sortAction == "Date Due Asc")
+                    {
+                        if (displayList[i].DateDue <= displayList[j].DateDue)
+                        {
                             displayList.Move(i, j);
                         }
                     }
@@ -184,7 +301,7 @@ namespace prototype2
                 {
                     displayInvoices.Add(invoice);
                 }
-                else if (action == "No Payments" && amountRemaining.Equals(invoice.AmountDue))
+                else if (action == "Unpaid" && amountRemaining.Equals(invoice.AmountDue))
                 {
                     displayInvoices.Add(invoice);
                 }
@@ -192,7 +309,11 @@ namespace prototype2
                 {
                     displayInvoices.Add(invoice);
                 }
-                else if (action == "Overdue" && invoice.DateDue < DateTime.Today && !amountRemaining.Equals(0.0))
+                else if (action == "Overdue" && invoice.DateDue <= DateTime.Today && !amountRemaining.Equals(0.0))
+                {
+                    displayInvoices.Add(invoice);
+                }
+                else if (action == "New" && invoice.DateDue > DateTime.Today)
                 {
                     displayInvoices.Add(invoice);
                 }
@@ -201,66 +322,6 @@ namespace prototype2
 
             return displayInvoices;
         }
-
-        void GenerateOutstandingBalance()
-        {
-            double total = 0;
-            foreach (Invoice invoice in invoices)
-            {
-                total += invoice.AmountDue - invoice.AmountPaid;
-            }
-            OutstandingBalance = total;
-
-            outstandingBalance.Text = "$" + OutstandingBalance.ToString(); // Push to view
-        }
-
-        //Authorizes the payment of all invoices. Updates the invoices on server
-        async void Payall(object sender, System.EventArgs e)
-        {
-            //Query server to delete all invoices of the user
-            //Generate source again
-
-            var answer = await DisplayAlert("Confirm Payment", "hello", "Confirm", "Cancel");
-            if(answer){
-                foreach(Invoice invoice in invoices){
-                    var amountRemaining = invoice.AmountDue - invoice.AmountPaid;
-                    invoice.AmountPaid += amountRemaining;
-                }
-
-            }
-
-            GenerateOutstandingBalance();
-            UpdateListView();
-        }
-
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
-        {
-            //Open invoice page
-            Invoice selectedInvoice = args.SelectedItem as Invoice;
-
-            await DisplayAlert("Open Invoice IN0000" + selectedInvoice.InvoiceNumber, "Temp. This should open individual invoice page", "OK"); // Replace
-        }
-
-        async void OnFilter(object sender, EventArgs args)
-        {
-            var action = await DisplayActionSheet("Filter By:", "Cancel", null, "All", "Paid", "No Payments", "Partially Paid", "Overdue");
-            if (action != "Cancel")
-            {
-                filterAction = action;
-            }
-            UpdateListView();
-        }
-
-        async void OnSort(object sender, EventArgs args)
-        {
-            var action = await DisplayActionSheet("Sort By:", "Cancel", null,"Invoice Number Asc", "Invoice Number Desc", "Date Due Asc", "Date Due Desc", "Amount Due Asc", "Amount Due Desc", "Amount Paid Asc","Amount Paid Desc");
-            if (action != "Cancel")
-            {
-                sortAction = action;
-            }
-            UpdateListView();
-        }
-
 
     }
 }
