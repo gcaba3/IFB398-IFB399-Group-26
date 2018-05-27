@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="prototype2.LiveStatementPage">
     <ContentPage.Content>
-        <ScrollView>
-            <Grid>
+        <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20*" />
-                    <RowDefinition Height="5*" />
-                    <RowDefinition Height="5*" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="4*" />
 
                 </Grid.RowDefinitions>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0">
                     <Label Text="Outstanding Balance" HorizontalTextAlignment="Center" FontSize="30" />
                     <Label x:Name="outstandingBalance" Text="" HorizontalTextAlignment="Center" FontSize="30" />
-                    <Label Text="Invoices" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" FontSize="30" />
+
                 </StackLayout>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1">
-                    <Button Text= "Pay all" 
+                    <Button Text= "Pay all Unpaid Invoices" 
                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                     Clicked="Payall"></Button>
                 </StackLayout>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50*" />
-                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -40,8 +40,11 @@
                             Clicked="OnSort"></Button>
                         </StackLayout>
                     </Grid>
+                 <Label x:Name="displayedInvoicesTitle" Text="" VerticalOptions="EndAndExpand" HorizontalTextAlignment="Center" FontSize="30" />
                 </StackLayout>
-                <StackLayout Grid.Row="3" VerticalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="3">
+                </StackLayout>
+                <StackLayout Grid.Row="4" VerticalOptions="FillAndExpand">
                     <ListView x:Name="invoiceList" HasUnevenRows="false" RowHeight="60" ItemSelected="OnItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -79,6 +82,5 @@
                     </ListView>
                 </StackLayout>
             </Grid>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

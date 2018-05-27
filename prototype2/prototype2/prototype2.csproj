@@ -50,9 +50,6 @@
     <EmbeddedResource Include="Account\LiveStatementPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Account\PaymentHistoryPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -115,9 +112,6 @@
     </Compile>
     <Compile Include="Account\LiveStatementPage.xaml.cs">
       <DependentUpon>LiveStatementPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Account\PaymentHistoryPage.xaml.cs">
-      <DependentUpon>PaymentHistoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyOrders\QuoteIncompletePage.cs" />
     <Compile Include="MyOrders\QuotePage.cs" />

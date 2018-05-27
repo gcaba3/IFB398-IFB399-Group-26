@@ -11,7 +11,7 @@ namespace prototype2
     public class Invoice : SalesDocument
     {        
         public int InvoiceNumber { get; set; }
-        public DateTime DatePaid { get; set; }
+        public DateTime DateIssued { get; set; }
         public DateTime DateDue { get; set; }
         public double AmountDue { get; set; }
         public double AmountPaid { get; set; }
