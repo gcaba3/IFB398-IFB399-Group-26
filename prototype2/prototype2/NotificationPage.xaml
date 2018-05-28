@@ -27,8 +27,7 @@
                         <ColumnDefinition Width="20*" />
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Text="Sort" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Sort"/>
-                    <SearchBar x:Name="searchQuery" Grid.Column="1" HorizontalTextAlignment="Start" Placeholder="Search here..." HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                    <Button Grid.Column="2" Text="Go" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="Search"/>
+                    <SearchBar x:Name="searchQuery" Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" Placeholder="Search here..." HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" TextChanged="Search"/>
                 </Grid>
                 <ListView Grid.Row="2" VerticalOptions="FillAndExpand" x:Name="notificationList" HasUnevenRows="false" RowHeight="120" ItemSelected="OnItemSelected" >
                     <ListView.ItemTemplate >

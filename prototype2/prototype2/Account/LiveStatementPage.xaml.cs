@@ -83,6 +83,16 @@ namespace prototype2
             UpdateListView();
         }
 
+        async void OnSort(object sender, EventArgs args)
+        {
+            var action = await DisplayActionSheet("Sort By:", "Cancel", null, "Invoice Number Asc", "Invoice Number Desc", "Date Due Asc", "Date Due Desc", "Amount Due Asc", "Amount Due Desc", "Amount Paid Asc", "Amount Paid Desc");
+            if (action != "Cancel")
+            {
+                sortAction = action;
+            }
+            UpdateListView();
+        }
+
         //Helper functions
 
         //Creates the source of the list view
@@ -197,15 +207,7 @@ namespace prototype2
             outstandingBalance.Text = "$" + OutstandingBalance.ToString(); // Push to view
         }
 
-        async void OnSort(object sender, EventArgs args)
-        {
-            var action = await DisplayActionSheet("Sort By:", "Cancel", null,"Invoice Number Asc", "Invoice Number Desc", "Date Due Asc", "Date Due Desc", "Amount Due Asc", "Amount Due Desc", "Amount Paid Asc","Amount Paid Desc");
-            if (action != "Cancel")
-            {
-                sortAction = action;
-            }
-            UpdateListView();
-        }
+
 
         String ConfirmationMessageMaker(){
             String returnMessage = "";
