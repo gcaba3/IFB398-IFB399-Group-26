@@ -13,37 +13,62 @@ using System.Diagnostics;
 
 namespace prototype2.Classes
 {
-    public class Test{
-        public string _id { get; set; }
-        public int userId { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public int __v { get; set; }
-    }
+
     static class Connection
     {
         static HttpClient client = new HttpClient();
+        public static void SetDestination(String path){
+            client.BaseAddress = new Uri(path);
+        }
 
-        public static async Task<List<Test>> GetTest(){
-            List<Test> tests = null;
+        public static async Task<bool> IsConnected(){
             try{
                 HttpResponseMessage responseMessage = await client.GetAsync("login");
-                tests = JsonConvert.DeserializeObject<List<Test>>(await responseMessage.Content.ReadAsStringAsync());
-                return tests;
+                return true;
+            }catch(Exception e){
+                return false;
+                throw new Exception("Could not connect to server", e);
+            }
+
+
+        }
+
+        public static async Task<int> Login(String username, String password)
+        {
+
+            try{
+                String target = String.Format("login/{0}/{1}", username, password);
+                var response= await client.GetStringAsync(target);
+                Login login = JsonConvert.DeserializeObject<Login>(response);
+                return login.userId;
+
+            }
+            catch (HttpRequestException e){
+                throw new Exception("Invalid Login.", e);
             }
             catch (Exception exc)
             {
-                throw new Exception(exc.Message);
+                throw new Exception("Internal App Error", exc);
             }
-
         }
 
-        public static void ShowTest(Test test){
-            Debug.WriteLine("Successful connection: " + test._id);
-        }
-
-        public static void SetDestination(String path){
-            client.BaseAddress = new Uri(path);
+        public static async Task<User> GetUser(int userId)
+        {
+            try
+            {
+                String target = String.Format("user/{0}", userId);
+                var response = await client.GetStringAsync(target);
+                User user = JsonConvert.DeserializeObject<User>(response);
+                return user;
+            }
+            catch (HttpRequestException e)
+            {
+                throw new Exception("Invalid UserId", e);
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("Internal App Error", exc);
+            }
         }
 
 

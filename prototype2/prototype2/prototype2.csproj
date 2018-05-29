@@ -133,6 +133,7 @@
     <Compile Include="Classes\Connection.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\Notification.cs" />
+    <Compile Include="Classes\Login.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

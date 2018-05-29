@@ -20,8 +20,7 @@ namespace prototype2
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Address { get; set; }
-            public bool HasCreditCard { get; set; }
-            public bool HasPaypal { get; set; }
+            public string[] Payments { get; set; }
         }
 
 
@@ -30,7 +29,6 @@ namespace prototype2
             InitializeComponent();
 
             MainPage = new NavigationPage(new LoginPage());
-            //MainPage = new NavigationPage(new AccountPage());
         }
 
         protected override void OnStart()

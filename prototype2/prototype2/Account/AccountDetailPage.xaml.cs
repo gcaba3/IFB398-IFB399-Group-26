@@ -13,7 +13,6 @@ namespace prototype2
             InitializeComponent();
             this.Title = "Account Details";
 
-            connect();
 
             //Display profile photo
             customerPhoto.Source = App.User.Default.ProfilePhoto;
@@ -25,42 +24,12 @@ namespace prototype2
             customerPassword.Text = App.User.Default.Password;
             customerAddress.Text = App.User.Default.Address;
 
-            if (App.User.Default.HasCreditCard)
-            {
-                creditCard.Text = "valid";
-            }
-            else
-            {
-                creditCard.Text = "invalid";
-            }
-
-            if (App.User.Default.HasPaypal)
-            {
-                paypal.Text = "valid";
-            }
-            else
-            {
-                paypal.Text = "invalid";
+            foreach(String payment in App.User.Default.Payments){
+                var label = new Label { Text = payment, TextColor=Color.Black };
+                paymentOptions.Children.Add(label);
             }
         }
 
-        async private void connect(){
-            try{
-                Connection.SetDestination("https://supply-partners-capstone.willdooit.net:8443/");
-                List<Test> tests = await Connection.GetTest();
 
-                foreach (Test test in tests){
-                    Connection.ShowTest(test);
-                }
-
-            } catch (Exception exc){
-                await DisplayAlert(exc.GetBaseException().ToString(), exc.Message, "ok");
-            }
-
-
-
-        }
-
-        //Note* Write validation functions e.g. passwords should only contain '*' characters.
     }
 }
