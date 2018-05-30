@@ -4,11 +4,11 @@
              xmlns:control="clr-namespace:prototype2;"
              x:Class="prototype2.SupportPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
+        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" Clicked="Clicked_BtnSearchTool"/>
         <ToolbarItem Text="Search" Priority="1" Order="Primary" Icon="ic_notifications_white_24dp.png" Clicked="Handle_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
+        <Grid x:Name="gridPageContent" ColumnSpacing="0" RowSpacing="0" Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="80*"/>

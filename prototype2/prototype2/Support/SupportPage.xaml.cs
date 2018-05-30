@@ -14,12 +14,15 @@ namespace prototype2
     public partial class SupportPage : ContentPage
     {
         public List<Ticket> ticketlist;
+        SearchGrid gridSearchGrid;
         public SupportPage()
         {
             InitializeComponent();
             Title = "Support";
             NavigationPage.SetHasBackButton(this, false);
             NavigationBar.ChangeSupportTabColor();
+            gridSearchGrid = new SearchGrid();
+            gridPageContent.Children.Add(gridSearchGrid, 0, 1, 0, 3);
             ticketlist = Data.tickets;
             //this.Appearing += OnResume;
 
@@ -157,6 +160,10 @@ namespace prototype2
         {
             NotificationPage notificationPage = new NotificationPage();
             await Navigation.PushAsync(notificationPage);
+        }
+        private void Clicked_BtnSearchTool(object sender, EventArgs eventArgs)
+        {
+            gridSearchGrid.Clicked_ButtonSearchTool();
         }
     }
 }

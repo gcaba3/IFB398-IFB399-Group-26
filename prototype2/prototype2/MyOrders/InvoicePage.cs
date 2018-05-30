@@ -127,7 +127,6 @@ namespace prototype2
             {
                 invoice.Status = InvoiceStatus.Paid;
                 invoice.AmountPaid = invoice.TotalPrice;
-                invoice.DatePaid = DateTime.Now;
 
                 PopPageReturnToMyOrders();
             }
