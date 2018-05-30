@@ -6,36 +6,39 @@
     <ContentPage.Content>
         <Grid ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
-                <!--<RowDefinition Height="5*"/>-->
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="25*"/>
             </Grid.RowDefinitions>
 
             <!--Top Row-->
-            <Grid Grid.Row="0" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <!--Picture-->
-                <Image Grid.Column="0" x:Name="Picture" />
-                <!--Info-->
-                <Grid Grid.Column="1" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Label Grid.Row="0" x:Name="Name" />
-                    <Label Grid.Row="1" x:Name="Description" />
-                </Grid>
-                <!--Price-->
-                <Label Grid.Column="2" x:Name="Price" />
+            <Grid Grid.Row="0" ColumnSpacing="0" RowSpacing="0" Margin="0" >
+                <!--Title-->
+                <Label x:Name="Title" />
             </Grid>
 
             <!--2nd row-->
-            <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Label Grid.Column="0" x:Name="Address" />
-                <Label Grid.Column="1" x:Name="Date" />
+            <Grid Grid.Row="1" ColumnSpacing="0" RowSpacing="0" Margin="0" >
+                <Grid Grid.Column="0" ColumnSpacing="0" RowSpacing="0" Margin="0">
+                    <Label Grid.Row="0" Grid.Column="0" Text="Posted on: " />
+                    <Label Grid.Row="1" Grid.Column="0" Text="Sent to: " />
+                    <Label Grid.Row="0" Grid.Column="1" x:Name="PostedDate" />
+                    <Label Grid.Row="1" Grid.Column="1" x:Name="SentTo" />
+                </Grid>
+                <Label Grid.Column="1" x:Name="State" BackgroundColor="SkyBlue" Text="state" ClassId = "eventState" />
+
             </Grid>
 
             <!--3rd row-->
-            <Grid Grid.Row="2" ColumnSpacing="0" RowSpacing="0" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Label Grid.Column="0" Text="Number of Tickets" />
-                <Entry Grid.Column="1" x:Name="NumTicketsEntry" Keyboard="Numeric" Placeholder="Enter Number Here" />
+            <Grid Grid.Row="2" Margin="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <ScrollView>
+                    <Grid x:Name="messagesContainer" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Grid>
+                </ScrollView>
             </Grid>
 
-            <!--payment button-->
-            <Button Grid.Row="3" Text="Proceed to Payment"  />
+            <!--new message-->
+            <Button Grid.Row="3" HorizontalOptions="CenterAndExpand" Text="Send a new message" Clicked="SendMessage"  />
 
 
         </Grid>

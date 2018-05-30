@@ -10,7 +10,7 @@ namespace prototype2
         public IndividualNotificationPage(String title, DateTime date, String message)
         {
             InitializeComponent();
-            this.Title = "Notification " + title;
+            this.Title = title;
             this.postedDate.Text = "Posted on " + date.ToString("dd/MM/yyyy");
             this.Message.Text =  message;
         }

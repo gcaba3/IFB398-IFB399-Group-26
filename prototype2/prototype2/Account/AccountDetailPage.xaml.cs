@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using prototype2.Classes;
 using Xamarin.Forms;
 
 namespace prototype2
@@ -12,6 +13,7 @@ namespace prototype2
             InitializeComponent();
             this.Title = "Account Details";
 
+
             //Display profile photo
             customerPhoto.Source = App.User.Default.ProfilePhoto;
 
@@ -22,25 +24,12 @@ namespace prototype2
             customerPassword.Text = App.User.Default.Password;
             customerAddress.Text = App.User.Default.Address;
 
-            if (App.User.Default.HasCreditCard)
-            {
-                creditCard.Text = "valid";
-            }
-            else
-            {
-                creditCard.Text = "invalid";
-            }
-
-            if (App.User.Default.HasPaypal)
-            {
-                paypal.Text = "valid";
-            }
-            else
-            {
-                paypal.Text = "invalid";
+            foreach(String payment in App.User.Default.Payments){
+                var label = new Label { Text = payment, TextColor=Color.Black };
+                paymentOptions.Children.Add(label);
             }
         }
 
-        //Note* Write validation functions e.g. passwords should only contain '*' characters.
+
     }
 }

@@ -28,6 +28,8 @@ namespace prototype2
         private void fillData()
         {
             //picture
+
+            Picture.Source = "http://supplypartners.com.au/files/uploads/2015/10/2018_MASTERCLASS_LOGO-150x150@2x.png";
             //name
             Name.Text = thisEvent.Name;
             //description

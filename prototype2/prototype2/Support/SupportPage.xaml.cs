@@ -13,23 +13,36 @@ namespace prototype2
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SupportPage : ContentPage
     {
-        private List<Ticket> ticketlist;
+        public List<Ticket> ticketlist;
         public SupportPage()
         {
             InitializeComponent();
             Title = "Support";
             NavigationPage.SetHasBackButton(this, false);
             NavigationBar.ChangeSupportTabColor();
-
-            ticketlist = new List<Ticket>();
+            ticketlist = Data.tickets;
+            //this.Appearing += OnResume;
 
             //generate test data
-            for (int i = 0; i < 10; i++)
+            if (ticketlist.Count() < 1) 
             {
+                for (int i = 0; i < 3; i++)
+                {
+                    Ticket newticket = new Ticket();
+                    newticket.Title = "title" + i.ToString();
+                    newticket.Date = DateTime.Now.ToString("d");
+                    newticket.Messages = new List<string>();
+                    newticket.Messages.Add("message" + i.ToString());
+                    newticket.Number = i;
+                    newticket.State = "in process";
+                    newticket.SentTo = "Technical Support";
+                    ticketlist.Add(newticket);
+                }
             }
             updateTickets();
-        }
 
+            
+        }
 
 
         public void updateTickets()
@@ -39,20 +52,20 @@ namespace prototype2
             {
                 stackLayoutMain.Children.RemoveAt(0);
             }
-
+            stackLayoutMain.Children.Clear();
             //display list on screen
             for (int i = 0; i < ticketlist.Count; i++)
             {
-                addEventToList(ticketlist[i].Title,
+                addTicketToList(ticketlist[i].Title,
                                (ticketlist[i].Date),
-                               (ticketlist[i].Messages),
+                               (ticketlist[i].Messages[0]),
                                (ticketlist[i].Number.ToString("#00000")),
                                (ticketlist[i].State)
                                );
             }
         }
 
-        public void addEventToList(string name, string date, string description, string price, string state)
+        public void addTicketToList(string title, string date, string message, string number, string state)
         {
 
             var eventGrid = new Grid
@@ -66,15 +79,15 @@ namespace prototype2
                 ColumnDefinitions =
                 {
                     new ColumnDefinition { Width = new GridLength(70, GridUnitType.Star)},
-                    new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star)},
-                    new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star)}
+                    new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star)},
+                    new ColumnDefinition { Width = new GridLength(30, GridUnitType.Star)}
                 },
             };
 
             eventGrid.Children.Add(new Label
             {
                 ClassId = "name",
-                Text = name,
+                Text = title,
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
 
@@ -90,7 +103,7 @@ namespace prototype2
 
             eventGrid.Children.Add(new Label
             {
-                Text = description,
+                Text = message,
                 FontSize = 10,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Start,
@@ -99,7 +112,7 @@ namespace prototype2
 
             eventGrid.Children.Add(new Label
             {
-                Text = "$" + price,
+                Text = number,
                 FontSize = 10,
                 VerticalOptions = LayoutOptions.Center,
             }, 1, 0);
@@ -137,6 +150,7 @@ namespace prototype2
         public void NewTicket(object sender, EventArgs args)
         {
             Navigation.PushAsync(new CreateTicket());
+            updateTickets();
         }
 
         async void Handle_Clicked(object sender, System.EventArgs e)

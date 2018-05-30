@@ -50,9 +50,6 @@
     <EmbeddedResource Include="Account\LiveStatementPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Account\PaymentHistoryPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -120,9 +117,6 @@
     <Compile Include="Account\LiveStatementPage.xaml.cs">
       <DependentUpon>LiveStatementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Account\PaymentHistoryPage.xaml.cs">
-      <DependentUpon>PaymentHistoryPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MyOrders\QuoteIncompletePage.cs" />
     <Compile Include="MyOrders\QuotePage.cs" />
     <Compile Include="MyOrders\QuotePendingResponsePage.cs" />
@@ -146,12 +140,19 @@
     <Compile Include="Support\CreateTicket.xaml.cs">
       <DependentUpon>CreateTicket.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Support\SendMessagePopup.xaml.cs">
+      <DependentUpon>SendMessagePopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Support\SupportPage.xaml.cs">
       <DependentUpon>SupportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Support\TicketSingle.xaml.cs">
       <DependentUpon>TicketSingle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Connection.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\Notification.cs" />
+    <Compile Include="Classes\Login.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -268,6 +269,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FilterGridProducts.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Support\SendMessagePopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
