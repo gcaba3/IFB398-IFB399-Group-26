@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using prototype2.Classes;
 
 namespace prototype2
 {
@@ -12,12 +13,16 @@ namespace prototype2
         public static List<Product> favourites;
         public static List<Quote> quotes;
         public static Quote newQuote;
+
+        public static List<Ticket> tickets;
+
         public static List<Order> orders;
         public static List<Invoice> invoices;
         public static int numSalesOrders, numInvoices; // just used to make up document numbers for now
 
         public static void InitializeData()
-        {
+        {   
+            tickets = new List<Ticket>();
             products = new List<Product>();
             favourites = new List<Product>();
             quotes = new List<Quote>();

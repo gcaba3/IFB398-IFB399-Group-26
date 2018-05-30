@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using prototype2.Classes;
+using static prototype2.NavigationBar;
 
 namespace prototype2
 {
@@ -22,15 +23,16 @@ namespace prototype2
         {
 
             Ticket newTicket = new Ticket();
-            newTicket.Title = "Title"; // + ticketList.length + 1;
+            newTicket.Title = Subject.Text;
             newTicket.Date = DateTime.Now.ToString("d");
-            newTicket.Messages = Message.Text;
-            newTicket.Number = 1; //ticketList.length + 1;
-            newTicket.State = "In Process";
-            App.Current.MainPage.DisplayAlert("Clicked!", "Submission Not implemented.", "OK");
-            //ticketList.add(newTicket);
-            //return newTicket;
-            Navigation.PopAsync();
+            newTicket.Messages = new List<string>();
+            newTicket.Messages.Add("Client:"+ Message.Text);
+            newTicket.Number = Data.tickets.Count();
+            newTicket.State = TicketStatus.InProgress;
+            newTicket.SentTo = "Technical Support";
+            Data.tickets.Add(newTicket);
+
+            Navigation.PushAsync(new AccountPage(Tab.Support));
 
         }
 

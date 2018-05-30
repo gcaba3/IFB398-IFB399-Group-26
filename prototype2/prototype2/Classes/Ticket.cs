@@ -18,7 +18,7 @@ namespace prototype2.Classes
         public int Number { get; set; }
         public string Date { get; set; }
         public string SentTo { get; set; }
-        public string Messages { get; set; }
+        public List<string> Messages { get; set; }
         public string State { get; set; }
     }
 }
