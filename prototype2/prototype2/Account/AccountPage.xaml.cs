@@ -58,6 +58,36 @@ namespace prototype2
             helloUser.Text = "Hello " + App.User.Default.Username + "!";
         }
 
+        public AccountPage(List<int> searchSuggestions)
+        {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+
+
+            Detail = new NavigationPage(new ProductsPage(searchSuggestions));
+            IsPresented = false;
+        }
+
+        public AccountPage(Product searchedProduct)
+        {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+
+
+            Detail = new NavigationPage(new ProductsPage(searchedProduct));
+            IsPresented = false;
+        }
+
+        public AccountPage(string searchedCategory)
+        {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+
+
+            Detail = new NavigationPage(new ProductsPage(searchedCategory));
+            IsPresented = false;
+        }
+
         async void OpenPage(object sender, System.EventArgs e)
         {
             Button PageSubpages = (Button)sender;

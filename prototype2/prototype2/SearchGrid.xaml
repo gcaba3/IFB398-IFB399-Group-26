@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="prototype2.SearchGrid"
+            xmlns:control="clr-namespace:prototype2"
+      
+      RowSpacing="0"
+      Opacity="0"
+      InputTransparent="True">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <BoxView Grid.Row="0" Grid.RowSpan="5" x:Name="boxSearchBackground" BackgroundColor="Black" Opacity="0.5">
+        <BoxView.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnBoxViewGestureRecognizerTapped"/>
+        </BoxView.GestureRecognizers>
+    </BoxView>
+
+    <StackLayout Grid.Row="0" Spacing="0">
+
+        <Grid x:Name="gridSearchBar" BackgroundColor="{StaticResource SPBlue}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+        
+            <!--SearchBarProducts control added here programmatically-->
+        </Grid>
+
+        <control:SearchSuggestionsStack x:Name="stackSearch"></control:SearchSuggestionsStack>
+
+    </StackLayout>
+</Grid>

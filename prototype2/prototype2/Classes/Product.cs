@@ -8,6 +8,8 @@ namespace prototype2
 {
     public class Product
     {
+        public static List<string> categories = new List<string>(){ "Solar Panel", "Solar Inverter", "Solar Mounting", "Energy Storage System", "Battery", "Zero Export Solutions" };
+
         public string Description { get; set; }
         //public string code { get; set; }
         public string Category { get; set; }

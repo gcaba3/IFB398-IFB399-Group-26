@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="prototype2.MyOrders.OrderAddressView">
+
+    <StackLayout.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelAddressFormStyle"
+                   TargetType="Label">
+                <Setter Property="HorizontalOptions"
+                Value="Start"/>
+                <Setter Property="Margin"
+                        Value="4,0,0,0"/>
+                <Setter Property="TextColor"
+                        Value="DarkSlateGray"/>
+                <Setter Property="FontSize"
+                        Value="12"/>
+            </Style>
+        </ResourceDictionary>
+    </StackLayout.Resources>
+
+
+    <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Black" Padding="2">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+
+            <!--Address drop down start-->
+            <Grid>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="46*"/>
+                        <ColumnDefinition Width="46*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Label x:Name="labelAddressTitle" LineBreakMode="NoWrap" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" FontSize="Medium" FontAttributes="Bold" TextColor="Black" Margin="4"/>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End" Text="View/Change" FontSize="Medium" TextColor="Blue" Margin="4"/>
+                    <Image Grid.Row="0" Grid.Column="2" Source="drop_down_arrow.png" Margin="4" x:Name="imageArrow"/>
+                    <Label x:Name="labelPickerAddress" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Start" Margin="4"/>                
+
+                    <Button x:Name="btnDropDown" Clicked="Clicked_DropDown"
+                            Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" BackgroundColor="Transparent"/>
+
+                    <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="End" VerticalOptions="End">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="25*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label HorizontalOptions="End" VerticalOptions="Center" TextColor="Black" Text="Confirm" Grid.Column="0"/>
+                        <Button Clicked="Clicked_DropDown"
+                            Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Transparent"/>
+                        <Button HorizontalOptions="End" x:Name="btnCheckBox"  Image="blank_check_box.png" Grid.Column="1"
+                                Clicked="Clicked_BtnCheckBox" BackgroundColor="Transparent" BorderColor="Transparent" Margin="0,0,4,0"/>                        
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+
+            <BoxView HorizontalOptions="FillAndExpand" BackgroundColor="Black" HeightRequest="2"/>
+
+            <StackLayout x:Name="stackAddress" IsVisible="False">
+
+                <Label x:Name="labelAddressDirections" Text="Select or add a new address" Style="{StaticResource LabelAddressFormStyle}"/>
+
+
+                <Frame BackgroundColor="Black" Padding="2" Margin="5">
+                    <Grid Grid.Column="1" BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Clicked_GridAddressPicker"/>
+                        </Grid.GestureRecognizers>
+
+                        <Picker x:Name="pickerAddress" Grid.Column="0"
+                                    SelectedIndexChanged="SelectedIndexChanged_AddressPicker"
+                                    Title="Select an Address"/>
+                        <Image
+                                Grid.Column="1"
+                                Source="down_arrow.png"
+                                InputTransparent="True"
+                                Margin="4"
+                                VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <Label Text="Name" Style="{StaticResource LabelAddressFormStyle}"/>
+                <Entry x:Name="entryName" HorizontalOptions="FillAndExpand"/>
+                
+                <Label Text="Phone" Style="{StaticResource LabelAddressFormStyle}"/>
+                <Entry x:Name="entryPhoneNumber" HorizontalOptions="FillAndExpand"/>     
+                
+                <Label Text="Email" Style="{StaticResource LabelAddressFormStyle}"/>
+                <Entry x:Name="entryEmail" HorizontalOptions="FillAndExpand"/>
+
+                <Label Text="Street and Number" Style="{StaticResource LabelAddressFormStyle}"/>
+                <Entry x:Name="entryStreetAndNumber" HorizontalOptions="FillAndExpand"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand">
+                        <Label Text="City" Style="{StaticResource LabelAddressFormStyle}"/>
+                        <Entry x:Name="entryCity" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand">
+                        <Label Text="Post Code" Style="{StaticResource LabelAddressFormStyle}"/>
+                        <Entry x:Name="entryPostCode" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout HorizontalOptions="FillAndExpand" Grid.Column="0">
+                        <Label x:Name="labelState" Text="State" Style="{StaticResource LabelAddressFormStyle}"/>
+                        <Entry x:Name="entryState" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" Grid.Column="1">
+                        <Label x:Name="labelCountry" Text="Country" Style="{StaticResource LabelAddressFormStyle}"/>
+                        <Entry x:Name="entryCountry" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+
+                </Grid>
+                
+
+            </StackLayout>
+            <!--Address drop down end-->
+
+        </StackLayout>
+    </Frame>
+</StackLayout>

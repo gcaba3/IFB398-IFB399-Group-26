@@ -11,27 +11,33 @@ namespace prototype2
     {
         private ColumnDefinitionCollection productDetailsColumnDefinitions;
         private EditQuotePopup editQuotePopup;
-        private BoxView boxBackground;
+        private MyOrders.OrderAddressView billingAddressView, deliveryAddressView;
         public QuoteIncompletePage(Quote quote) : base(quote)
         {
+            AddBillingAddressOptions();
+            AddDeliveryAddressOptions();
+
             SetUpEditQuotePopup();
-        }        
+        }
+
+        private void AddBillingAddressOptions()
+        {
+            billingAddressView = new MyOrders.OrderAddressView(scrollviewPage, Data.billingAddresses, MyOrders.AddressType.BillingAddress, "Billing Address");
+            billingAddressView.DisplayAlertInvalidAddress += DisplayAlertInvalidAddressEvent;
+            stackDocumentControls.Children.Add(billingAddressView);
+        }
+
+        private void AddDeliveryAddressOptions()
+        {
+            deliveryAddressView = new MyOrders.OrderAddressView(scrollviewPage, Data.deliveryAddresses, MyOrders.AddressType.DeliveryAddress, "Delivery Address");
+            stackDocumentControls.Children.Add(deliveryAddressView);
+        }
 
         private void SetUpEditQuotePopup()
         {
             editQuotePopup = new EditQuotePopup();
-            boxBackground = new BoxView
-            {
-                Color = Color.Black,
-                Opacity = 0,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                IsVisible = false,
-            };
 
             editQuotePopup.SetEditQuotePopupChange("");
-
-            salesDocumentPageGrid.Children.Add(boxBackground, 0, 0);
             salesDocumentPageGrid.Children.Add(editQuotePopup, 0, 0);
             
             editQuotePopup.OnCancelButtonClicked += OnCancelButtonClickedEvent;
@@ -113,7 +119,7 @@ namespace prototype2
             Button button = (Button)sender;
             Product product = Data.GetProductFromId(button.ClassId);
             PrepareEditQuotePopup(product);
-            editQuotePopup.ToggleAddToQuotePopup(boxBackground);
+            editQuotePopup.ToggleAddToQuotePopup();
         }
 
         private void PrepareEditQuotePopup(Product product)
@@ -125,7 +131,7 @@ namespace prototype2
 
         private void OnCancelButtonClickedEvent()
         {
-            editQuotePopup.ToggleAddToQuotePopup(boxBackground);
+            editQuotePopup.ToggleAddToQuotePopup();
         }
 
         private void OnRemoveButtonClickedEvent(string productId)
@@ -137,7 +143,7 @@ namespace prototype2
             else
             {
                 RemoveProductFromQuoteStack(productId);
-                editQuotePopup.ToggleAddToQuotePopup(boxBackground);
+                editQuotePopup.ToggleAddToQuotePopup();
                 UpdatePriceLabels();
                 UpdateDateLabel();
             }            
@@ -146,6 +152,7 @@ namespace prototype2
         private void DeleteQuote()
         {
             Data.CreateFreshQuote();
+            PopPageReturnToMyOrders();
         }
 
         protected override void UpdateDateLabel()
@@ -186,7 +193,7 @@ namespace prototype2
                     UpdatePriceLabels();
                 }
 
-            editQuotePopup.ToggleAddToQuotePopup(boxBackground);
+            editQuotePopup.ToggleAddToQuotePopup();
         }
 
         private void UpdateProductNetPrice(Product product, int quantity, Label netPriceLabel)
@@ -230,8 +237,30 @@ namespace prototype2
 
         private void Clicked_btnValidate(object sender, EventArgs eventArgs)
         {
-            AddNewQuoteToList();            
-            PopPageReturnToMyOrders();
+            ValidateAddresses();            
+        }
+
+        private void ValidateAddresses()
+        {
+            if (billingAddressView.CheckBoxChecked() && deliveryAddressView.CheckBoxChecked())
+            {
+                AddNewQuoteToList();
+                PopPageReturnToMyOrders();
+            }
+            else
+            {
+                DisplayAlertNotConfirmed();
+            }
+        }
+
+        private async void DisplayAlertNotConfirmed()
+        {
+            await DisplayAlert("", "Please check both the billing and delivery address checkboxes first", "OK");
+        }
+
+        private async void DisplayAlertInvalidAddressEvent()
+        {
+            await DisplayAlert("Invalid Address", "No address field can be blank", "OK");
         }
 
         private void AddNewQuoteToList()

@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace prototype2
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EditQuotePopup : Frame
+    public partial class EditQuotePopup : Grid
     {
         public bool newProduct;
         public EditQuotePopup()
@@ -24,8 +24,8 @@ namespace prototype2
 
         private void SetUpPopup()
         {
-            gridEditQuotePopup.ScaleTo(0.5, 0, Easing.Linear);
-            this.ScaleTo(0.5, 0, Easing.Linear);
+            //gridEditQuotePopup.ScaleTo(0.5, 0, Easing.Linear);
+            framePopup.ScaleTo(0.5, 0, Easing.Linear);
         }        
 
         public void SetLabelProductName(string productName)
@@ -112,49 +112,38 @@ namespace prototype2
             }
         }
 
-        public void ToggleAddToQuotePopup(BoxView backgroundBox)
+        public void ToggleAddToQuotePopup()
         {
-            if (gridEditQuotePopup.IsVisible)
-                AnimatePopupOn(backgroundBox);
+            if (IsVisible)
+                AnimatePopupOn();
             else
             {
-                AnimatePopupOff(backgroundBox);
+                AnimatePopupOff();
                 EnableButtons();
             }
                 
         }
 
-        private async void AnimatePopupOn(BoxView backgroundBox)
+        private async void AnimatePopupOn()
         {
             await Task.WhenAll(
-                gridEditQuotePopup.ScaleTo(0.5, 250, Easing.Linear),
-                gridEditQuotePopup.FadeTo(0, 250, Easing.Linear),
-                this.ScaleTo(0.5, 250, Easing.Linear),
-                this.FadeTo(0, 250, Easing.Linear),
-                backgroundBox.FadeTo(0, 250, Easing.Linear)
+                framePopup.ScaleTo(0.5, 250, Easing.Linear),
+                framePopup.FadeTo(0, 250, Easing.Linear),
+                boxBackground.FadeTo(0, 250, Easing.Linear)
                 );
 
-            ToggleAddToQuotePopupVisibilities(backgroundBox);
+            IsVisible = false;
         }
 
-        private async void AnimatePopupOff(BoxView backgroundBox)
+        private async void AnimatePopupOff()
         {
-            ToggleAddToQuotePopupVisibilities(backgroundBox);
+            IsVisible = true;
 
             await Task.WhenAll(
-                gridEditQuotePopup.ScaleTo(1, 250, Easing.Linear),
-                gridEditQuotePopup.FadeTo(1, 250, Easing.Linear),
-                this.ScaleTo(1, 250, Easing.Linear),
-                this.FadeTo(1, 250, Easing.Linear),
-                backgroundBox.FadeTo(0.5, 250, Easing.Linear)
+                framePopup.ScaleTo(1, 250, Easing.Linear),
+                framePopup.FadeTo(1, 250, Easing.Linear),
+                boxBackground.FadeTo(0.5, 250, Easing.Linear)
                 );
-        }
-
-        private void ToggleAddToQuotePopupVisibilities(BoxView backgroundBox)
-        {
-            gridEditQuotePopup.IsVisible = !gridEditQuotePopup.IsVisible;
-            this.IsVisible = !this.IsVisible;
-            backgroundBox.IsVisible = !backgroundBox.IsVisible;
         }
 
         public bool IsInteger(string input)
@@ -196,6 +185,10 @@ namespace prototype2
                 btnConfirm.IsEnabled = false;
                 btnConfirm.BackgroundColor = Color.Default;
             }
+        }
+        private void OnBoxViewGestureRecognizerTapped(object sender, EventArgs eventArgs)
+        {
+            ToggleAddToQuotePopup();
         }
     }
 }

@@ -11,19 +11,8 @@ namespace prototype2
     {
         public QuoteValidatedPage(Quote quote) : base(quote)
         {
-            AddBillingAddressOptions();
-            AddShippingAddressOptions();
-        }
-
-        private void AddBillingAddressOptions()
-        {
-            stackDocumentControls.Children.Add(new MyOrders.BillingAddressView());
-        }
-
-        private void AddShippingAddressOptions()
-        {
-
-        }
+            
+        }        
 
         protected override void AddDocumentControls()
         {

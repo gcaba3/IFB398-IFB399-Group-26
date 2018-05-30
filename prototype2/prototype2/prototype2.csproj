@@ -58,6 +58,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Event.cs" />
     <Compile Include="Classes\Order.cs" />
     <Compile Include="Classes\Product.cs" />
@@ -71,8 +72,11 @@
     <Compile Include="EventPages\EventSingle.xaml.cs">
       <DependentUpon>EventSingle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyOrders\BillingAddressView.xaml.cs">
-      <DependentUpon>BillingAddressView.xaml</DependentUpon>
+    <Compile Include="FilterGridProducts.xaml.cs">
+      <DependentUpon>FilterGridProducts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyOrders\OrderAddressView.xaml.cs">
+      <DependentUpon>OrderAddressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyOrders\InvoicePage.cs" />
     <Compile Include="MyOrders\MyOrdersPage.xaml.cs">
@@ -127,6 +131,18 @@
     </Compile>
     <Compile Include="MyOrders\QuoteValidatedPage.cs" />
     <Compile Include="MyOrders\QuoteOrderPlacedPage.cs" />
+    <Compile Include="SearchBarProducts.xaml.cs">
+      <DependentUpon>SearchBarProducts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchBarProductsPage.cs" />
+    <Compile Include="SearchBarProductsTool.cs" />
+    <Compile Include="SearchGrid.xaml.cs">
+      <DependentUpon>SearchGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchSuggestionsStack.xaml.cs">
+      <DependentUpon>SearchSuggestionsStack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchSuggestionsStackProductsPage.cs" />
     <Compile Include="Support\CreateTicket.xaml.cs">
       <DependentUpon>CreateTicket.xaml</DependentUpon>
     </Compile>
@@ -227,7 +243,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyOrders\BillingAddressView.xaml">
+    <EmbeddedResource Include="MyOrders\OrderAddressView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SearchGrid.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SearchSuggestionsStack.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SearchBarProducts.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FilterGridProducts.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Grid
+    xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:control="clr-namespace:prototype2"
+        x:Class="prototype2.FilterGridProducts"
+    VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+    IsVisible="False">    
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+
+        <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3"
+        x:Name="boxBackgroundFilters" Opacity="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+            BackgroundColor="Black">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer
+                Tapped="OnBoxViewGestureRecognizerTapped"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Frame Padding="0" Grid.Row="1" Grid.Column="1"
+        x:Name="framePopupFilters" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" 
+                       BackgroundColor="White" OutlineColor="Black" HasShadow="True" Opacity="0" InputTransparent="False">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <StackLayout Grid.Row="0" Spacing="0" Padding="0,20,0,0">
+
+
+                    <Label Text="Filter Products" TextColor="{StaticResource SPBlue}" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+
+                    <BoxView BackgroundColor="Black" HeightRequest="1" Margin="0,20,0,0" HorizontalOptions="FillAndExpand" />
+
+                </StackLayout>
+
+                <ScrollView Grid.Row="1"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Spacing="0" Padding="0">
+            <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="90*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="Categories" Grid.Column="1" TextColor="Black" FontAttributes="Bold" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <Image x:Name="imageCategoriesDropDownArrow" Grid.Column="1" Source="drop_down_arrow.png" HorizontalOptions="End" Scale="0.75"/>
+                <Button Clicked="Clicked_BtnCategories" Grid.Column="1"  BackgroundColor="Transparent"/>
+            </Grid>
+            <StackLayout x:Name="stackCategories" IsVisible="False"/> <!--category filtering options are stacked here programmatically-->
+            <!--
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="90*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+
+                <Label Text="Manufacturer" Grid.Column="1" TextColor="Black" FontAttributes="Bold" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <Image x:Name="imageManufacturersDropDownArrow" Source="drop_down_arrow.png" Grid.Column="1" HorizontalOptions="End" Scale="0.75"/>
+                <Button Clicked="Clicked_BtnManufacturers" Grid.Column="1" BackgroundColor="Transparent"/>
+            </Grid>
+            <StackLayout x:Name="stackManufacturers" IsVisible="False"/> -->
+
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Grid.Row="2" Spacing="0">
+
+                <BoxView BackgroundColor="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" />
+                <StackLayout BackgroundColor="{StaticResource SPBlue}" Padding="0" Spacing="0">
+                    <Grid>
+                        <Button Clicked="Clicked_BtnApply" BackgroundColor="{StaticResource SPBlue}"/>
+                        <Label HorizontalOptions="Center" HorizontalTextAlignment="Center" 
+                       VerticalOptions="Center" VerticalTextAlignment="Center"
+                       Text="Apply" TextColor="White" InputTransparent="True"/>
+                    </Grid>
+                    
+                </StackLayout>
+
+                </StackLayout>
+
+
+            </Grid>
+        </Frame>
+
+    </Grid>
+</Grid>

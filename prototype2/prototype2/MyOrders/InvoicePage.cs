@@ -117,7 +117,20 @@ namespace prototype2
 
         private void Clicked_btnPayInvoice(object sender, EventArgs eventArgs)
         {
-            
+            ConfirmPayInvoice();
+        }
+
+        private async void ConfirmPayInvoice()
+        {
+            var answer = await DisplayAlert("Pay Invoice", "Pay the remaining amount of $" + invoice.AmountDue + " now?", "Confirm", "Cancel");
+            if (answer)
+            {
+                invoice.Status = InvoiceStatus.Paid;
+                invoice.AmountPaid = invoice.TotalPrice;
+                invoice.DatePaid = DateTime.Now;
+
+                PopPageReturnToMyOrders();
+            }
         }
     }
 }

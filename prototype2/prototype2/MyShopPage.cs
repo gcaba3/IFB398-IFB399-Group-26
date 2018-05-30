@@ -25,12 +25,13 @@ namespace prototype2
         protected override void Clicked_btnFavourite(object sender, EventArgs eventArgs)
         {
             Button button = (Button)sender;
-            AnimateFavouriteRemoval((View)button.Parent.Parent);            
+            AnimateFavouriteRemoval((View)button.Parent.Parent, (Button) sender);            
             RemoveFavourite(button);
         }
 
-        private async void AnimateFavouriteRemoval(View view)
+        private async void AnimateFavouriteRemoval(View view, Button button)
         {
+            AnimateFavouriteButton(button);
             await view.FadeTo(0, 500, Easing.Linear);
             stackProducts.Children.Remove(view);
         }

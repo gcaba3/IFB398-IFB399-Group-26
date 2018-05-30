@@ -5,8 +5,8 @@
              x:Class="prototype2.MyOrdersPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" />
-        <ToolbarItem Text="Search" Priority="1" Order="Primary" Icon="ic_notifications_white_24dp.png" Clicked="Handle_Clicked" />
+        <ToolbarItem Text="Search" Priority="0" Order="Primary" Icon="ic_search_white_24dp.png" Clicked="Clicked_BtnSearchTool"/>
+        <ToolbarItem Text="Notifications" Priority="1" Order="Primary" Icon="ic_notifications_white_24dp.png" Clicked="Notifications_Clicked" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -42,7 +42,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid ColumnSpacing="0" RowSpacing="0" Margin="0">
+    <Grid x:Name="gridPageContent" ColumnSpacing="0" RowSpacing="0" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="85*"/>
@@ -113,7 +113,7 @@
         <!--Start page content-->
 
         <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <StackLayout HorizontalOptions="FillAndExpand" Margin="10,10,10,10" x:Name="stackLayoutMain"/>
+            <StackLayout HorizontalOptions="FillAndExpand" Margin="10,0,10,0" x:Name="stackLayoutMain"/>
         </StackLayout>
 
         <!--End page content-->

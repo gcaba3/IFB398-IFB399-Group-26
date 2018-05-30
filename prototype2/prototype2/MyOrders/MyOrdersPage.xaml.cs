@@ -20,6 +20,7 @@ namespace prototype2
         private double pageWidth;
         private Color buttonColor = Color.FromHex("#eaeafc");
 
+        SearchGrid gridSearchGrid;
         StackLayout stackLayoutQuotes, stackLayoutOrders, stackLayoutInvoices;
         ScrollView scrollViewQuotes, scrollViewOrders, scrollViewInvoices;
         public MyOrdersPage()
@@ -29,9 +30,13 @@ namespace prototype2
             NavigationPage.SetHasBackButton(this, false);
             NavigationBar.ChangeMyOrdersTabColor();
 
-            stackLayoutQuotes = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
-            stackLayoutOrders = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
-            stackLayoutInvoices = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand };
+
+            gridSearchGrid = new SearchGrid();
+            gridPageContent.Children.Add(gridSearchGrid, 0, 1, 0, 3);
+
+            stackLayoutQuotes = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand, Spacing=0 };
+            stackLayoutOrders = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand, Spacing = 0 };
+            stackLayoutInvoices = new StackLayout { HorizontalOptions = LayoutOptions.FillAndExpand, Spacing = 0 };
 
             scrollViewQuotes = new ScrollView { HorizontalOptions = LayoutOptions.FillAndExpand };
             scrollViewOrders = new ScrollView { HorizontalOptions = LayoutOptions.FillAndExpand, IsEnabled = false};
@@ -41,23 +46,9 @@ namespace prototype2
             InitializeLayoutPositions();
             AddIncompleteQuote();
 
-            for (int i = Data.quotes.Count - 1; i >= 0; i--)
-            {
-                AddDocumentToStack(stackLayoutQuotes, Data.quotes[i]);
-            }
-
-            buttonColor = Color.FromHex("ceffcf");
-
-            for (int i = Data.orders.Count - 1; i >= 0; i--)
-            {
-                AddDocumentToStack(stackLayoutOrders, Data.orders[i]);
-            }
-
-            for (int i = Data.invoices.Count - 1; i >= 0; i--)
-            {
-                buttonColor = GetInvoiceColor(Data.invoices[i].Status);
-                AddDocumentToStack(stackLayoutInvoices, Data.invoices[i]);
-            }
+            FillStackLayoutQuotes();
+            FillStackLayoutOrders();
+            FillStackLayoutInvoices();
 
             DisplayQuotes();
 
@@ -70,13 +61,48 @@ namespace prototype2
             displayGrid.Children.Add(scrollViewOrders, 0, 0);
             displayGrid.Children.Add(scrollViewInvoices, 0, 0);
 
-            stackLayoutMain.Children.Add(displayGrid);
+            stackLayoutMain.Children.Add(displayGrid);            
         }
 
         private void InitializeLayoutPositions()
         {
             stackLayoutOrders.TranslateTo(pageWidth, 0, 0, Easing.CubicIn);
             stackLayoutInvoices.TranslateTo(pageWidth * 2, 0, 0, Easing.CubicIn);
+        }
+
+        private void FillStackLayoutQuotes()
+        {
+            stackLayoutQuotes.Children.Add(new BoxView { Color = Color.Transparent, HeightRequest = 5 });
+            for (int i = Data.quotes.Count - 1; i >= 0; i--)
+            {
+                AddDocumentToStack(stackLayoutQuotes, Data.quotes[i]);
+            }
+            stackLayoutQuotes.Children.Add(new BoxView { Color = Color.Transparent, HeightRequest = 5 });
+        }
+        private void FillStackLayoutOrders()
+        {
+            stackLayoutOrders.Children.Add(new BoxView { Color = Color.Transparent, HeightRequest = 5 });
+
+            buttonColor = Color.FromHex("ceffcf");
+
+            for (int i = Data.orders.Count - 1; i >= 0; i--)
+            {
+                AddDocumentToStack(stackLayoutOrders, Data.orders[i]);
+            }
+
+            stackLayoutOrders.Children.Add(new BoxView { Color = Color.Transparent, HeightRequest = 5 });
+        }
+        private void FillStackLayoutInvoices()
+        {
+            stackLayoutInvoices.Children.Add(new BoxView { Color = Color.Transparent, HeightRequest = 5 });
+
+            for (int i = Data.invoices.Count - 1; i >= 0; i--)
+            {
+                buttonColor = GetInvoiceColor(Data.invoices[i].Status);
+                AddDocumentToStack(stackLayoutInvoices, Data.invoices[i]);
+            }
+
+            stackLayoutInvoices.Children.Add(new BoxView { Color = Color.Transparent, HeightRequest = 5 });
         }
 
         private void DisplayQuotes()
@@ -194,10 +220,11 @@ namespace prototype2
 
                 RowDefinitions =
                 {
-                    new RowDefinition { Height = new GridLength(3, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(42, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(42, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(3, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
                 }
             };
 
@@ -205,7 +232,7 @@ namespace prototype2
             {
                 BackgroundColor = buttonColor,
                 BorderColor = (Color)App.Current.Resources["SPBlue"],      
-                BorderRadius = 20
+                BorderRadius = 20,
             };
 
             btnViewDocument.ClassId = document.Number.ToString();
@@ -229,7 +256,7 @@ namespace prototype2
                 Text = document.Status,
                 FontSize = fontSize,
                 InputTransparent = true,
-            }, 1, 2);
+            }, 1, 2);            
 
             documentGrid.Children.Add(new Label
             {
@@ -239,13 +266,38 @@ namespace prototype2
                 InputTransparent = true,
             }, 2, 1);
 
+            string productInfoText = document.Products.Values.First() + "x " + document.Products.Keys.First().Description;
+            if (document.Products.Count > 1)
+            {
+                productInfoText += "\n(plus " + (document.Products.Keys.Count - 1) + " other product";
+                if (document.Products.Count > 2)
+                    productInfoText += "s";
+                productInfoText += ")";
+            }
+
+            StackLayout stackProductInfo = new StackLayout //stack layout used to contain label to fix word wrap issues
+            {
+                Padding = new Thickness(0,0,0,4),
+                InputTransparent = true
+            };
+
+            stackProductInfo.Children.Add(new Label
+            {
+                VerticalOptions = LayoutOptions.StartAndExpand,
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                Text = productInfoText,
+                FontSize = 12,
+            });
+
+            documentGrid.Children.Add(stackProductInfo, 1, 3, 3, 4);
+
             documentGrid.Children.Add(new Image
             {
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
                 Source = buttonIndicator,
                 InputTransparent = true,
-            }, 3, 4, 0, 4);
+            }, 3, 4, 0, 5);
 
             documentGrid.Children.Add(new Label
             {
@@ -298,9 +350,6 @@ namespace prototype2
                 case QuoteStatus.Validated:
                     await Navigation.PushAsync(new QuoteValidatedPage(quote));
                     break;
-                /*case QuoteStatus.OrderPlaced:
-                    await Navigation.PushAsync(new QuoteOrderPlacedPage(quote));
-                    break;*/
             }
         }
 
@@ -318,10 +367,15 @@ namespace prototype2
             await Navigation.PushAsync(new InvoicePage(invoice));
         }
 
-        async void Handle_Clicked(object sender, System.EventArgs e)
+        private async void Notifications_Clicked(object sender, EventArgs eventArgs)
         {
             NotificationPage notificationPage = new NotificationPage();
             await Navigation.PushAsync(notificationPage);
+        }
+
+        private void Clicked_BtnSearchTool(object sender, EventArgs eventArgs)
+        {
+            gridSearchGrid.Clicked_ButtonSearchTool();
         }
     }
 }

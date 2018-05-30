@@ -14,6 +14,9 @@ namespace prototype2
         public static Quote newQuote;
         public static List<Order> orders;
         public static List<Invoice> invoices;
+        public static List<Address> billingAddresses;
+        public static List<Address> deliveryAddresses;
+        public static List<string> manufacturers;
         public static int numSalesOrders, numInvoices; // just used to make up document numbers for now
 
         public static void InitializeData()
@@ -23,23 +26,36 @@ namespace prototype2
             quotes = new List<Quote>();
             orders = new List<Order>();
             invoices = new List<Invoice>();
+            billingAddresses = new List<Address>();
+            deliveryAddresses = new List<Address>();
             numSalesOrders = 0;
             numInvoices = 0;
 
             CreateFreshQuote();
+
+            GetManufacturersFromDatabase();
 
             GetProductsFromDatabase();
             CreateFavorites();
             
             GetOrdersFromDatabase();
             GetQuotesFromDatabase();
-            GetInvoicesFromDatabase();            
+            GetInvoicesFromDatabase();
+
+            GetAddressesFromDatabase();
         }
 
         private static void CreateFavorites()
         {
             favourites.Add(products[0]);
             favourites.Add(products[2]);
+        }
+
+        private static void GetManufacturersFromDatabase()
+        {
+            List<string> manufacturersFromDatabase = new List<string> { "ABB", "Clenergy", "LG", "Phono Solar", "Sungrow", "Suntech" };
+
+            manufacturers = manufacturersFromDatabase;
         }
 
         /// <summary>
@@ -88,6 +104,17 @@ namespace prototype2
                 Price = 1499.00,
                 Stock = 6,
                 ImagePath = "SG10ECThreePhase10kWInverter.jpg",
+                Id = products.Count
+            });
+
+            products.Add(new Product
+            {
+                Description = "[ER-R-MT] PV-ezRack MT Rail",
+                Category = "Solar Mounting",
+                Manufacturer = "Clenergy",
+                Price = 105.71,
+                Stock = 20,
+                ImagePath = "PV_ezrack_solaroof_LR.jpg",
                 Id = products.Count
             });
 
@@ -289,7 +316,7 @@ namespace prototype2
 
         private static bool CheckIfNewQuoteEmpty()
         {
-            if (newQuote.Products.Count == 0)
+            if (newQuote.Products.Count < 1)
             {
                 newQuote.Status = QuoteStatus.Empty;
                 return true;
@@ -552,6 +579,52 @@ namespace prototype2
 
             orders.Add(order);
             quotes.Remove(quote);
+        }
+
+        private static void GetAddressesFromDatabase()
+        {
+            AddSampleBillingAddress("Solar Bear Solutions", "barry@solarbearsolutions.com", "(07) 3870 8243", "4027", "Yatala", "26 Business Street", "Queensland", "Australia");
+            AddSampleBillingAddress("Solar Bear Solutions", "barry@solarbearsolutions.com", "(07) 3852 7397", "4170", "Morningside", "40 Steel Place", "Queensland", "Australia");
+
+            AddSampleDeliveryAddress("Solar Bear Solutions", "barry@solarbearsolutions.com", "(07) 3870 8243", "4027", "Yatala", "26 Business Street", "Queensland", "Australia");
+            AddSampleDeliveryAddress("Solar Bear Solutions", "barry@solarbearsolutions.com", "(07) 3852 7397", "4170", "Morningside", "40 Steel Place", "Queensland", "Australia");
+        }
+            
+
+        private static void AddSampleBillingAddress(string name, string email, string phoneNumber, string postCode, string city, string streetAndNumber, string state, string country)
+        {
+            Address address = new Address
+            {
+                Number = billingAddresses.Count + 1,
+                Name = name,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                PostCode = postCode,
+                City = city,
+                StreetAndNumber = streetAndNumber,
+                State = state,
+                Country = country
+            };
+
+            billingAddresses.Add(address);
+        }
+
+        private static void AddSampleDeliveryAddress(string name, string email, string phoneNumber, string postCode, string city, string streetAndNumber, string state, string country)
+        {
+            Address address = new Address
+            {
+                Number = billingAddresses.Count + 1,
+                Name = name,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                PostCode = postCode,
+                City = city,
+                StreetAndNumber = streetAndNumber,
+                State = state,
+                Country = country
+            };
+
+            deliveryAddresses.Add(address);
         }
     }
 }

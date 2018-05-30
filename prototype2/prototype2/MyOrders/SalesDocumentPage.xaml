@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control="clr-namespace:prototype2;"
+             xmlns:control="clr-namespace:prototype2"
              x:Class="prototype2.SalesDocumentPage">
     <Grid x:Name="salesDocumentPageGrid" x:FieldModifier="protected"  ColumnSpacing="0" RowSpacing="0">
         <Grid.RowDefinitions>
@@ -11,7 +11,7 @@
 
 
         <!--page content-->
-        <ScrollView Grid.Row="0" HorizontalOptions="FillAndExpand">
+        <ScrollView x:Name="scrollviewPage" x:FieldModifier="protected" Grid.Row="0" HorizontalOptions="FillAndExpand">
 
 
 
@@ -74,14 +74,14 @@
 
                         <!--Product Details Headings-->
                         <StackLayout HorizontalOptions="FillAndExpand">
-                            <Grid HorizontalOptions="FillAndExpand" x:Name="gridProductDetailsHeadings" x:FieldModifier="protected">
+                            <Grid HorizontalOptions="FillAndExpand" x:Name="gridProductDetailsHeadings" x:FieldModifier="protected" ColumnSpacing="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="40*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="38*"/>
                                     <ColumnDefinition Width="18*"/>
-                                    <ColumnDefinition Width="16*"/>
-                                    <ColumnDefinition Width="16*"/>
-                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="21*"/>
+                                    <ColumnDefinition Width="21*"/>
+                                    <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label
                     Grid.Column="1"

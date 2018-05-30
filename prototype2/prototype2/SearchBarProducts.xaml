@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SearchBar xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="prototype2.SearchBarProducts"
+           xmlns:control="clr-namespace:prototype2"
+           
+           Grid.Row="0"
+            VerticalOptions="Start"
+            TextChanged="TextChanged_SearchBarProducts"
+            SearchButtonPressed="Searched_SearchBarProducts"
+            HorizontalOptions="CenterAndExpand"
+            BackgroundColor="White"
+            Placeholder="Search for products"
+           >
+</SearchBar>

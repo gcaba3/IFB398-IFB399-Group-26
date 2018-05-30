@@ -70,7 +70,7 @@ namespace prototype2
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Start,
-                HorizontalTextAlignment = TextAlignment.Start
+                HorizontalTextAlignment = TextAlignment.Start,                
             };
 
             return labelProductName;
@@ -84,7 +84,7 @@ namespace prototype2
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.End,
-                HorizontalTextAlignment = TextAlignment.End
+                HorizontalTextAlignment = TextAlignment.End,
             };
 
             return labelProductQuantity;
@@ -97,8 +97,8 @@ namespace prototype2
                 Text = productPrice,
                 FontSize = 14,
                 VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.End,
-                HorizontalTextAlignment = TextAlignment.End
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                HorizontalTextAlignment = TextAlignment.End,
             };
             return labelProductPrice;
         }
