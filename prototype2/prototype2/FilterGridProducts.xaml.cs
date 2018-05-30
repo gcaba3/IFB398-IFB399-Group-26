@@ -59,7 +59,6 @@ namespace prototype2
             Image imageCheckBox = new Image
             {
                 Source = checkBoxUnchecked,
-                BackgroundColor = Color.Transparent,
                 HorizontalOptions = LayoutOptions.End,
                 ClassId = option,
             };         
@@ -112,7 +111,7 @@ namespace prototype2
                 VerticalTextAlignment = TextAlignment.Center,
             };
 
-            gridOption.Children.Add(new Button
+            gridOption.Children.Add(new Button //just added to fix spacing issues
             {
                 InputTransparent = true,
                 BackgroundColor = Color.Transparent
