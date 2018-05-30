@@ -14,12 +14,16 @@ namespace prototype2
     public partial class Events : ContentPage
     {
         private List<Event> eventlist;
+        SearchGrid gridSearchGrid;
         public Events()
         {
             InitializeComponent();
             Title = "Events";
             NavigationPage.SetHasBackButton(this, false);
             NavigationBar.ChangeEventsTabColor();
+
+            gridSearchGrid = new SearchGrid();
+            gridPageContent.Children.Add(gridSearchGrid, 0, 1, 0, 3);
 
             eventlist = new List<Event>();
 
@@ -163,5 +167,9 @@ namespace prototype2
             await Navigation.PushAsync(notificationPage);
         }
 
+        private void Clicked_BtnSearchTool(object sender, EventArgs eventArgs)
+        {
+            gridSearchGrid.Clicked_ButtonSearchTool();
+        }
     }
 }
